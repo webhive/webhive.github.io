@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Пробуем wintersmith</title><meta name="description" content="Пробую очередной генератор статичных сайтов на node.js. Сегодня это будет wintersmith. Ниже будет произвдена установка и проведено стресс-тестирование."><meta name="keywords" content="Node.js,Генераторы сайтов,Wintersmith"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2013/12/29/trying-wintersmith-static-sites-generator/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;Node.js&quot;,&quot;Генераторы сайтов&quot;,&quot;Wintersmith&quot;]"><meta property="article:section" content="[]"><meta property="article:published_time" content="2013-12-29T17:56:55.000Z"><meta property="article:modified_time" content="2013-12-29T17:56:55.000Z"><meta name="DC.Title" content="Пробуем wintersmith"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2013-12-29T17:56:55.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2013/12/29/trying-wintersmith-static-sites-generator/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2013/12/29/trying-wintersmith-static-sites-generator/">
+        Пробуем wintersmith
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2013-12-29T17:56:55.000Z" itemprop="datePublished">
+        29 декабря 2013
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2013/12/29/trying-wintersmith-static-sites-generator/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Пробую очередной генератор статичных сайтов на&nbsp;node.js. Сегодня это будет <a target="_blank" rel="noopener" href="http://wintersmith.io/">wintersmith</a>. Ниже будет произвдена установка и&nbsp;проведено стресс-тестирование.</p>
+<a id="more"></a>
+
+<h1 id="Зачем"><a href="#Зачем" class="headerlink" title="Зачем"></a>Зачем</h1><p>Текущая версия блога работает на&nbsp;движке hexo, который хотя и&nbsp;довольно неплох, но&nbsp;имеет весьма скудные возможности. Нет например описания как загружать картинки в&nbsp;статьи&nbsp;&mdash; такая казалось&nbsp;бы&nbsp;банальная вещь, а&nbsp;уже проблема.</p>
+<p>Ну в&nbsp;общем есть претензии&nbsp;&mdash; опишу подробнее в&nbsp;отдельной статье. В&nbsp;связи с&nbsp;этим начал рассматривать альтернативы. Wintersmith как раз одна из&nbsp;них.</p>
+<h1 id="Установка"><a href="#Установка" class="headerlink" title="Установка"></a>Установка</h1><p>Ничего особенного&nbsp;&mdash; довольно тривиально. Обычный модуль для node.js</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install wintersmith -g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wintersmith new &lt;path&gt;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &lt;path&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Запуск"><a href="#Запуск" class="headerlink" title="Запуск"></a>Запуск</h1><p>Как и&nbsp;принято для софта такого класса есть два варианта</p>
+<p>Запуск в&nbsp;виде сервера</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wintersmith preview</span><br></pre></td></tr></table></figure>
+
+<p>Или генерация статичных файлов</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wintersmith build</span><br></pre></td></tr></table></figure>
+
+<h1 id="Первые-проблемы"><a href="#Первые-проблемы" class="headerlink" title="Первые проблемы"></a>Первые проблемы</h1><p>Сходу словил косяк&nbsp;&mdash; jade шаблоны ругаются на&nbsp;неправильный синтаксис</p>
+<p>Файл, строка и&nbsp;причина были указаны, поэтому исправление не&nbsp;составило большого труда. Хотя это наверно достоинство jade, а&nbsp;не&nbsp;wintersmith.</p>
+<p>Проблема была в&nbsp;устаревшем синтаксисе</p>
+<p>Вот этот кусок</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!! 5</span><br></pre></td></tr></table></figure>
+
+<p>Надо было заменить на&nbsp;этот</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctype html</span><br></pre></td></tr></table></figure>
+
+<p>Ладно&nbsp;&mdash; мы&nbsp;не&nbsp;гордые&nbsp;&mdash; поправим.</p>
+<p>После этого небольшого инцидента все заработало.</p>
+<h1 id="Стресс-тест"><a href="#Стресс-тест" class="headerlink" title="Стресс - тест"></a>Стресс&nbsp;&mdash; тест</h1><p>Традиционно подготовил стресс-тест. Как старый блоггер: )  я&nbsp;хочу надежную систему, чтобы не&nbsp;трахаться с&nbsp;движком, а&nbsp;заниматься писаниной не&nbsp;отвлекаясь на&nbsp;мелочи. Это уже третий по&nbsp;счету движок, который подвергся моему стресс-тесту. Предыдущие два были DocType и&nbsp;Hexo. DocType оказался крайне тормознутым с&nbsp;экспоненциальным ростом времени генерации сайта в&nbsp;зависимости от&nbsp;количества постов. Hexo показал куда лучшие результаты по&nbsp;генерации и&nbsp;на&nbsp;данный момент это явный лидер.</p>
+<p>Что-же выдал нам wintersmith?</p>
+<p>Полный провал!!!</p>
+<p>После 800&nbsp;статей он&nbsp;тупо падает с&nbsp;ошибкой.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">events.js:<span class="number">72</span></span><br><span class="line">        <span class="keyword">throw</span> er; <span class="comment">// Unhandled &#x27;error&#x27; event</span></span><br><span class="line">              ^</span><br><span class="line"><span class="built_in">Error</span>: EMFILE, open <span class="string">&#x27;&lt;путь к тестовому проекту&gt;/build/articles/test-6-97/index.html&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Баг-репорт"><a href="#Баг-репорт" class="headerlink" title="Баг-репорт"></a>Баг-репорт</h1><p>Отправил автору <a target="_blank" rel="noopener" href="https://github.com/jnordberg/wintersmith/issues/205">отчет об&nbsp;ошибке</a>. Ответ пока не&nbsp;радует&nbsp;&mdash; насколько я&nbsp;понял внятного объяснения у&nbsp;автора&nbsp;нет. Предложенные им&nbsp;уменьшение лимитов результата не&nbsp;дало.</p>
+<h1 id="Вывод"><a href="#Вывод" class="headerlink" title="Вывод"></a>Вывод</h1><p>Очередной провал. Очевидно, что есть какой-то лимит, после которого генерация сайта просто в&nbsp;принципе невозможна. И&nbsp;тот факт что другие движки такого лимита не&nbsp;имеют говорит о&nbsp;том, что это проблема именно кода wintersmith. Да&nbsp;&mdash; я&nbsp;нагрузил его данными&nbsp;&mdash;, но&nbsp;DocPad справился с&nbsp;куда большими объёмами (хоть и&nbsp;начал заметно тормозить), hexo вообще сожрал все и&nbsp;не&nbsp;крякнул&nbsp;&mdash; думаю он&nbsp;ьы&nbsp;отработал и&nbsp;больше, просто мне хватило и&nbsp;того что я&nbsp;увидел.</p>
+<p>Всем кто использует или собирается использовать wintersmith советую подумать&nbsp;&mdash; не&nbsp;придется&nbsp;ли&nbsp;через год другой менять движок.</p>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/node-js/">Node.js</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/site-generators/">Генераторы сайтов</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/wintersmith/">Wintersmith</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description=""></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2013/12/29/trying-wintersmith-static-sites-generator/';
+  this.page.identifier = 'https://www.webhive.ru/2013/12/29/trying-wintersmith-static-sites-generator/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

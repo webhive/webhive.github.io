@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Первое впечатление от sails.js</title><meta name="description" content="Начал проектик на sails.js, чтобы прочуствовать этот движок. Опишу ниже некоторые моменты которые позникли по ходу. Не претендую на полноту и объективность - все написанное ниже это мои личные впечатления."><meta name="keywords" content="Node.js,Вести с полей,sails.js"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2013/12/22/sailsjs-first-impression/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;Node.js&quot;,&quot;Вести с полей&quot;,&quot;sails.js&quot;]"><meta property="article:section" content="[]"><meta property="article:published_time" content="2013-12-22T06:12:23.000Z"><meta property="article:modified_time" content="2013-12-22T06:12:23.000Z"><meta name="DC.Title" content="Первое впечатление от sails.js"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2013-12-22T06:12:23.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2013/12/22/sailsjs-first-impression/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2013/12/22/sailsjs-first-impression/">
+        Первое впечатление от sails.js
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2013-12-22T06:12:23.000Z" itemprop="datePublished">
+        22 декабря 2013
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2013/12/22/sailsjs-first-impression/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Начал проектик на&nbsp;sails.js, чтобы прочуствовать этот движок. Опишу ниже некоторые моменты которые позникли по&nbsp;ходу. Не&nbsp;претендую на&nbsp;полноту и&nbsp;объективность&nbsp;&mdash; все написанное ниже это мои личные впечатления.</p>
+<a id="more"></a>
+
+<h1 id="Нет-миграций"><a href="#Нет-миграций" class="headerlink" title="Нет миграций"></a>Нет миграций</h1><p>Первое, что вызвало недоумение это отсутствие миграций в&nbsp;их&nbsp;привычном виде. Вместо этого sails.js автоматически изменяет схему БД&nbsp;в&nbsp;соответствии с&nbsp;изменениями в&nbsp;моделях. Насколько это хорошо или плохо пока сказать не&nbsp;могу. Пока чисто умозрительно это скорее плохо, т.&nbsp;к.&nbsp;насколько говорит мой опыт&nbsp;&mdash; не&nbsp;все изменения можно безопасно сделать автоматически. Например непонятно как сделать например автоматически переименование столбца. Поэтому эту фичу отнесу скорее к&nbsp;недостаткам.</p>
+<h1 id="Таблицы-именуются-точно-по-имени-модели"><a href="#Таблицы-именуются-точно-по-имени-модели" class="headerlink" title="Таблицы именуются точно по имени модели"></a>Таблицы именуются точно по&nbsp;имени модели</h1><p>После Rails выглядит непривычно, и&nbsp;это скорее мелкая придирка. Просто немного режет глаз когда видишь таблицы в&nbsp;БД.&nbsp;Чуть позже нашед способ задать имя таблицы в&nbsp;модели, но&nbsp;все равно по&nbsp;умолчанию это просто имя модели.</p>
+<h1 id="Отсутствуют-логи"><a href="#Отсутствуют-логи" class="headerlink" title="Отсутствуют логи"></a>Отсутствуют логи</h1><p>В development режиме нет логов. Никаких. Надо настраивать <a target="_blank" rel="noopener" href="https://github.com/flatiron/winston">whinston</a>. Видимо для node.js джедаев это банально-очевидно, но&nbsp;для меня это стало реальной проблемой. Отлаживать приложение &laquo;вслепую&raquo; довольно тяжело.</p>
+<p>Чуть позже я&nbsp;понял, что никакая настройка whinston не&nbsp;спасет. Логгировать можно какие-то свои действия, но&nbsp;по&nbsp;умолчанию никаких абсолютно логов ни&nbsp;в&nbsp;файл ни&nbsp;в&nbsp;консоль не&nbsp;пишется. Я&nbsp;в&nbsp;полном недоумении. В&nbsp;Rails как минимум видно запросы к&nbsp;серверу, выполняющиеся SQL запросы и&nbsp;порядок рендеринга шаблонов. Здесь&nbsp;же&nbsp;вообще непонятно, что происходит в&nbsp;данный момент в&nbsp;системе.</p>
+<h1 id="ORM-не-поддерживает-связи"><a href="#ORM-не-поддерживает-связи" class="headerlink" title="ORM не поддерживает связи"></a>ORM не&nbsp;поддерживает связи</h1><p>И это просто трагедия. Связи между моделями отсутствуют как класс. Я&nbsp;было даже полумал, что я&nbsp;чего-то не&nbsp;понял, но&nbsp;информация с&nbsp;официального сайта (сегодня 22&nbsp;декабря 2013&nbsp;г.)  гласит:</p>
+<blockquote>
+<p>Associations are not yet available for Sails.JS, however are on&nbsp;the immediate todo list.</p>
+</blockquote>
+<p>Для движка, позиционируемого как &laquo;production ready&raquo; это просто срамота какая-то. Ну&nbsp;и&nbsp;для справки раз уж&nbsp;порылся в&nbsp;этой теме используется в&nbsp;нем некая ORM <a target="_blank" rel="noopener" href="https://github.com/balderdashy/waterline">Waterline</a>&nbsp;&mdash; самописная ORM система, писаная под sails.js. К&nbsp;плюсам можно отнести относительную всеядноось 0&nbsp;список поддерживаемых БД&nbsp;довольно обширен, синтаксис пытается быть похожим на&nbsp;Rails ActiveRecord.</p>
+<h1 id="Некоторые-выводы"><a href="#Некоторые-выводы" class="headerlink" title="Некоторые выводы"></a>Некоторые выводы</h1><p>В общем как по&nbsp;мне так сыроват еще этот фреймоворк. До&nbsp;рельсов ему как пешком до&nbsp;луны. И&nbsp;если это один из&nbsp;лучших если ен&nbsp;лучший (по моему мнению)  движок на&nbsp;node.js, то&nbsp;становится совсем грустно. А&nbsp;заявки типа <em>Sails makes it&nbsp;easy to&nbsp;build custom, enterprise-grade Node.js apps</em> кроме слёз никаких эмоций вызвать не&nbsp;могут.</p>
+<p>Наверно если вам не&nbsp;нужны связи в&nbsp;моделях, вы&nbsp;готовы строить формы руками, делать руками авторизацию (passport с&nbsp;плугинами по&nbsp;сравнению с&nbsp;devise это просто пигмей), то&nbsp;такой enterprise-grade это&nbsp;то, что вам надо.</p>
+<p>В качестве слабого оправдания можно сказать, что движок активно развивается, в&nbsp;качестве основы выбран таки Rails и&nbsp;можно надеяться, что в&nbsp;конце-концов что-то у&nbsp;них и&nbsp;получится.</p>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/node-js/">Node.js</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/news-from-trenches/">Вести с полей</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/sails-js/">sails.js</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description=""></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2013/12/22/sailsjs-first-impression/';
+  this.page.identifier = 'https://www.webhive.ru/2013/12/22/sailsjs-first-impression/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

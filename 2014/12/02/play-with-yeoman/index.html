@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Попробовал Yeoman</title><meta name="description" content="Давно уже как-то разбирался, что за зверь такой yeoman - как-то так пришёл к выводу, что штука для меня довольно бесполезная. Ну скаффолдиг ну и чо? Практически любой приличный фреймворк умеет генерить приложение на себе самом. И уверен сделает это лучше чем какой-то внешний генератор. Сегодня понял где я эту штуку можно применить."><meta name="keywords" content="Node.js,yeoman"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2014/12/02/play-with-yeoman/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;Node.js&quot;,&quot;yeoman&quot;]"><meta property="article:section" content="[]"><meta property="article:published_time" content="2014-12-02T16:38:10.000Z"><meta property="article:modified_time" content="2014-12-02T16:38:10.000Z"><meta name="DC.Title" content="Попробовал Yeoman"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2014-12-02T16:38:10.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2014/12/02/play-with-yeoman/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2014/12/02/play-with-yeoman/">
+        Попробовал Yeoman
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2014-12-02T16:38:10.000Z" itemprop="datePublished">
+        2 декабря 2014
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2014/12/02/play-with-yeoman/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Давно уже как-то разбирался, что за&nbsp;зверь такой <a target="_blank" rel="noopener" href="http://yeoman.io/">yeoman</a>&nbsp;&mdash; как-то так пришёл к&nbsp;выводу, что штука для меня довольно бесполезная. Ну&nbsp;скаффолдиг ну&nbsp;и&nbsp;чо? Практически любой приличный фреймворк умеет генерить приложение на&nbsp;себе самом. И&nbsp;уверен сделает это лучше чем какой-то внешний генератор. Сегодня понял где я&nbsp;эту штуку можно применить.</p>
+<a id="more"></a>
+
+<p>Понадобилось мне потестировать одну js&nbsp;библиотечку. И&nbsp;вот чё-то сидел я&nbsp;и&nbsp;думал куда&nbsp;бы&nbsp;её&nbsp;прикрутить, чтоб проверить.</p>
+<p>В какой-нибудь готовый проект вставить? Как-то извратно &hellip; Новый рельсовый проект ради этого создавать&nbsp;&mdash; тоже как-то уж&nbsp;слишком.</p>
+<p>Можно конечно на&nbsp;скорую руку минимальную страничку накропать, но&nbsp;опять-же зависимости подключать, создавать файлы, стили&nbsp;&mdash; да&nbsp;ещё привык к&nbsp;coffeescript-у и&nbsp;sass-у&nbsp;&mdash; писать на&nbsp;голом js-е и&nbsp;css-е как-то уже и&nbsp;не&nbsp;хочется. В&nbsp;общем избаловался видимо за&nbsp;последние годы&nbsp;&mdash; как говорится &laquo;к хорошему быстро привыкаешь&raquo;.</p>
+<p>И как-то пришло осознание, что времена когда минимальный сайтик можно по&nbsp;быстрому &laquo;слабать на&nbsp;коленке&raquo; пользуясь одним notepad-ом уже безвозвратно ушли.</p>
+<p>И вот тут-то я&nbsp;и&nbsp;вспомнил про этот самый <a target="_blank" rel="noopener" href="http://yeoman.io/">yeoman</a>. Собственно это именно&nbsp;то, что нужно для такого быстрого старта. Оно насколько я&nbsp;помню именно для этого и&nbsp;задумано&nbsp;&mdash; быстро сгенерить болванку сайта, где уже будет подключен минимальный набор библиотек и&nbsp;будут работать &laquo;искаропки&raquo; всевозможные препроцессоры, что позволит использовать &laquo;расово верный&raquo; coffeescript и&nbsp;scss.</p>
+<h1 id="От-слов-к-делу"><a href="#От-слов-к-делу" class="headerlink" title="От слов к делу"></a>От слов к&nbsp;делу</h1><p>Предполагается, что <code>nodejs</code> уже установлен&nbsp;&mdash; по&nbsp;крайней мере у&nbsp;меня именно так и&nbsp;соответственно процесс его установки описывать не&nbsp;буду.</p>
+<p>Ставим yeoman</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g yo</span><br></pre></td></tr></table></figure>
+
+<p>Ставим генератор для обычного веб приложения. Генераторов на&nbsp;самом деле довольно много. Посмотреть полный список можно <a target="_blank" rel="noopener" href="http://yeoman.io/generators/">тут</a>. Но&nbsp;для моих скромных целей вполне достаточно обычного <code>generator-webapp</code>.</p>
+<p>Ставим:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g generator-webapp</span><br></pre></td></tr></table></figure>
+
+<p>Создаём папку для проекта и&nbsp;запускаем генератор:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir my-yo-project</span><br><span class="line">$ cd my-yo-project</span><br><span class="line">$ yo webapp</span><br></pre></td></tr></table></figure>
+
+<p>Оно запросит некоторые опции типа подключать&nbsp;ли&nbsp;ту&nbsp;или иную библиотеку. В&nbsp;общем прочекал все галочки и&nbsp;нажал <code>Enter</code>. Yeoman сгенерил болванку приложения, скачал и&nbsp;установил зависимости.</p>
+<p>Запускаем сервер. Кстати поддерживается LiveReload, что как-бы тоже неплохой бонус.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grunt serve</span><br></pre></td></tr></table></figure>
+
+<p>При этом по&nbsp;адресу <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost: 9000</a> стало доступной веб-страничка с&nbsp;bootstrap-ом, Modernizr-ом и&nbsp;HTML5&nbsp;Boilerplate-ом. LiveReload работает прямо из&nbsp;коробки&nbsp;&mdash; никаких дополнительных телодвижений не&nbsp;потребовалось.</p>
+<p>Можно так-же запускать тесты. В&nbsp;этом приложении используется <code>mocha</code>. Но&nbsp;это уже за&nbsp;пределами моих потребностей&nbsp;&mdash; возможно когда-нибудь и&nbsp;понадобится.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grunt test</span><br></pre></td></tr></table></figure>
+
+<p>Ну и&nbsp;конечно не&nbsp;всё прошло гладко&nbsp;&mdash; <code>coffeescript</code> почему-то не&nbsp;работал. Как оказалось при генерации можно указать ряд опций, в&nbsp;числе которых и&nbsp;нужная мне опция <code>--coffee</code>. Ну&nbsp;и&nbsp;как оказалось в&nbsp;качестве фреймворка для тестирования можно подключить <code>jasmine</code>.</p>
+<p>Перезапускаем генерацию приложения с&nbsp;нужно опцией и&nbsp;соглашаемся перезаписать файлы.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yo webapp --coffee</span><br></pre></td></tr></table></figure>
+
+<p>Видим в&nbsp;консоли браузера заветные строчки <code>Allo from CoffeeScript!</code>. Ура&nbsp;&mdash; всё работает. Я&nbsp;полностью удовлетворён&nbsp;&mdash; практически без геморроя сделал одноразовый сайтик для тестов.</p>
+<p>Вынужден констатировать факт, что это очень удобное средство. Но&nbsp;для определённого круга задач.</p>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/node-js/">Node.js</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/yeoman/">yeoman</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description=""></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2014/12/02/play-with-yeoman/';
+  this.page.identifier = 'https://www.webhive.ru/2014/12/02/play-with-yeoman/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

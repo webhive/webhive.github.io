@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Что не так с CoreOS?</title><meta name="description" content="Почему CoreOS не является хорошим решением для установки Kubernetes кластера?"><meta name="keywords" content="Docker,kubernetes,digital-ocean,Core OS,etcd,kubeadm,kubelet"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2018/06/13/what-is-wrong-with-coreos/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;Docker&quot;,&quot;kubernetes&quot;,&quot;digital-ocean&quot;,&quot;Core OS&quot;,&quot;etcd&quot;,&quot;kubeadm&quot;,&quot;kubelet&quot;]"><meta property="article:section" content="[&quot;DevOps&quot;]"><meta property="article:published_time" content="2018-06-13T08:13:56.000Z"><meta property="article:modified_time" content="2018-06-13T08:13:56.000Z"><meta name="DC.Title" content="Что не так с CoreOS?"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2018-06-13T08:13:56.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2018/06/13/what-is-wrong-with-coreos/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2018/06/13/what-is-wrong-with-coreos/">
+        Что не так с CoreOS?
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2018-06-13T08:13:56.000Z" itemprop="datePublished">
+        13 июня 2018
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2018/06/13/what-is-wrong-with-coreos/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>В последнее время много экспериментирую с&nbsp;Kubernetes и&nbsp;одним из&nbsp;вопросов, которые я&nbsp;для себя пытаюсь разрешить это выбор &laquo;правильного&raquo; дистрибутива для запуска кластера на&nbsp;голом железе. Дело в&nbsp;том, что на&nbsp;сегодняшний день есть целый ряд дистрибутивов, позиционирующих себя как заточенные на&nbsp;построение кластеров. Одним из&nbsp;таких, я&nbsp;бы&nbsp;даже сказал одним из&nbsp;пионеров в&nbsp;этой области является <a target="_blank" rel="noopener" href="https://coreos.com/">CoreOS</a>.</p>
+<a id="more"></a>
+
+<p>Изначально я&nbsp;нацелился использовать CoreOS как типа&nbsp;ось, специально заточенную под кластеризацию и&nbsp;kubernetes в&nbsp;частности. Собственно поглядывал в&nbsp;эту сторону одним глазом уже давно и&nbsp;вот наконец решил попробовать.</p>
+<h1 id="Чем-она-хороша"><a href="#Чем-она-хороша" class="headerlink" title="Чем она хороша?"></a>Чем она хороша?</h1><p>Для начала давайте разберёмся что-же такого есть в&nbsp;операционной системе особенного, чтоб называть её&nbsp;cluster friendly? Ну&nbsp;должно-же быть что-то, чтобы променять дистрибутив общего назначения на&nbsp;CoreOS.</p>
+<h2 id="Предустановленный-софт"><a href="#Предустановленный-софт" class="headerlink" title="Предустановленный софт"></a>Предустановленный софт</h2><p>Прямо из&nbsp;коробки у&nbsp;нас есть <code>etcd</code>, <code>docker</code>, <code>rkt</code>&nbsp;&mdash;&nbsp;т.&nbsp;е.&nbsp;основные компоненты построения любого кластера. Ну&nbsp;вообще слабый аргумент, ибо ставится всё это сравнительно легко на&nbsp;любой дистрибутив.</p>
+<h2 id="Менеджер-перезагрузок"><a href="#Менеджер-перезагрузок" class="headerlink" title="Менеджер перезагрузок"></a>Менеджер перезагрузок</h2><p>А именно&nbsp;&mdash; locksmith. Специальный процесс, следящий, чтобы при обновлении&nbsp;ПО, узла кластера не&nbsp;вздумали перезагрузиться одновременно. Имеет набор готовых стратегий, а&nbsp;так-же расписание перезагрузок. Очевидно, что работает через etcd.</p>
+<p>Думаю, что полезная штука.</p>
+<h2 id="Автоматические-обновления"><a href="#Автоматические-обновления" class="headerlink" title="Автоматические обновления"></a>Автоматические обновления</h2><p>Собственно есть у&nbsp;любого дистрибутива, но&nbsp;в&nbsp;CoreOS в&nbsp;купе с&nbsp;locksmith типа обещается отказоустойчивое и&nbsp;прозрачное обновление системы, которое не&nbsp;должно приводить к&nbsp;каким-либо сбоям в&nbsp;работе кластера. Выглядит конечно вкусно, но&nbsp;как оно на&nbsp;практике сказать не&nbsp;могу и&nbsp;вообще на&nbsp;этот счёт имеются сомнения, о&nbsp;которых напишу ниже.</p>
+<h2 id="Предварительная-настройка"><a href="#Предварительная-настройка" class="headerlink" title="Предварительная настройка"></a>Предварительная настройка</h2><p>CoreOS долгое время поддерживала традиционный для кластерных систем cloud-config&nbsp;&mdash; набор конфигурационных команд в&nbsp;YAML формате, передаваемых в&nbsp;систему в&nbsp;момент установки. Но&nbsp;разработчики системы пошли ещё дальше и&nbsp;представили свою систему&nbsp;&mdash; ignition, которая в&nbsp;сущности делает то-же самое, но&nbsp;имеет гораздо более широкие возможности&nbsp;&mdash; от&nbsp;создания новых пользователей, до&nbsp;переразбивки дисков и&nbsp;формирования RAID-ов.</p>
+<p>Физически это json файл или строка или URL с&nbsp;JSON контентом, в&nbsp;котором и&nbsp;прописаны все директивы. Вручную его набирать нереально, ибо JSON хорош для машин, а&nbsp;не&nbsp;для людей. Поэтому есть транспилер для конвертации традиционного cloud-config YAML файла в&nbsp;ignition JSON.</p>
+<p>С помощью ignition добавлять новые узла в&nbsp;кластер становится просто элементарно&nbsp;&mdash; скармливаем установщику готовый ignition файл и&nbsp;всё&nbsp;&mdash; узел сконфигурируется и&nbsp;поключится к&nbsp;кластеру&nbsp;сам. Ну&nbsp;в&nbsp;общем так оно в&nbsp;теории. Думаю на&nbsp;практике всё не&nbsp;так просто.</p>
+<p>Ну вот пожалуй и&nbsp;всё про плюсы. Действительно&nbsp;&mdash; есть ряд полезных возможностей, которые отсутствуют в&nbsp;дистрибутивах общего назначения. Теперь перейдём к&nbsp;недостаткам.</p>
+<h1 id="Что-же-с-ней-не-так"><a href="#Что-же-с-ней-не-так" class="headerlink" title="Что же с ней не так?"></a>Что&nbsp;же&nbsp;с&nbsp;ней не&nbsp;так?</h1><h2 id="Ignition-работает-не-везде"><a href="#Ignition-работает-не-везде" class="headerlink" title="Ignition работает не везде"></a>Ignition работает не&nbsp;везде</h2><p>Как ни&nbsp;странно, один из&nbsp;ключевых элементов системы&nbsp;&mdash; ignition сходу подложил мне свинью. Как оказалось работает он&nbsp;на&nbsp;списке заранее предустановленных провайдеров. И&nbsp;если вы&nbsp;запускаете его в&nbsp;среде, которая ему не&nbsp;известна, то&nbsp;получите облом. Именно это я&nbsp;и&nbsp;получил пытаясь поднять тестовый кластер через Vagrant и&nbsp;libvirt. C&nbsp;Vagrant оказывается ignition работает только если в&nbsp;качестве провайдера использовать VirtualBox. Собственно вот доказательства <a target="_blank" rel="noopener" href="https://github.com/coreos/ignition/blob/9796484de2dd06b39691c4021b6bbd8f51431d42/internal/oem/oem.go#L128">https://github.com/coreos/ignition/blob/9796484de2dd06b39691c4021b6bbd8f51431d42/internal/oem/oem.go#L128</a>&nbsp;&mdash; как мы&nbsp;видим для Vagrant ignition использует <code>noop.FetchConfig</code>, что означает &laquo;не знаю откуда брать данные&raquo;</p>
+<p>С другой стороны ignition работает под большинство основных и&nbsp;наиболее распространённых платформ. Конкретно моя проблема тут скорее исключение.</p>
+<h2 id="Обновления-и-софт"><a href="#Обновления-и-софт" class="headerlink" title="Обновления и софт"></a>Обновления и&nbsp;софт</h2><p>В CoreOS нет как такового менеджера пакетов. Оно само как-то умеет обновлять свои основные компоненты, а&nbsp;установить что-то дополнительно непонятно&nbsp;как. С&nbsp;одной стороны концепция дистрибутива она именно такова и&nbsp;есть&nbsp;&mdash; это просто запускалка контейнеров и&nbsp;ничего лишнего там быть не&nbsp;должно. С&nbsp;другой стороны образ весит почти&nbsp;гиг, что мягко говоря весьма не&nbsp;мало для дистрибутива, гордо называющего себя &laquo;легковесным&raquo;.</p>
+<p>Более того я&nbsp;достаточно порылся в&nbsp;кишках этой системы, включая сборку кастомного варианта CoreOS. И&nbsp;этот опыт принёс мне немало удивительных открытий. Как оказалось CoreOS основана на&nbsp;известном дистрибутиве Gentoo. Как человек несколько лет сидевший на&nbsp;ней и&nbsp;знающий не&nbsp;по&nbsp;наслышке, что это такое я&nbsp;мягко говоря удивлён. Стабильность это отнюдь не&nbsp;конёк Gentoo.</p>
+<p>Ну да&nbsp;ладно&nbsp;&mdash; почему&nbsp;бы&nbsp;и&nbsp;нет, но&nbsp;я&nbsp;например в&nbsp;ходе сборки с&nbsp;удивлением обнаружил, что включен&nbsp;т.&nbsp;н.&nbsp;USE флаг&nbsp;usb, что означает собирать весь софт с&nbsp;поддержкой&nbsp;USB. Зачем USB на&nbsp;чисто серверной запускалке контейнеров мне не&nbsp;совсем понятно. Возможно подразумевается подключение какого-то железа типа UPS-ов.</p>
+<p>Опять&nbsp;же&nbsp;при сборке (благодаря ошибке при сборке)  обнаружил в&nbsp;составе дистрибутива пакет <code>texinfo</code>&nbsp;&mdash; зачем оно на&nbsp;кластере опять&nbsp;же&nbsp;остаётся только гадать.</p>
+<p>Можно предположить, что сторонний софт можно установить используя Gentoo-шные ebuild-ы, но&nbsp;сам я&nbsp;не&nbsp;проверял.</p>
+<p>Вообще выбор как базового дистрибутива так и&nbsp;набор софта лично мне не&nbsp;нравятся. Это субъективно, но&nbsp;это&nbsp;так.</p>
+<h2 id="Проблемы-с-Kubernetes"><a href="#Проблемы-с-Kubernetes" class="headerlink" title="Проблемы с Kubernetes"></a>Проблемы с&nbsp;Kubernetes</h2><p>Собственно залез я&nbsp;в&nbsp;эту тему с&nbsp;CoreOS в&nbsp;контексте моих экспериментов с&nbsp;Kubernetes, а&nbsp;конкретно выбора дистрибутива под кластер. Вышеописанные проблемы меня не&nbsp;остановили и&nbsp;я&nbsp;таки решил довести дело до&nbsp;какого-то логического конца и&nbsp;установит-таки кластер на&nbsp;эту систему. Но&nbsp;и&nbsp;тут меня ждало некоторое разочарование.</p>
+<p>Установку Kubernetes я&nbsp;проводил с&nbsp;помощью <code>kubeadm</code>. Первым начал ругаться <code>kubelet</code> заявивший при старте, что версия docker-а слишком новая и&nbsp;типа &laquo;используйте на&nbsp;свой страх и&nbsp;риск&raquo;. Блин&nbsp;&mdash; это немного не&nbsp;то, чего я&nbsp;ожидал от&nbsp;стабильной системы заточенной на&nbsp;запуск kubernetes.</p>
+<p>Вторым и&nbsp;финальным косяком стала ругань <code>kubeadm</code> при попытке поднять мастера&nbsp;&mdash; ему не&nbsp;понравилась текущая версия etcd. Ну&nbsp;и&nbsp;как вариант он&nbsp;предложил мне запустить команду с&nbsp;отключенным <code>preflight check</code>, чего я&nbsp;делать уже не&nbsp;стал, ибо в&nbsp;этой точке моё терпение окончательно лопнуло.</p>
+<p>На этом месте я&nbsp;задумался&nbsp;&mdash; если операционная система сама по&nbsp;себе, а&nbsp;кластер сам по&nbsp;себе и&nbsp;в&nbsp;то-же время ОС&nbsp;отвечает за&nbsp;обновление ключевых компонентов кластера (docker и&nbsp;etcd), то&nbsp;о&nbsp;какой вообще надёжности тут можно говорить? В&nbsp;любой момент CoreOS обновит etcd на&nbsp;несовместимую с&nbsp;текущей версией kubernetes версию и&nbsp;всё&nbsp;&mdash; наш кластер просто развалится.</p>
+<h1 id="Итоги"><a href="#Итоги" class="headerlink" title="Итоги"></a>Итоги</h1><p>В общем и&nbsp;целом CoreOS оставил какие-то смешанные чувства. С&nbsp;одной стороны довольно известная система продвигаемая как одно из&nbsp;лучших решений для kubernetes. С&nbsp;другой стороны очень мало информации с&nbsp;описанием реальных примеров внедрения kubernetes на&nbsp;этой системе. Плюс собственный опыт который лишь добавил опасений.</p>
+<p>Рискну заявить, что я&nbsp;бы&nbsp;не&nbsp;рекомендовал использовать CoreOS для серьёзных применений как минимум с&nbsp;Kubernetes точно.</p>
+<p>Это крайне субъективное мнение, но&nbsp;по&nbsp;крайней мере основанное хотя и&nbsp;на&nbsp;небольшом, но&nbsp;реальном опыте работа с&nbsp;этой системой.</p>
+<h1 id="Источники"><a href="#Источники" class="headerlink" title="Источники"></a>Источники</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.laputa.io/kubernetes-flannel-networking-6a1cb1f8ec7c">https://blog.laputa.io/kubernetes-flannel-networking-6a1cb1f8ec7c</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrislovecnm.com/kubernetes/cni/choosing-a-cni-provider/">https://chrislovecnm.com/kubernetes/cni/choosing-a-cni-provider/</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1polIS2pvjOxCZ7hpXbra68CluwOZybsP1IYfr-HrAXc/edit">https://docs.google.com/spreadsheets/d/1polIS2pvjOxCZ7hpXbra68CluwOZybsP1IYfr-HrAXc/edit</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.openstack.org/assets/presentation-media/Networking-approaches-in-a-container-world.pdf">https://www.openstack.org/assets/presentation-media/Networking-approaches-in-a-container-world.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/security/https/#create-a-ca-server-and-client-keys-with-openssl">https://docs.docker.com/engine/security/https/#create-a-ca-server-and-client-keys-with-openssl</a></li>
+</ul>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/docker/">Docker</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/kubernetes/">kubernetes</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/digital-ocean/">digital-ocean</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="3" href="/tags/coreos/">Core OS</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="4" href="/tags/etcd/">etcd</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="5" href="/tags/kubeadm/">kubeadm</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="6" href="/tags/kubelet/">kubelet</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/devops/">DevOps</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description="Почему CoreOS не является хорошим решением для установки Kubernetes кластера?"></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2018/06/13/what-is-wrong-with-coreos/';
+  this.page.identifier = 'https://www.webhive.ru/2018/06/13/what-is-wrong-with-coreos/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

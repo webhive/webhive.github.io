@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Создаю свой локальный Docker Registry</title><meta name="description" content="Как установить и настроить собственный репозитарий docker?"><meta name="keywords" content="Docker,Let's Encrypt,Docker Registry"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2018/06/10/howto-setup-private-docker-registry/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;Docker&quot;,&quot;Let's Encrypt&quot;,&quot;Docker Registry&quot;]"><meta property="article:section" content="[&quot;DevOps&quot;]"><meta property="article:published_time" content="2018-06-10T16:31:44.000Z"><meta property="article:modified_time" content="2018-06-10T16:31:44.000Z"><meta name="DC.Title" content="Создаю свой локальный Docker Registry"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2018-06-10T16:31:44.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2018/06/10/howto-setup-private-docker-registry/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2018/06/10/howto-setup-private-docker-registry/">
+        Создаю свой локальный Docker Registry
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2018-06-10T16:31:44.000Z" itemprop="datePublished">
+        10 июня 2018
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2018/06/10/howto-setup-private-docker-registry/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Не стану отрицать очевидный медицинский факт, что у&nbsp;меня докер головного мозга. Болезнь пустила метастазы в&nbsp;виде неистребимого желания заиметь свой персональный registry для хранения и&nbsp;распространения собственных образов. Этим бесценым опытом я&nbsp;и&nbsp;хочу поделиться.</p>
+<a id="more"></a>
+
+<h1 id="Что-за-странное-желание"><a href="#Что-за-странное-желание" class="headerlink" title="Что за странное желание?"></a>Что за&nbsp;странное желание?</h1><p>Позывы сделать свой registry были давно, но&nbsp;как-то всё не&nbsp;доходили руки. На&nbsp;самом деле не&nbsp;было такой острой необходимости. Как правило всё решалось простым:</p>
+<pre class="code language language-bash"><code class="language language-bash">$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">DOCKER_HOST</span><span class="token operator">=</span>tcp://<span class="token operator">&lt;</span>ip адрес хоста с докером<span class="token operator">></span>:2375
+$ docker <span class="token operator">&lt;</span>какая нибудь команда<span class="token operator">></span></code></pre>
+
+<p>Минусы такого подхода очевидны&nbsp;&mdash; каждый раз образ собирается прямо на&nbsp;целевом сервере и&nbsp;каждую новую установку или обновление образа нужно выполнять на&nbsp;каждом сервере отдельно. И&nbsp;это при&nbsp;том, что собранный образ у&nbsp;меня уже есть. Хотелось&nbsp;бы&nbsp;конечно собрать и&nbsp;оттестировать локально один&nbsp;раз, а&nbsp;потом просто разлить готовый образ по&nbsp;нужным хостам.</p>
+<p>Попытка использовать в&nbsp;качестве registry Docker Hub не&nbsp;увенчалась успехом&nbsp;&mdash; бесплатно там доступно не&nbsp;очень много.</p>
+<h1 id="Моя-инфраструктура"><a href="#Моя-инфраструктура" class="headerlink" title="Моя инфраструктура"></a>Моя инфраструктура</h1><h2 id="Железо"><a href="#Железо" class="headerlink" title="Железо"></a>Железо</h2><p>У меня есть локальный сервер, на&nbsp;котором крутятся всякие базы данных и&nbsp;прочие редисы с&nbsp;эластиками. Запускать всё на&nbsp;локальной машине это просто безумие, поэтому давно уже вынес все зависимости на&nbsp;этот отдельный компьютер. Ну&nbsp;и&nbsp;вполне очевидно, что разместить registry я&nbsp;решил именно на&nbsp;нём.</p>
+<h2 id="Сеть"><a href="#Сеть" class="headerlink" title="Сеть"></a>Сеть</h2><p>Единственная проблема это доступ к&nbsp;нему снаружи, но&nbsp;это даже не&nbsp;проблема, а&nbsp;скорее небольшое препятствие.</p>
+<p>В общем я&nbsp;просто пробросил 443&nbsp;порт со&nbsp;своего роутера на&nbsp;мой сервер внутри моей домашней сети. В&nbsp;моём Zyxel Keenetic Giga это делается&nbsp;так:</p>
+<img src="/2018/06/10/howto-setup-private-docker-registry/zyxel-setup-1.png" class="" title="Zyxel список открытых портов">
+
+<p>Ну и&nbsp;для конкретного порта настройки выглядят вот&nbsp;так:</p>
+<img src="/2018/06/10/howto-setup-private-docker-registry/zyxel-setup-2.png" class="" title="Zyxel настройка проброса порта во внутреннюю сеть">
+
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><p>Я пользуюсь DNS серверами Яндэкс-а, ну&nbsp;и&nbsp;соответственно прописал там свой внешний IP&nbsp;(он у&nbsp;меня статичный)  для имени <code>registry.webhive.ru</code>.</p>
+<p>На этом предварительная подготовка закончена и&nbsp;у&nbsp;меня есть доменное имя и&nbsp;сервер во&nbsp;домашней сети, доступный по&nbsp;443-му порту по&nbsp;этому имени.</p>
+<h1 id="Установка-registry"><a href="#Установка-registry" class="headerlink" title="Установка registry"></a>Установка registry</h1><h2 id="Сертификаты"><a href="#Сертификаты" class="headerlink" title="Сертификаты"></a>Сертификаты</h2><p>Теперь мне нужно запустить registry и&nbsp;прибить его к&nbsp;443&nbsp;порту. Но&nbsp;443&nbsp;порт это HTTPS и&nbsp;соответственно нужно поиметь сертификат для шифрования трафика. Думаю никого не&nbsp;удивлю&nbsp;тем, что выбор пал на&nbsp;LetsEncrypt. Для получения сертификата воспользуюсь скриптом <a target="_blank" rel="noopener" href="https://github.com/Neilpang/acme.sh">acme.sh</a> и&nbsp;API для Яндэкс DNS-а, что позволяет максимально автоматизировать процесс.</p>
+<p>На самом деле у&nbsp;docker образа registry есть встроенная поддержка LetsEncrypt, но&nbsp;она у&nbsp;меня не&nbsp;заработала, впрочем не&nbsp;только у&nbsp;меня. Собственно именно поэтому и&nbsp;установку сертификата выполнил отдельно.</p>
+<p>Да&nbsp;&mdash; ещё забыл упомянуть&nbsp;&mdash; без HTTPS не&nbsp;работает авторизация и&nbsp;если хочется защитить свой registry паролем, то&nbsp;получение сертификата является обязательным шагом.</p>
+<p>Итак ближе к&nbsp;делу. Получаем сертификат. Для этого на&nbsp;сервере запускаем команду (на сервере должен быть установлен docker) </p>
+<pre class="code language language-bash"><code class="language language-bash">$ docker run -v /etc/acme/webhive:/acme.sh <span class="token punctuation">\</span>
+             -e <span class="token assign-left variable">PDD_Token</span><span class="token operator">=</span><span class="token operator">&lt;</span>токен API Яндэкса<span class="token operator">></span> <span class="token punctuation">\</span>
+             --rm <span class="token punctuation">\</span>
+             neilpang/acme.sh <span class="token punctuation">\</span>
+             --issue <span class="token punctuation">\</span>
+             -d registry.webhive.ru <span class="token punctuation">\</span>
+             --dns dns_yandex <span class="token punctuation">\</span>
+             --accountemail <span class="token string">"&lt;email>"</span> <span class="token punctuation">\</span>
+             --standalone</code></pre>
+
+<p>Здесь <code>/etc/acme/webhive</code> предварительно созданная папка для сохранения данных LetsEncrypt.</p>
+<p>Далее нужно экспортировать полученный сертификат и&nbsp;ключ в&nbsp;папку, доступную для registry (в моём случае это <code>/etc/docker-registry/certs</code>). Делается это&nbsp;так:</p>
+<pre class="code language language-bash"><code class="language language-bash">$ docker run -v /etc/acme/webhive:/acme.sh <span class="token punctuation">\</span>
+             -v /etc/docker-registry/certs/:/etc/docker-registry/certs/ <span class="token punctuation">\</span>
+             --rm <span class="token punctuation">\</span>
+             neilpang/acme.sh <span class="token punctuation">\</span>
+             --install-cert -d registry.webhive.ru <span class="token punctuation">\</span>
+             --key-file /etc/docker-registry/certs/key.pem <span class="token punctuation">\</span>
+             --fullchain-file /etc/docker-registry/certs/cert.pem</code></pre>
+
+<p>Думаю тут всё очевидно&nbsp;&mdash; в&nbsp;результате получаем два файла&nbsp;&mdash; сертификат и&nbsp;ключ.</p>
+<h2 id="Basic-Auth"><a href="#Basic-Auth" class="headerlink" title="Basic Auth"></a>Basic Auth</h2><p>Кроме сертификата нам понадобится настроить парольную авторизацию, ибо у&nbsp;меня нет большого желания, чтоб в&nbsp;мой registry лазил кто попало. Делается это так&nbsp;&mdash; мы&nbsp;используем образ registry, но&nbsp;как команду для генерации аккаунта пользователя.</p>
+<pre class="code language language-bash"><code class="language language-bash">$ docker run --rm <span class="token punctuation">\</span>
+             --entrypoint htpasswd <span class="token punctuation">\</span>
+             registry:2 <span class="token punctuation">\</span>
+             -Bbn <span class="token operator">&lt;</span>имя пользователя<span class="token operator">></span> <span class="token operator">&lt;</span>пароль<span class="token operator">></span> <span class="token punctuation">\</span>
+             <span class="token operator">></span> /etc/docker-registry/auth/htpasswd</code></pre>
+
+<h2 id="Собираем-всё-вместе"><a href="#Собираем-всё-вместе" class="headerlink" title="Собираем всё вместе"></a>Собираем всё вместе</h2><p>Ну и&nbsp;наконец у&nbsp;нас всё готово для финального аккорда. У&nbsp;нас есть сертификат и&nbsp;ключ для организации HTTPS, у&nbsp;нас есть файл с&nbsp;аккаунтами пользователей. Давайте-же наконец запустим registry.</p>
+<pre class="code language language-bash"><code class="language language-bash">$ docker run <span class="token punctuation">\</span>
+    --rm <span class="token punctuation">\</span>
+    -p <span class="token number">443</span>:5000 <span class="token punctuation">\</span>
+    --name registry <span class="token punctuation">\</span>
+    -v /etc/docker-registry/certs:/certs/ <span class="token punctuation">\</span>
+    -v /etc/docker-registry/auth:/auth <span class="token punctuation">\</span>
+    -v /var/lib/docker-registry:/var/lib/registry <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">REGISTRY_AUTH</span><span class="token operator">=</span>htpasswd <span class="token punctuation">\</span>
+    -e <span class="token string">"REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"</span> <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">REGISTRY_AUTH_HTPASSWD_PATH</span><span class="token operator">=</span>/auth/htpasswd <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">REGISTRY_HTTP_HOST</span><span class="token operator">=</span>https://registry.webhive.ru <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">REGISTRY_HTTP_TLS_CERTIFICATE</span><span class="token operator">=</span>/certs/cert.pem <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">REGISTRY_HTTP_TLS_KEY</span><span class="token operator">=</span>/certs/key.pem <span class="token punctuation">\</span>
+    registry:2</code></pre>
+
+<p>Что тут происходит&nbsp;&mdash; мы&nbsp;подсовываем приложению наши ключи и&nbsp;дополнительные опции в&nbsp;виде переменных окружения. Собственно как и&nbsp;описано в&nbsp;документации&nbsp;&mdash; <a target="_blank" rel="noopener" href="https://docs.docker.com/registry/configuration/">https://docs.docker.com/registry/configuration/</a> (раздел Override specific configuration options).</p>
+<p>Так-же мы&nbsp;мапим некоторые папки нашего хоста в&nbsp;докерский образ. Это как раз сертификаты и&nbsp;файл с&nbsp;аккаунтами. Ну&nbsp;и&nbsp;собственно и&nbsp;всё&nbsp;&mdash; пазл сложился. Теперь мы&nbsp;можем наблюдать наш registry живой и&nbsp;рабочий в&nbsp;списке процессов докера.</p>
+<pre class="code language language-bash"><code class="language language-bash">$ docker login registry.webhive.ru
+Username: docker
+Password:
+WARNING<span class="token operator">!</span> Your password will be stored unencrypted <span class="token keyword">in</span> /home/roman/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/<span class="token comment">#credentials-store</span>
+
+Login Succeeded</code></pre>
+
+<h1 id="Автоматизируй-это"><a href="#Автоматизируй-это" class="headerlink" title="Автоматизируй это"></a>Автоматизируй это</h1><p>Для полного счастья осталось добавить registry в&nbsp;автозагрузку сервера. Используем systemd&nbsp;&mdash; ну,&nbsp;а&nbsp;какие ещё могут быть варианты в&nbsp;2018&nbsp;году?<br>Юнит-файл для этого у&nbsp;меня имеет следующий вид</p>
+<pre class="code language language-bash"><code class="language language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>Docker Registry Container
+<span class="token assign-left variable">After</span><span class="token operator">=</span>docker.service
+<span class="token assign-left variable">Requires</span><span class="token operator">=</span>docker.service
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">ExecStartPre</span><span class="token operator">=</span>-/usr/bin/docker pull registry
+<span class="token assign-left variable">ExecStartPre</span><span class="token operator">=</span>-/usr/bin/docker <span class="token function">kill</span> registry
+<span class="token assign-left variable">ExecStartPre</span><span class="token operator">=</span>-/usr/bin/docker <span class="token function">rm</span> registry
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/bin/docker run <span class="token punctuation">\</span>
+                          --rm <span class="token punctuation">\</span>
+                          -p <span class="token number">443</span>:5000 <span class="token punctuation">\</span>
+                          --name registry <span class="token punctuation">\</span>
+                          -v /etc/docker-registry/certs:/certs/ <span class="token punctuation">\</span>
+                          -v /etc/docker-registry/auth:/auth <span class="token punctuation">\</span>
+                          -v /var/lib/docker-registry:/var/lib/registry <span class="token punctuation">\</span>
+                          -e <span class="token assign-left variable">REGISTRY_AUTH</span><span class="token operator">=</span>htpasswd <span class="token punctuation">\</span>
+                          -e <span class="token string">"REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"</span> <span class="token punctuation">\</span>
+                          -e <span class="token assign-left variable">REGISTRY_AUTH_HTPASSWD_PATH</span><span class="token operator">=</span>/auth/htpasswd <span class="token punctuation">\</span>
+                          -e <span class="token assign-left variable">REGISTRY_HTTP_HOST</span><span class="token operator">=</span>https://registry.webhive.ru <span class="token punctuation">\</span>
+                          -e <span class="token assign-left variable">REGISTRY_HTTP_TLS_CERTIFICATE</span><span class="token operator">=</span>/certs/cert.pem <span class="token punctuation">\</span>
+                          -e <span class="token assign-left variable">REGISTRY_HTTP_TLS_KEY</span><span class="token operator">=</span>/certs/key.pem <span class="token punctuation">\</span>
+                          registry:2
+<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>-/usr/bin/docker stop registry
+<span class="token assign-left variable">Restart</span><span class="token operator">=</span>always
+<span class="token assign-left variable">RestartSec</span><span class="token operator">=</span>10s
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target</code></pre>
+
+<p>Ну и&nbsp;для полного счастья нужен ещё таймер для обновления сертификатов&nbsp;&mdash; он&nbsp;есть у&nbsp;меня, но&nbsp;в&nbsp;контексте данной статьи публиковать его не&nbsp;вижу нужды.</p>
+<h1 id="Итого"><a href="#Итого" class="headerlink" title="Итого"></a>Итого</h1><p>Получили рабочий Docker Registry, работающий на&nbsp;сервере внутри домашней сети и&nbsp;доступный снаружи по&nbsp;HTTPS и&nbsp;защищённый паролем.</p>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/docker/">Docker</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/letsencrypt/">Let's Encrypt</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/docker-registry/">Docker Registry</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/devops/">DevOps</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description="Как установить и настроить собственный репозитарий docker?"></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2018/06/10/howto-setup-private-docker-registry/';
+  this.page.identifier = 'https://www.webhive.ru/2018/06/10/howto-setup-private-docker-registry/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

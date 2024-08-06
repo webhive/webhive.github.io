@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>acme.sh - отличная альтернатива certbot</title><meta name="description" content="Скрипт acme.sh - отличная замена стандартному certbot-у"><meta name="keywords" content="Yandex,acme,Let's Encrypt,certbot,yandex_dns,dns"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2018/05/17/acme-sh-great-certbot-alternative/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;Yandex&quot;,&quot;acme&quot;,&quot;Let's Encrypt&quot;,&quot;certbot&quot;,&quot;yandex_dns&quot;,&quot;dns&quot;]"><meta property="article:section" content="[&quot;DevOps&quot;]"><meta property="article:published_time" content="2018-05-17T08:33:44.000Z"><meta property="article:modified_time" content="2018-05-17T08:33:44.000Z"><meta name="DC.Title" content="acme.sh - отличная альтернатива certbot"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2018-05-17T08:33:44.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2018/05/17/acme-sh-great-certbot-alternative/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2018/05/17/acme-sh-great-certbot-alternative/">
+        acme.sh - отличная альтернатива certbot
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2018-05-17T08:33:44.000Z" itemprop="datePublished">
+        17 мая 2018
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2018/05/17/acme-sh-great-certbot-alternative/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>В связи с&nbsp;возросшей важностью поддержки современными сайтами протокола https использование LetsEncrypt становится практически обязательным. Я&nbsp;для данных целей всегда пользовался стандартным рекомендованным скриптом&nbsp;&mdash; certbot-ом, который вполне исправно работал (и работает). Но&nbsp;вот недавно открыл для себя альтернативный клиент <a target="_blank" rel="noopener" href="https://github.com/Neilpang/acme.sh">acme.sh</a> и&nbsp;остался им&nbsp;крайне доволен о&nbsp;чём и&nbsp;хочу поведать.</p>
+<a id="more"></a>
+
+<p>Итак собственно мотивом побудившим меня вообще взглянуть в&nbsp;сторону альтернативных клиентов стал очередной виток докеризации одного из&nbsp;проектов. Я&nbsp;давно хотел завернуть в&nbsp;контейнер nginx-ы на&nbsp;серверах проекта и&nbsp;единственное, что мешало это как раз проблема с&nbsp;certbot&nbsp;&mdash; не&nbsp;было ясности как это сделать &laquo;правильно&raquo;. И&nbsp;вот я&nbsp;наконец созрел и&nbsp;полез изучать тему. Ну&nbsp;и&nbsp;в&nbsp;ходе поисков пересматривал различные варианты на&nbsp;hub.docker.com&nbsp;&mdash; впитывал так сказать опыт других людей. В&nbsp;одном из&nbsp;вариантов обнаружил жирное сообщение, что типа &laquo;к чорту всё это&nbsp;&mdash; я&nbsp;теперь использую <a target="_blank" rel="noopener" href="https://github.com/Neilpang/acme.sh">acme.sh</a>&raquo;. Ну&nbsp;и&nbsp;перейдя по&nbsp;ссылке я&nbsp;решил попробовать этот волшебный скрипт.</p>
+<h1 id="Плюсы"><a href="#Плюсы" class="headerlink" title="Плюсы"></a>Плюсы</h1><p>Скрипт написан на&nbsp;чистом bash-е. Собственно и&nbsp;оригинальный certbot со&nbsp;своим python-ом не&nbsp;особо напрягал, но&nbsp;в&nbsp;принципе чем меньше зависимостей, тем мне нравится больше.</p>
+<p>Поддерживает валидацию через&nbsp;DNS, причём автоматически. Для меня это просто открытие!!! Правда в&nbsp;ручном режиме это реальный геморрой, но&nbsp;скрипт поддерживает целую кучу API различных провайдеров, включая используемый мной повсеместно Yandex-овский&nbsp;pdd.yandex.ru. Т.е. больше не&nbsp;нужно заводить на&nbsp;вебсервере специальную папку, добавлять специальный правила или как вариант останавливать веб-сервер, чтоб certbot отработал автономно. Скрипт сам проверяет ваши права на&nbsp;домен добавляя специальную TXT запись в&nbsp;вашу зону (если есть API у&nbsp;вашего провайдера)  и&nbsp;генерирует нужные сертификаты.</p>
+<p>Поддержка docker-а &laquo;из коробки&raquo;. Есть уже готовый контейнер от&nbsp;авторов скрипта&nbsp;&mdash; бери и&nbsp;пользуйся, что я&nbsp;собственно и&nbsp;сделал.</p>
+<h1 id="Минусы"><a href="#Минусы" class="headerlink" title="Минусы"></a>Минусы</h1><p>Каких-то критичных минусов пока не&nbsp;обнаружил. Если уж&nbsp;совсем докапываться, то&nbsp;это огромное количество ключей командной строки, что лично я&nbsp;не&nbsp;люблю. Ну&nbsp;и&nbsp;автор скрипта азиат и&nbsp;как следствие очень много ссылок в&nbsp;вики иероглифами. Но&nbsp;не&nbsp;смотря на&nbsp;это английская документация и&nbsp;вики присутствуют и&nbsp;вполне себе полезны.</p>
+<h1 id="Как-это-работает"><a href="#Как-это-работает" class="headerlink" title="Как это работает"></a>Как это работает</h1><p>Сразу оговорюсь&nbsp;&mdash; я&nbsp;пользуюсь этим скриптом через докер контейнер&nbsp;&mdash; хотя при запуске отличия минимальны. Второй момент&nbsp;&mdash; я&nbsp;использую DNS от&nbsp;Яндекса. Соответственно примеры будут именно в&nbsp;этом контексте.</p>
+<h2 id="Ключ-для-API-DNS-Яндекса"><a href="#Ключ-для-API-DNS-Яндекса" class="headerlink" title="Ключ для API DNS Яндекса"></a>Ключ для API DNS Яндекса</h2><p>Создать ключ можно по&nbsp;этой ссылке&nbsp;&mdash; <a target="_blank" rel="noopener" href="https://pddimp.yandex.ru/api2/admin/get_token">https://pddimp.yandex.ru/api2/admin/get_token</a><br>Там надо просто ввести свой домен и&nbsp;капчу и&nbsp;сервис выдаст вам токен. Проще не&nbsp;придумаешь.</p>
+<p>Для использования ключа его нужно поместить в&nbsp;переменную окружения <code>PDD_Token</code>. Просто для скрипта это очевидно <code>export PDD_Token=&lt;ваш токен&gt;</code>, а&nbsp;для докера передаём в&nbsp;контейнер с&nbsp;ключом <code>e</code>&nbsp;&mdash; как-то так <code>docker run -e PDD_Token=&lt;ваш токен&gt; --rm neilpang/acme.sh</code></p>
+<h2 id="Запуск"><a href="#Запуск" class="headerlink" title="Запуск"></a>Запуск</h2><pre class="code language language-bash"><code class="language language-bash">$ docker run -v /etc/acme:/acme.sh -e <span class="token assign-left variable">PDD_Token</span><span class="token operator">=</span><span class="token operator">&lt;</span>токен<span class="token operator">></span> --rm neilpang/acme.sh <span class="token punctuation">\</span>
+  --issue -d webhive.ru <span class="token punctuation">\</span>
+  --dns dns_yandex <span class="token punctuation">\</span>
+  --accountemail <span class="token string">"roman.tataurov@yandex.ru"</span> <span class="token punctuation">\</span>
+  --standalone
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:24 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Registering account
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Registered
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> <span class="token assign-left variable">ACCOUNT_THUMBPRINT</span><span class="token operator">=</span><span class="token string">'........................'</span>
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Creating domain key
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> The domain key is here: /acme.sh/webhive.ru/webhive.ru.key
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Single <span class="token assign-left variable">domain</span><span class="token operator">=</span><span class="token string">'webhive.ru'</span>
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Getting domain auth token <span class="token keyword">for</span> each domain
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Getting webroot <span class="token keyword">for</span> <span class="token assign-left variable">domain</span><span class="token operator">=</span><span class="token string">'webhive.ru'</span>
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:26 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Getting new-authz <span class="token keyword">for</span> <span class="token assign-left variable">domain</span><span class="token operator">=</span><span class="token string">'webhive.ru'</span>
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:27 UTC <span class="token number">2018</span><span class="token punctuation">]</span> The new-authz request is ok.
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:27 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Found domain api file: /root/.acme.sh/dnsapi/dns_yandex.sh
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:22:27 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Sleep <span class="token number">120</span> seconds <span class="token keyword">for</span> the txt records to take effect
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:27 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Verifying:webhive.ru
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:30 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Success
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:30 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Removing DNS records.
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:32 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Verify finished, start to sign.
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:33 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Cert success.
+-----BEGIN CERTIFICATE-----
+ <span class="token punctuation">..</span>. skip <span class="token punctuation">..</span>.
+-----END CERTIFICATE-----
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:33 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Your cert is <span class="token keyword">in</span>  /acme.sh/webhive.ru/webhive.ru.cer
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:33 UTC <span class="token number">2018</span><span class="token punctuation">]</span> Your cert key is <span class="token keyword">in</span>  /acme.sh/webhive.ru/webhive.ru.key
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:33 UTC <span class="token number">2018</span><span class="token punctuation">]</span> The intermediate CA cert is <span class="token keyword">in</span>  /acme.sh/webhive.ru/ca.cer
+<span class="token punctuation">[</span>Wed May <span class="token number">16</span> <span class="token number">21</span>:24:33 UTC <span class="token number">2018</span><span class="token punctuation">]</span> And the full chain certs is there:  /acme.sh/webhive.ru/fullchain.cer</code></pre>
+
+<p>Сохраняться всё будет в&nbsp;<code>/etc/acme</code>&nbsp;т.&nbsp;к.&nbsp;именно эту папку я&nbsp;указал докеру для маппинга <code>docker run -v /etc/acme:/acme.sh</code></p>
+<p>Как видно из&nbsp;вывода скрипт добавил проверочную запись в&nbsp;зону, подождал 120&nbsp;секунд&nbsp;&mdash; прочитал запись из&nbsp;DNS и&nbsp;таким образом убедился, что домен принадлежит&nbsp;вам.</p>
+<p>В принципе если у&nbsp;вашего провайдера DNS нет&nbsp;API, то&nbsp;можно добавлять проверочную запись вручную, но&nbsp;это придётся делать при каждом обновлении ключей (примерно раз в&nbsp;2&nbsp;месяца). Поэтому если нет возможности использовать&nbsp;API, то&nbsp;этот способ вам не&nbsp;подойдёт.</p>
+<p>Если&nbsp;же&nbsp;API для вашего провайдера просто не&nbsp;поддерживается (пока)  скриптом, то&nbsp;можно просто написать его самому&nbsp;&mdash; там надо-то реализовать 2&nbsp;функции на&nbsp;bash. Если вы&nbsp;не&nbsp;в&nbsp;силах такого сделать, то&nbsp;странно, что вы&nbsp;вообще читаете эту статью.</p>
+<p>Ну собственно с&nbsp;запуском всё&nbsp;&mdash; скрипт генерирует ключи&nbsp;&mdash; ну,&nbsp;а&nbsp;как их&nbsp;использовать уже выходит за&nbsp;рамки статьи.</p>
+<h2 id="Какие-ещё-плюшки-есть-у-скрипта"><a href="#Какие-ещё-плюшки-есть-у-скрипта" class="headerlink" title="Какие ещё плюшки есть у скрипта?"></a>Какие ещё плюшки есть у&nbsp;скрипта?</h2><p>Оно умеет добавлять себя в&nbsp;cron для автоматического обновления сертификатов по&nbsp;таймеру.</p>
+<p>Так-же скрипт может выполнить заданную команду после обновления сертификатов&nbsp;&mdash; очевидным применением является отправка команды веб-серверу на&nbsp;перезагрузку ключей. Есть ещё хуки для выполнения до&nbsp;и&nbsp;после запуска скрипта.</p>
+<p>Так-же есть функции для автоматической загрузки ключей в&nbsp;различные хостинговые панели (типа cpanel), но&nbsp;я&nbsp;таким не&nbsp;пользуюсь и&nbsp;как оно работает не&nbsp;скажу, но&nbsp;сам факт наличия такой возможности безусловный плюс.</p>
+<h1 id="Импорт-существующих-данных"><a href="#Импорт-существующих-данных" class="headerlink" title="Импорт существующих данных"></a>Импорт существующих данных</h1><p>Такой возможности&nbsp;нет. Как пишет сам автор&nbsp;&mdash; &laquo;нафига это нужно&nbsp;&mdash; просто сгенерируйте новый сертификат и&nbsp;всё, а&nbsp;старый выбросьте&raquo;. И&nbsp;в&nbsp;сущности он&nbsp;прав&nbsp;&mdash; этот тот случай когда нет смысл городить что-то там где оно не&nbsp;нужно.</p>
+<h1 id="Итого"><a href="#Итого" class="headerlink" title="Итого"></a>Итого</h1><p>Имеем отличнейшую альтернативу стандартному certbot-у с&nbsp;кучей полезных функций.</p>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/yandex/">Yandex</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/acme/">acme</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/letsencrypt/">Let's Encrypt</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="3" href="/tags/certbot/">certbot</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="4" href="/tags/yandex-dns/">yandex_dns</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="5" href="/tags/dns/">dns</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/devops/">DevOps</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description="Скрипт acme.sh - отличная замена стандартному certbot-у"></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2018/05/17/acme-sh-great-certbot-alternative/';
+  this.page.identifier = 'https://www.webhive.ru/2018/05/17/acme-sh-great-certbot-alternative/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

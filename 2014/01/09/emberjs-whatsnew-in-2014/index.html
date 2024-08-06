@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Ember.js - что новенького ждет нас в 2014</title><meta name="description" content="Ниже представлен вольный перевод статьи What’s coming in ember in 2014. Рассматриваются текущие вопросы и задачи, которые стоят перед командой разработчиков Ember и которые планируется решать в 2014 году."><meta name="keywords" content="Ember.js"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2014/01/09/emberjs-whatsnew-in-2014/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;Ember.js&quot;]"><meta property="article:section" content="[]"><meta property="article:published_time" content="2014-01-09T06:11:33.000Z"><meta property="article:modified_time" content="2014-01-09T06:11:33.000Z"><meta name="DC.Title" content="Ember.js - что новенького ждет нас в 2014"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2014-01-09T06:11:33.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2014/01/09/emberjs-whatsnew-in-2014/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2014/01/09/emberjs-whatsnew-in-2014/">
+        Ember.js - что новенького ждет нас в 2014
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2014-01-09T06:11:33.000Z" itemprop="datePublished">
+        9 января 2014
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2014/01/09/emberjs-whatsnew-in-2014/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Ниже представлен вольный перевод статьи <a target="_blank" rel="noopener" href="http://emberjs.com/blog/2013/12/17/whats-coming-in-ember-in-2014.html">What&laquo;s coming in&nbsp;ember in&nbsp;2014</a>. Рассматриваются текущие вопросы и&nbsp;задачи, которые стоят перед командой разработчиков Ember и&nbsp;которые планируется решать в&nbsp;2014&nbsp;году.</p>
+<a id="more"></a>
+
+<h1 id="Средства-для-сборки-и-поддержка-модульности"><a href="#Средства-для-сборки-и-поддержка-модульности" class="headerlink" title="Средства для сборки и поддержка модульности"></a>Средства для сборки и&nbsp;поддержка модульности</h1><p>Когда Ember только создавался еще не&nbsp;было популярных форматов модулей для JavaScript. Однако в&nbsp;последнее время модульность стала довольно популярной темой и&nbsp;всё сильнее набирают популярность такие средства как CommonJS (для сервреной стороны)  и&nbsp;AMD (для клиентской части). Оба подхода достаточно хороши, но&nbsp;это принципиально различные и&nbsp;как следствие трудно совместимые подходы.</p>
+<p>К счастью <a target="_blank" rel="noopener" href="http://www.ecma-international.org/memento/TC39.htm">TC39</a>&nbsp;&mdash; коммитет по&nbsp;стандартизации JavaScript осознал необходимость унифицированной системы модулей. Предложенная ими система ES6&nbsp;использовала лучшие стороны CommonJS и&nbsp;AMD и&nbsp;внедрила непосредственно в&nbsp;язык. При этом сосуществуют оба подхода позволяя использовать сильные стороны каждого.</p>
+<p>Сообщество Ember всегда было на&nbsp;гребне волны новых технологий. Например мменно в&nbsp;Ember начали широко использоваться promises. Здесь разработчики тоже не&nbsp;подкачали и&nbsp;несколько месяцев было потрачено на&nbsp;реализацию в&nbsp;Ember поддержки ES6. В&nbsp;результате возникли следующие проекты.</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.thomasboyt.com/2013/06/21/es6-module-transpiler">ES6&nbsp;Module Transpiler</a>&nbsp;&mdash; утилита для преобразования модулей из&nbsp;синтаксиса ES6 в&nbsp;набор AMD и&nbsp;CommonJS</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://embersherpa.com/articles/introduction-to-ember-app-kit/">Ember App Kit</a>&nbsp;&mdash; набор CLI средств для построения Ember приложений</p>
+</li>
+</ul>
+<p>Таким образом первый квартал 2014&nbsp;года будет посвящён разработке новых CLI средств разработки. Приложения Ember будут полностью использовать ES6 и&nbsp;побуждать к&nbsp;этому разработчиков.</p>
+<h1 id="Новые-свойства-инспекторов"><a href="#Новые-свойства-инспекторов" class="headerlink" title="Новые свойства инспекторов"></a>Новые свойства инспекторов</h1><p>Если вы&nbsp;разрабатываете Ember приложение с&nbsp;помощью утилит командной строки то&nbsp;вам должны понравиться так-же улучшения в&nbsp;инспекторах Chrome и&nbsp;Firefox. Сервер разработки будет открывать сокет к&nbsp;которому может обращаться инспектор, получать дополнительную информацию о&nbsp;середе разработки и&nbsp;показывать ее&nbsp;непосредственно в&nbsp;браузере.</p>
+<p>Это позволит делать такие вещи&nbsp;как:</p>
+<ul>
+<li>просматривать список установленных bower пакетов</li>
+<li>видеть результаты выполнения тестов</li>
+<li>проводить аудит кода</li>
+<li>конфигурировать приложение используя визуальные средства</li>
+</ul>
+<h1 id="Структура-файлов-проекта"><a href="#Структура-файлов-проекта" class="headerlink" title="Структура файлов проекта"></a>Структура файлов проекта</h1><p>Структура созданного Ember приложения выглядит примерно&nbsp;так:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">app&#x2F;</span><br><span class="line">  controllers&#x2F;</span><br><span class="line">  models&#x2F;</span><br><span class="line">  fonts&#x2F;</span><br><span class="line">  …</span><br><span class="line">config&#x2F;</span><br><span class="line">  shim.json</span><br><span class="line">vendor&#x2F;</span><br><span class="line">  underscore.js    &#x2F;&#x2F; bower installed</span><br><span class="line">  markdown.js</span><br><span class="line">lib&#x2F;</span><br><span class="line">  ember-histogram&#x2F; &#x2F;&#x2F; incubator for packages</span><br><span class="line">    skylight&#x2F;</span><br><span class="line">    bower.json</span><br><span class="line">modules&#x2F;           &#x2F;&#x2F; non-MVC stuff</span><br><span class="line">  underscore.js</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pods"><a href="#Pods" class="headerlink" title="Pods"></a>Pods</h2><p>В настоящий момент многие Ember проекты используют структуру файлов, схожую с&nbsp;Rails, где файлы сгруппированы по&nbsp;типам. С&nbsp;ростом размера приложения это становится все менее и&nbsp;менее удобно.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app&#x2F;</span><br><span class="line">  controllers&#x2F;</span><br><span class="line">    post.js</span><br><span class="line">    posts.js</span><br><span class="line">    index.js</span><br><span class="line">  models&#x2F;</span><br><span class="line">    post.js</span><br><span class="line">    user.js</span><br><span class="line">  templates&#x2F;</span><br><span class="line">    post.handlebars</span><br><span class="line">    posts.handlebars</span><br><span class="line">    index.handlebars</span><br></pre></td></tr></table></figure>
+
+<p>Предполагается использовать в&nbsp;Ember несколько иную структуру&nbsp;&mdash; группировать файлы в&nbsp;некие <code>pods</code> согласно их&nbsp;функционалу, т.&nbsp;е.&nbsp;например группировать контроллеры и&nbsp;соответствующие шаблоны вместе в&nbsp;одной папке.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">app&#x2F;</span><br><span class="line">  config&#x2F;</span><br><span class="line">    application.js</span><br><span class="line">  serializers&#x2F;</span><br><span class="line">  models&#x2F;</span><br><span class="line">    post.js</span><br><span class="line">    user.js</span><br><span class="line">  mixins&#x2F;</span><br><span class="line">pods&#x2F;</span><br><span class="line">  post&#x2F;</span><br><span class="line">    controller.js</span><br><span class="line">    template.handlebars</span><br><span class="line">  posts&#x2F;</span><br><span class="line">    controller.js</span><br><span class="line">    template.handlebars</span><br><span class="line">  index&#x2F;</span><br><span class="line">    controller.js</span><br><span class="line">    template.handlebars</span><br><span class="line">components&#x2F;</span><br><span class="line">  google-map&#x2F;</span><br><span class="line">    component.handlebars</span><br><span class="line">    component.js</span><br><span class="line">    component.css</span><br></pre></td></tr></table></figure>
+
+<p>Предложенная структура все ещё является предметом обсуждений, но&nbsp;безусловно является интересным хоть и&nbsp;довольно очевидным решением.</p>
+<h1 id="Уменьшение-размера-кода"><a href="#Уменьшение-размера-кода" class="headerlink" title="Уменьшение размера кода"></a>Уменьшение размера кода</h1><p>Нет сомнений код Ember довольно сильно раздут. Одним из&nbsp;улучшений запланированных на&nbsp;2014&nbsp;год будет уменьшение размера кода. Разработчики планирую ужать код до&nbsp;размера порядка 50kБ. Цифра еще не&nbsp;окончательная и&nbsp;возможно будет еще скорректирована.</p>
+<h1 id="Компоненты"><a href="#Компоненты" class="headerlink" title="Компоненты"></a>Компоненты</h1><p>Существует ряд проблем с&nbsp;распространением повторно используемых компонентов и&nbsp;библиотек компонентов. Ember использует спецификацию Web Components, но&nbsp;есть ряд областей где эта спецификация не&nbsp;дает четких указаний. В&nbsp;связи с&nbsp;этим в&nbsp;Ember существует ряд собственных решений&nbsp;&mdash; разработчики пытаются разрешить эти вопросы с&nbsp;авторами спецификации Web Components, но&nbsp;пока видимо без особого успеха.</p>
+<p>Ещё одним ограничением является&nbsp;то, что в&nbsp;старых браузерах отсутствуют некоторые возможности используемые в&nbsp;Web Components и&nbsp;требуются обходные пути для разрешения этих проблем. В&nbsp;частности есть определённые проблемы с&nbsp;IE8.</p>
+<h2 id="Пространство-имён-namespacing"><a href="#Пространство-имён-namespacing" class="headerlink" title="Пространство имён (namespacing)"></a>Пространство имён (namespacing) </h2><p>В данный момент компоненты Ember используют глобальное пространство имён. Соответственно если два компонента имеют одинаковое имя то&nbsp;при их&nbsp;одновременном использовании возникнет конфликт.</p>
+<p>Но вскоре эта проблема будет решена. Пример синтаксиса для использования компонента <code>area-graph</code> из&nbsp;пакета <code>d3</code></p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">\&#123;\&#123;area-graph@d3 xValue=responseTimes&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">\&#123;\&#123;import &quot;area-graph&quot; from &quot;d3&quot;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Можно так-же подключить все компоненты из&nbsp;пакета</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">\&#123;\&#123;import &quot;d3&quot;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Будем надеяться эты фича появится в&nbsp;этом году. Хотя к&nbsp;счастью пока не&nbsp;так уж&nbsp;много компонент для Ember и&nbsp;ситуация с&nbsp;конфликтом имён выглядит маловероятной.</p>
+<h2 id="TEMPLATE-VERSIONING-COMPILATION"><a href="#TEMPLATE-VERSIONING-COMPILATION" class="headerlink" title="TEMPLATE VERSIONING/COMPILATION"></a>TEMPLATE VERSIONING/COMPILATION</h2><p>Handlebars компилирует шаблоны в&nbsp;промежуточное <a target="_blank" rel="noopener" href="http://ru.wikipedia.org/wiki/%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%BE%D0%B5_%D1%81%D0%B8%D0%BD%D1%82%D0%B0%D0%BA%D1%81%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5_%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%BE">AST</a>. Формат AST может изменяться между версиями Handlebars. Кроме того к&nbsp;версии 2.0&nbsp;Handlebars может расширить синтаксис или даже его существенно изменить.</p>
+<p>В связи с&nbsp;этим встает вопрос должны&nbsp;ли&nbsp;компоненты, распространяемые через bower поставляться с&nbsp;предварительно скомпилированными шаблонами, или лучше компилировать их&nbsp;&bdquo;на лету&ldquo; средствами Ember?</p>
+<p>В данный момент используется второй подход, но&nbsp;вполне возможно, что он&nbsp;поменяется.</p>
+<h2 id="Scoped-CSS"><a href="#Scoped-CSS" class="headerlink" title="Scoped CSS"></a>Scoped CSS</h2><p>Существует проблема с&nbsp;CSS файлами внешних компонентов. Эти стили могут конфликтовать с&nbsp;уже существующими. Для обхода этой проблемы существует аттрибут <a target="_blank" rel="noopener" href="http://www.w3schools.com/tags/att_style_scoped.asp">scoped</a> тега <code>&lt;style&gt;</code><br>, но&nbsp;он&nbsp;к&nbsp;сожалению еще не&nbsp;поддерживается большинством браузеров. Поэтому подключаемые компоненты будут получать уникальный uuid и&nbsp;все их&nbsp;CSS правила будут обернуты селектором который ограничит их&nbsp;только заданным uuid-ом.</p>
+<h1 id="HTMLBars"><a href="#HTMLBars" class="headerlink" title="HTMLBars"></a>HTMLBars</h1><p>Одно из&nbsp;самых интересных нововведений. <a target="_blank" rel="noopener" href="https://github.com/tildeio/htmlbars">HTMLBars</a> это новый, активно развивающийся проект по&nbsp;интеграции Handlebars с&nbsp;DOM. Это позволит реализовать биндинг более элегантным способом чем это сделано в&nbsp;Ember сейчас. Несколько примеров:</p>
+<p>В данный момент биндинг реализован следующим образом</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img \&#123;\&#123;bind-attr src&#x3D;imageUrl&#125;&#125;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Используя <a target="_blank" rel="noopener" href="https://github.com/tildeio/htmlbars">HTMLBars</a> получим следующую конструкцию</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;\&#123;\&#123;imageUrl&#125;&#125;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Но более приятный синтаксис это еще не&nbsp;самое главное&nbsp;&mdash; гораздо интереснее то&nbsp;как будет выглядеть DOM после рендеринга. Наконец-то Ember больше не&nbsp;будет втыкать в&nbsp;DOM лишние элементы. Я&nbsp;уверен, что многих разработчиков раздражали вставки кода типа</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">&quot;metamorph-17-start&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/placeholder&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">&quot;metamorph-17-end&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/placeholder&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>которые хоть и&nbsp;были необходимы для биндинга, но&nbsp;без сомнений засоряли DOM и&nbsp;в&nbsp;ряду случаев сильно осложняли жизнь (например при генерации таблиц) </p>
+<p>Разработчики планируют внедрить HTMLBars уже в&nbsp;этом году.</p>
+<h1 id="Избавление-от-jQuery"><a href="#Избавление-от-jQuery" class="headerlink" title="Избавление от jQuery"></a>Избавление от&nbsp;jQuery</h1><p>В связи с&nbsp;тем, что в&nbsp;Ember запланирован переход на&nbsp;HTMLBars, взаимодействие Ember с&nbsp;DOM становится минимальным. Соответственно исчезает зависимость от&nbsp;jQuery, хотя jQuery может быть использована опционально если уже используется глобально или подключена через&nbsp;AMD.</p>
+<h1 id="Анимация"><a href="#Анимация" class="headerlink" title="Анимация"></a>Анимация</h1><p>Будут проводиться работы по&nbsp;внедрению в&nbsp;Ember анимационных эффектов. Но&nbsp;в&nbsp;данный момент не&nbsp;опубликовано какого-то API для анимации&nbsp;т.&nbsp;к.&nbsp;команда не&nbsp;хочет публиковать сырой продукт.</p>
+<h1 id="Поддержка-IE8"><a href="#Поддержка-IE8" class="headerlink" title="Поддержка IE8"></a>Поддержка IE8</h1><p>Ember будет поддерживать версии Internet Explorer вплоть до&nbsp;8&nbsp;версии включительно. Связано это с&nbsp;желанием охватить кроме всего прочего корпоративный сектор.</p>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/ember-js/">Ember.js</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description=""></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2014/01/09/emberjs-whatsnew-in-2014/';
+  this.page.identifier = 'https://www.webhive.ru/2014/01/09/emberjs-whatsnew-in-2014/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

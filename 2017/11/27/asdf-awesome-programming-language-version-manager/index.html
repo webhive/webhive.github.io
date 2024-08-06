@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>ASDF - отличный менеджер версий языков программирования</title><meta name="description" content="ASDF - менеджер версий языков программирования, позволяющий установить рпактически любую версию любого языка программирования."><meta name="keywords" content="RVM,asdf,nvm"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2017/11/27/asdf-awesome-programming-language-version-manager/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;RVM&quot;,&quot;asdf&quot;,&quot;nvm&quot;]"><meta property="article:section" content="[&quot;Программирование&quot;]"><meta property="article:published_time" content="2017-11-26T21:16:35.000Z"><meta property="article:modified_time" content="2017-11-26T21:16:35.000Z"><meta name="DC.Title" content="ASDF - отличный менеджер версий языков программирования"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2017-11-26T21:16:35.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2017/11/27/asdf-awesome-programming-language-version-manager/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2017/11/27/asdf-awesome-programming-language-version-manager/">
+        ASDF - отличный менеджер версий языков программирования
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2017-11-26T21:16:35.000Z" itemprop="datePublished">
+        27 ноября 2017
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2017/11/27/asdf-awesome-programming-language-version-manager/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Долгое время для управления версиями ruby и&nbsp;nodejs использовал соответственно RVM и&nbsp;NVM. Но&nbsp;сегодня с&nbsp;удивлением обнаружил такой пакет как <a target="_blank" rel="noopener" href="https://github.com/asdf-vm/asdf">ASDF</a> и&nbsp;радости моей не&nbsp;было предела. Эта штука заменяет их&nbsp;обоих и&nbsp;не&nbsp;только&nbsp;их, но&nbsp;кучу<br>других.</p>
+<a id="more"></a>
+
+<p>Собственно не&nbsp;скажу, что я&nbsp;чем-то недоволен в&nbsp;RVM или NVM&nbsp;&mdash; оба пакета делают своё дело и&nbsp;делают его хорошо, но&nbsp;зачем использовать 2&nbsp;разные программы, которые делают практически одно и&nbsp;тоже когда можно заменить их&nbsp;одной которая делает гораздо больше? Вопрос конечно риторический.</p>
+<p>Я уже проверил работу <a target="_blank" rel="noopener" href="https://github.com/asdf-vm/asdf">ASDF</a> на&nbsp;ряде своих проектов и&nbsp;каких-то видимых проблем с&nbsp;ними не&nbsp;обнаружил.</p>
+<h1 id="Установка"><a href="#Установка" class="headerlink" title="Установка"></a>Установка</h1><p>Собственно процесс установки прекрасно описан на&nbsp;странице проекта. Просто тупо клонируем реп в&nbsp;папку <code>~/.asdf</code>&nbsp;&mdash; что может быть проще?</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.0</span><br></pre></td></tr></table></figure>
+
+<p>Ну и&nbsp;добавляем нужные строчки в&nbsp;автозагрузку вашей оболочки как написано на&nbsp;странице проекта.</p>
+<p>После этого <a target="_blank" rel="noopener" href="https://github.com/asdf-vm/asdf">ASDF</a> пока бесполезен ибо ничего не&nbsp;знает ни&nbsp;о&nbsp;каких языках программирования. Поддержка каждого языка осуществляется отдельным плагином, что в&nbsp;общем-то на&nbsp;мой вкус очень даже неплохо.</p>
+<h1 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h1><p>Ставим плагин для поддержки ruby.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git</span><br></pre></td></tr></table></figure>
+
+<p>после этого мы&nbsp;можем посмотреть имеющиеся версии ruby</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ asdf list-all ruby</span><br><span class="line">jruby-1.0.0RC1</span><br><span class="line">jruby-1.0.0RC2</span><br><span class="line">jruby-1.0.0RC3</span><br><span class="line">jruby-1.0.1</span><br><span class="line">...</span><br><span class="line">2.4.1</span><br><span class="line">2.4.2</span><br><span class="line">2.5.0-preview1</span><br></pre></td></tr></table></figure>
+
+<p>и установить выбранную версию</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ asdf install ruby 2.4.2</span><br></pre></td></tr></table></figure>
+
+<p>Несомненным плюсом является поддержка конфигурационных файлов&nbsp;RVM, но&nbsp;только если версия ruby в&nbsp;них прописана только цифрами, в&nbsp;случае&nbsp;же&nbsp;полной записи с&nbsp;префиксом <code>ruby</code> ASDF нужную версию найти не&nbsp;может и&nbsp;нужно править конфиг. Так-же можно перенести уже установленные версии <code>ruby</code> из&nbsp;RVM банальным копированием &laquo;в лоб&raquo;, что несомненно очень удобно.</p>
+<p>Из минусов отмечу, что среди всего многообразия вариантов ruby машин в&nbsp;списке есть только jruby и&nbsp;MRI версии.</p>
+<p>Относительным минусом можно назвать отсутствие поддержки <code>gemset</code>-ов, но&nbsp;этот функционал успешно реализован в&nbsp;<code>bundler</code>-е и&nbsp;особой проблемы не&nbsp;вижу.</p>
+<h1 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h1><p>Плагин для nodejs</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git</span><br></pre></td></tr></table></figure>
+
+<p>После установки плагина нужно ещё импортировать ключи</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring</span><br></pre></td></tr></table></figure>
+
+<p>Ну, а&nbsp;дальше установка точно так-же как и&nbsp;для ruby. Node.js кстати тянет бинарные версии, поэтому установка проходит очень быстро. В&nbsp;отличие от&nbsp;NVM нет деления на&nbsp;текущие и&nbsp;lts версии и&nbsp;нет алиасов, поддержка которых была в&nbsp;случае NVM очень удобной.</p>
+<p>Поддерживается формат файлов&nbsp;NVM, но&nbsp;как показала практика пользы от&nbsp;этого не&nbsp;очень много, т.&nbsp;к.&nbsp;в&nbsp;моём случае версия node.js в&nbsp;каждом проекте была прописана алиасом <code>stable</code>, который не&nbsp;поддерживается. Там-же где использовался явный номер версии версия была указана с&nbsp;префиксом <code>v</code>, что правильно для NVM, но&nbsp;ASDF такой формат не&nbsp;понимает.</p>
+<h1 id="Выводы"><a href="#Выводы" class="headerlink" title="Выводы"></a>Выводы</h1><p>Планирую полностью переезжать на&nbsp;этот вариант менеджера языков. Мои потребности он&nbsp;покрывает полностью, прост в&nbsp;установке и&nbsp;настройке. Кроме того есть поддержка <code>elixir</code>, которую планирую проверить в&nbsp;ближайшее время.</p>
+<p>Ещё одним плюсом упомяну&nbsp;то, что теперь в&nbsp;конфиге проекта можно сразу задавать несколько языков, что удобно для рельсовых проектов, где можно указать одновременно версии <code>ruby</code> и&nbsp;<code>node.js</code>. Итого вместо 3-х файлов получаем 1 (для RVM нужно 2&nbsp;файла&nbsp;&mdash; версия руби и&nbsp;гемсет указываются в&nbsp;разных файлах) </p>
+<h1 id="Источники"><a href="#Источники" class="headerlink" title="Источники"></a>Источники</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://danielstrunk.me/blog/2016/11/25/asdf-version-manager/">https://danielstrunk.me/blog/25.11.2016/asdf-version-manager/</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.akitaonrails.com/2017/10/24/replacing-rvm-rbenv-nvm-etc-for-asdf">http://www.akitaonrails.com/24.10.2017/replacing-rvm-rbenv-nvm-etc-for-asdf</a></li>
+</ul>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/rvm/">RVM</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/asdf/">asdf</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/nvm/">nvm</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/programming/">Программирование</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description="ASDF - менеджер версий языков программирования, позволяющий установить рпактически любую версию любого языка программирования."></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2017/11/27/asdf-awesome-programming-language-version-manager/';
+  this.page.identifier = 'https://www.webhive.ru/2017/11/27/asdf-awesome-programming-language-version-manager/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

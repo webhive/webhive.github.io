@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Создаём минимальный проект на БЭМ c нуля</title><meta name="description" content="Несколько раз пытался пощупать БЭМ, но порог входа довольно высок, поэтому раз за разом бросал это дело, хотя внутренне понимал, что рациональное зерно в этом есть. На этот раз решил погрузиться полностью и попробовать собрать проект на полном стеке технологий БЭМ"><meta name="keywords" content="БЭМ,Node.js,ENB"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2016/07/21/bem-project-from-scratch/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;БЭМ&quot;,&quot;Node.js&quot;,&quot;ENB&quot;]"><meta property="article:section" content="[&quot;Вёрстка&quot;]"><meta property="article:published_time" content="2016-07-21T13:57:36.000Z"><meta property="article:modified_time" content="2016-07-21T13:57:36.000Z"><meta name="DC.Title" content="Создаём минимальный проект на БЭМ c нуля"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2016-07-21T13:57:36.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2016/07/21/bem-project-from-scratch/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2016/07/21/bem-project-from-scratch/">
+        Создаём минимальный проект на БЭМ c нуля
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2016-07-21T13:57:36.000Z" itemprop="datePublished">
+        21 июля 2016
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2016/07/21/bem-project-from-scratch/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Несколько раз пытался пощупать <a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a>, но&nbsp;порог входа довольно высок, поэтому раз за&nbsp;разом бросал это дело, хотя внутренне понимал, что рациональное зерно в&nbsp;этом есть. На&nbsp;этот раз решил погрузиться полностью и&nbsp;попробовать собрать проект на&nbsp;полном стеке технологий <a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a></p>
+<a id="more"></a>
+
+<p>Классическим способом установки, который крайне рекомендуют авторы <a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a> является клонирование некого каноничного репозитария с&nbsp;расово верным дефолтным проектом <a target="_blank" rel="noopener" href="https://github.com/bem/project-stub">project-stub</a>.</p>
+<p>Но это не&nbsp;мой метод&nbsp;&mdash; я&nbsp;предпочитаю понимать, что я&nbsp;делаю, а&nbsp;не&nbsp;копипастить какие-то непонятные решения, которые магическим образом работают, но&nbsp;только непонятно&nbsp;как. Поэтому попробую шаг за&nbsp;шагом установить все библиотеки и&nbsp;зависимости с&nbsp;нуля и&nbsp;заодно пройтись по&nbsp;всем граблям. Полагаю это будет способствовать более глубокому пониманию внутренностей <a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a>, что собственно мне и&nbsp;нужно.</p>
+<h1 id="Подготовка-проекта"><a href="#Подготовка-проекта" class="headerlink" title="Подготовка проекта"></a>Подготовка проекта</h1><p>Технология БЕМ реализована на&nbsp;javascript, поэтому для нашего проекта подготовим <code>package.json</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm init --yes</span><br><span class="line">Wrote to package.json:</span><br></pre></td></tr></table></figure>
+
+<h1 id="Ставим-ENB"><a href="#Ставим-ENB" class="headerlink" title="Ставим ENB"></a>Ставим ENB</h1><p>В связи с&nbsp;тем, что решил погрузиться в&nbsp;пучину <a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a> полностью решил для сборки проекта использовать их&nbsp;родной сборщик <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a>.</p>
+<p>Казалось&nbsp;бы&nbsp;логично было&nbsp;бы&nbsp;установить пакет <code>bem</code>, но&nbsp;как оказалось в&nbsp;этом пакете находятся <code>bem-tools</code>, которые типа считаются устаревшими, а&nbsp;идеологически правильным всё-таки считается использование именно <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a>.</p>
+<p>Ну что&nbsp;&mdash; ставим:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install enb --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>Голый <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a> походу умеет только запускать сборку проекта <code>enb make</code> и&nbsp;запускать сервер <code>enb server</code>. Негусто, но&nbsp;на&nbsp;самом деле насколько я&nbsp;понимаю <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a> имеет кучу расширений, которые и&nbsp;содержать всё самое вкусное.</p>
+<p>Попытка запустить сборку или сервер ожидаемо выдаёт ошибку.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Cannot find enb config directory. Should be either .enb&#x2F; or .bem&#x2F;.</span><br></pre></td></tr></table></figure>
+<p>что впрочем вполне логично, хотя я&nbsp;бы&nbsp;конечно предпочёл, чтобы создавался какой-то дефолтный конфиг с&nbsp;комментариями, с&nbsp;которого было&nbsp;бы&nbsp;значительно проще начать. Хотя подход с&nbsp;отсутствием конфигов довольно распространён в&nbsp;среде отечественных разработчиков&nbsp;&mdash; типа всё так офигенно гибко, что даже дефолтные настройки будут недостаточно гибки.</p>
+<p>Попробуем всё-таки написать конфиг. По&nbsp;счастью есть исчерпывающее руководство&nbsp;&mdash; <a target="_blank" rel="noopener" href="https://github.com/enb/enb#%D0%9A%D0%B0%D0%BA-%D1%81%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82---%D0%BF%D0%BE%D1%88%D0%B0%D0%B3%D0%BE%D0%B2%D0%BE%D0%B5-%D1%80%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE">Как-собрать-проект&mdash;пошаговое-руководство</a>. Не&nbsp;очень понятно почему его нет в&nbsp;официальной документации &hellip; уже понятно&nbsp;&mdash; всё устарело, примеры не&nbsp;работают, полная дезинформация.</p>
+<p>Тем не&nbsp;менее, чтобы <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a> не&nbsp;ругался скормим ему минимальный пустой конфиг.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir .bem &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;module.exports = function(config) &#123;&#125;;&quot;</span> &gt; .bem/make.js</span><br></pre></td></tr></table></figure>
+
+<p>На этот раз <code>enb make</code> отрабатывает как надо (правда ничего не&nbsp;делает):</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./node_modules/.bin/enb make</span><br><span class="line">21:57:28.025 - build started</span><br><span class="line">21:57:28.030 - build finished - 11ms</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>На этом считаем, что <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a> у&nbsp;нас установлен.</p>
+<h1 id="Ближе-к-БЭМ"><a href="#Ближе-к-БЭМ" class="headerlink" title="Ближе к БЭМ"></a>Ближе к&nbsp;БЭМ</h1><p>Как оказалось дефолтный <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a> довольно бесполезен. Нам нужен <a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a>, а&nbsp;не&nbsp;абстрактный сборщик, а&nbsp;для этого нам нужно установить набор технологий для <a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install enb-bem-techs --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>Вот <a target="_blank" rel="noopener" href="https://github.com/enb/enb-bem-techs">тут</a> есть список технологий, предоставляемых этим пакетом.</p>
+<p>Создаём минимальный конфиг (см. ниже)  и&nbsp;нихрена не&nbsp;работает опять&nbsp;т.&nbsp;к.&nbsp;нужен <a target="_blank" rel="noopener" href="https://github.com/enb/enb-bemxjst">enb-bemxjst</a>. Да&nbsp;что-ж такое-то&nbsp;&mdash; ещё одна неявная зависимость. Тем не&nbsp;менее ставим&nbsp;&mdash; деваться некуда.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install enb-bemxjst --save-dev</span><br></pre></td></tr></table></figure>
+
+<h1 id="Конфиг-для-ENB"><a href="#Конфиг-для-ENB" class="headerlink" title="Конфиг для ENB"></a>Конфиг для ENB</h1><p>Вот такой у&nbsp;меня получился минимальный конфиг, чтобы сгенерировать минимальный проект, который умеет генерировать только HTML. Для написания использовался <code>project-stub</code> и&nbsp;<a target="_blank" rel="noopener" href="https://github.com/enb/enb-bem-techs/tree/master/docs">документация enb-bem-techs</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Подключаем требуемые технологии</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> techs = &#123;</span><br><span class="line">        fileProvider: <span class="built_in">require</span>(<span class="string">&#x27;enb/techs/file-provider&#x27;</span>), <span class="comment">// источник исходных данных - файл</span></span><br><span class="line">        bemhtml: <span class="built_in">require</span>(<span class="string">&#x27;enb-bemxjst/techs/bemhtml&#x27;</span>),    <span class="comment">// поддержка bemhtml</span></span><br><span class="line">        bemjsonToHtml: <span class="built_in">require</span>(<span class="string">&#x27;enb-bemxjst/techs/bemjson-to-html&#x27;</span>) <span class="comment">// преобразование bemjson -&gt; html</span></span><br><span class="line">    &#125;,</span><br><span class="line">    enbBemTechs = <span class="built_in">require</span>(<span class="string">&#x27;enb-bem-techs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Непосредственно конфигурация</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Указываем по каким путям мы будем искать исходники для сборки</span></span><br><span class="line"><span class="comment">     * В нашем случае это папки &#x27;*.bundles/*&#x27;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    config.nodes(<span class="string">&#x27;*.bundles/*&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">nodeConfig</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Добавляем используемые технологии</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        nodeConfig.addTechs([</span><br><span class="line">            [enbBemTechs.levels, &#123; <span class="attr">levels</span>: [] &#125;],</span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * Генерация из bemjson -&gt; bemdecl - т.е. из исходного bemjson-а</span></span><br><span class="line"><span class="comment">             * вытаскиваем все используемые блоки в отдельный файл.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            [enbBemTechs.bemjsonToBemdecl],</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * Генерация из bemjson -&gt; deps - т.е. из исходного bemjson-а</span></span><br><span class="line"><span class="comment">             * вытаскиваем все используемые зависимости в отдельный файл.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            [enbBemTechs.deps],</span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * Не совсем понял, что делает эта технология - вроде как</span></span><br><span class="line"><span class="comment">             * объединяет сгенерированные файлы</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            [enbBemTechs.files],</span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * Указываем откуда брать исходную информацию.</span></span><br><span class="line"><span class="comment">             * В данном случае используем файл и именно файл</span></span><br><span class="line"><span class="comment">             * с расширением .bemjson.js</span></span><br><span class="line"><span class="comment">             * Знак вопроса заменяется на имя бандла</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            [techs.fileProvider, &#123; <span class="attr">target</span>: <span class="string">&#x27;?.bemjson.js&#x27;</span> &#125;],</span><br><span class="line"></span><br><span class="line">            <span class="comment">// https://github.com/enb/enb-bemxjst/blob/v4.1.0/api.ru.md</span></span><br><span class="line">            [techs.bemhtml],</span><br><span class="line"></span><br><span class="line">            <span class="comment">// ну и указываем, что из bemjson-а мы будем генерировать HTML</span></span><br><span class="line">            [techs.bemjsonToHtml],</span><br><span class="line">        ]);</span><br><span class="line"></span><br><span class="line">        nodeConfig.addTargets([<span class="string">&#x27;?.html&#x27;</span>]);  <span class="comment">// мы генерируем только html</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Тестовый-бандл"><a href="#Тестовый-бандл" class="headerlink" title="Тестовый бандл"></a>Тестовый бандл</h1><p>Создадим папку для нашей первой страницы</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p desktop.bundles&#x2F;index</span><br></pre></td></tr></table></figure>
+
+<p>Для простоты будем использовать только <code>desktop.bundles</code>. Такое именование папок принято в&nbsp;<a target="_blank" rel="noopener" href="https://ru.bem.info/">БЭМ</a>, поэтому буду придерживаться именно&nbsp;его, а&nbsp;не&nbsp;изобретать свой велосипед.</p>
+<p>Ну и&nbsp;внутри созданной папки создадим файл <code>index.bemjson.js</code> со&nbsp;следующим содержимым:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    block : <span class="string">&#x27;page&#x27;</span>,</span><br><span class="line">    content : [</span><br><span class="line">        &#123;</span><br><span class="line">            block : <span class="string">&#x27;header&#x27;</span>,</span><br><span class="line">            content : [</span><br><span class="line">                <span class="string">&#x27;header content goes here&#x27;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            block : <span class="string">&#x27;content&#x27;</span>,</span><br><span class="line">            content : [</span><br><span class="line">                &#123;</span><br><span class="line">                    tag : <span class="string">&#x27;p&#x27;</span>,</span><br><span class="line">                    content : [</span><br><span class="line">                        <span class="string">&#x27;main content&#x27;</span>,</span><br><span class="line">                    ]</span><br><span class="line">                &#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            block : <span class="string">&#x27;footer&#x27;</span>,</span><br><span class="line">            content : [</span><br><span class="line">                <span class="string">&#x27;footer content goes here&#x27;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>И запускаем билд</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/enb make</span><br><span class="line">10:05:31.270 - build started</span><br><span class="line">10:05:31.283 - [rebuild] [desktop.bundles/index/index.bemjson.js] file-provider</span><br><span class="line">10:05:31.289 - [rebuild] [desktop.bundles/index/index.levels] levels</span><br><span class="line">10:05:31.290 - [rebuild] [desktop.bundles/index/index.bemdecl.js] bemjson-to-bemdecl</span><br><span class="line">10:05:31.294 - [rebuild] [desktop.bundles/index/index.deps.js] deps</span><br><span class="line">10:05:31.295 - [rebuild] [desktop.bundles/index/index.files] files</span><br><span class="line">10:05:31.295 - [rebuild] [desktop.bundles/index/index.dirs] files</span><br><span class="line">10:05:31.563 - [rebuild] [desktop.bundles/index/index.bemhtml.js] bemhtml</span><br><span class="line">10:05:31.594 - [rebuild] [desktop.bundles/index/index.html] bemjson-to-html</span><br><span class="line">10:05:31.596 - build finished - 388ms</span><br></pre></td></tr></table></figure>
+
+<p>На выходе мы&nbsp;получили кучу промежуточных файлов ну&nbsp;и&nbsp;вожделенный <code>index.html</code>, ради которого всё и&nbsp;затевалось. Взглянем на&nbsp;него.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;page&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;header&quot;</span>&gt;</span>header content goes here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>main content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;footer&quot;</span>&gt;</span>footer content goes here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Всё в&nbsp;соответствии с&nbsp;исходным <code>bemjson</code>-ом.</p>
+<h1 id="Итого"><a href="#Итого" class="headerlink" title="Итого"></a>Итого</h1><p>Ну что сказать&nbsp;&mdash; для начала неплохо. Как минимум оно работает.<br>В общем и&nbsp;целом для минимального старта необходимы следующие пакеты.</p>
+<ul>
+<li>enb (<a target="_blank" rel="noopener" href="https://github.com/enb/enb">https://github.com/enb/enb</a>) </li>
+<li>enb-bem-techs (<a target="_blank" rel="noopener" href="https://github.com/enb/enb-bem-techs">https://github.com/enb/enb-bem-techs</a>) </li>
+<li>enb-bemxjst (<a target="_blank" rel="noopener" href="https://github.com/enb/enb-bemxjst">https://github.com/enb/enb-bemxjst</a>) </li>
+</ul>
+<p>Нужен так-же конфиг для <a target="_blank" rel="noopener" href="https://github.com/enb/enb">ENB</a>&nbsp;&mdash; <code>.bem/make.js</code></p>
+<p>Без этого минимума сборка каких-бы то&nbsp;ни&nbsp;было HTML файлов видимо невозможна.</p>
+<p>Не понравилось, что надо создавать довольно хитрый конфиг, что сделать непросто&nbsp;т.&nbsp;к.&nbsp;нужно предварительно переварить немало новых терминов и&nbsp;концепций. Есть конечно вариант с&nbsp;<code>project-stub</code>, но&nbsp;на&nbsp;мой взгляд там слишком много магии и&nbsp;мало что понятно.</p>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/bem/">БЭМ</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/node-js/">Node.js</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/enb/">ENB</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/css/">Вёрстка</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description=""></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2016/07/21/bem-project-from-scratch/';
+  this.page.identifier = 'https://www.webhive.ru/2016/07/21/bem-project-from-scratch/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

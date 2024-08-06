@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Настройка Wi-Fi маршрутизатора Xiaomi</title><meta name="description" content="Как перепрошить китайский маршрутизатор Xiaomi Mini прошивкой Prometheus."><meta name="keywords" content="xiaomi-mini,xiaomi,router,padavan-firmware"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2018/01/26/xiaomi-wifi-router-setup/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;xiaomi-mini&quot;,&quot;xiaomi&quot;,&quot;router&quot;,&quot;padavan-firmware&quot;]"><meta property="article:section" content="[&quot;DevOps&quot;]"><meta property="article:published_time" content="2018-01-26T16:05:21.000Z"><meta property="article:modified_time" content="2018-01-26T16:05:21.000Z"><meta name="DC.Title" content="Настройка Wi-Fi маршрутизатора Xiaomi"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2018-01-26T16:05:21.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2018/01/26/xiaomi-wifi-router-setup/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2018/01/26/xiaomi-wifi-router-setup/">
+        Настройка Wi-Fi маршрутизатора Xiaomi
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2018-01-26T16:05:21.000Z" itemprop="datePublished">
+        26 января 2018
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2018/01/26/xiaomi-wifi-router-setup/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Понадобился мне тут Wi-Fi маршрутизатор и&nbsp;вспомнил&nbsp;я, что в&nbsp;закромах валяется нужное устройство от&nbsp;компании Xiaomi. В&nbsp;своё время хотелось мне быстрого Wi-Fi-я, а&nbsp;эта железяка была довольно недорогой и&nbsp;с&nbsp;виду вполне функциональной. Обломало меня тогда только отсутствие гигабитного Ethernet-а (почему-то подумал, что оно гигабитное и&nbsp;прощёлкал этот момент), ибо я&nbsp;таки хотел его ещё использовать для внутренней сети дома. В&nbsp;итоге настроил поигрался и&nbsp;как-то забросил. И&nbsp;вот его время пришло&nbsp;&mdash; расчехляю и&nbsp;пробую запустить.</p>
+<a id="more"></a>
+
+<p>Маршрутизатор покупал <a target="_blank" rel="noopener" href="http://ali.pub/2811ut">тут</a>.</p>
+<h1 id="Сброс-настроек"><a href="#Сброс-настроек" class="headerlink" title="Сброс настроек"></a>Сброс настроек</h1><p>Как оказалось я&nbsp;уже успел позабыть, что я&nbsp;там настраивал, поэтому решил сбросить к&nbsp;заводским настройкам. Но&nbsp;как ни&nbsp;пытался нажимать и&nbsp;держать кнопку сброса результата не&nbsp;было. Пришлось гуглить подробные инструкции и&nbsp;как оказалось нужно:</p>
+<ol>
+<li>Включить питание</li>
+<li>Нажать и&nbsp;держать кнопку сброса до&nbsp;тех пор пока индикатор на&nbsp;передней панели не&nbsp;станет красным</li>
+<li>Отключить и&nbsp;включить питание</li>
+</ol>
+<p>После этого маршрутизатор доступен по&nbsp;адресу <code>192.168.31.1</code></p>
+<p>Подробнее <a target="_blank" rel="noopener" href="https://xroom.su/706-sbros-nastroek-roytera-xiaomi-mi-wifi-sohranenie-i-vosstanovlenie-nastroek">тут</a></p>
+<h1 id="Прошивки"><a href="#Прошивки" class="headerlink" title="Прошивки"></a>Прошивки</h1><p>Собственно сходу встаёт вопрос&nbsp;&mdash; ради чего затевать все эти танцы с&nbsp;бубном и&nbsp;чего такого не&nbsp;хватает в&nbsp;родной прошивке? Отвечаю&nbsp;&mdash; во&nbsp;первых есть&nbsp;хак, позволяющий получить ssh доступ к&nbsp;устройству, чего для меня лично уже достаточно, чтобы предпринять какие-то действия. Во&nbsp;вторых пишут, что интерфейс маршрутизатора жрёт много ресурсов и&nbsp;я&nbsp;готов с&nbsp;этим согласиться&nbsp;&mdash; работает всё очень неторопливо.</p>
+<p>В общем как&nbsp;бы&nbsp;то&nbsp;ни&nbsp;было я&nbsp;решил таки попробовать эту железку перепрошить.</p>
+<p>Как пишут перед прошивкой стоит установить английскую прошивку 2.8.91, но&nbsp;у&nbsp;меня как оказалось уже стояла именно&nbsp;она, поэтому делать ничего не&nbsp;пришлось.</p>
+<h2 id="OpenWrt"><a href="#OpenWrt" class="headerlink" title="OpenWrt"></a>OpenWrt</h2><p>Самое известное, что было на&nbsp;слуху. Но&nbsp;по&nbsp;ходу гугления заинтересовался другими вариантами прошивок, поэтому просто отавлю здесь ссылки.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.openwrt.org/ru/toh/xiaomi/mini">https://wiki.openwrt.org/ru/toh/xiaomi/mini</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.openwrt.org/toh/xiaomi/mini">https://wiki.openwrt.org/toh/xiaomi/mini</a></li>
+</ul>
+<h2 id="Pandora-Box"><a href="#Pandora-Box" class="headerlink" title="Pandora Box"></a>Pandora Box</h2><p>Пишут, что надо много допиливать. Я&nbsp;конечно люблю поработать напильником, но&nbsp;в&nbsp;данном случае почему-то не&nbsp;воодушевился. Я&nbsp;готов попотеть один&nbsp;раз, но&nbsp;чтоб потом всё работало&nbsp;&mdash;, а&nbsp;тут как раз предлагается быстро и&nbsp;просто всё установить, а&nbsp;потом ходить по&nbsp;граблям. Но&nbsp;может конечно это просто завистники наговаривают. В&nbsp;любом случае отложил пока этот вариант до&nbsp;лучших всремён.</p>
+<h2 id="Padavan"><a href="#Padavan" class="headerlink" title="Padavan"></a>Padavan</h2><p>Наиболее типа продвинутая прошивка, но&nbsp;опять&nbsp;же&nbsp;без напильника не&nbsp;обойтись. Но&nbsp;весь геморрой в&nbsp;основном вызван ограничением на&nbsp;распространение кода прошивки, в&nbsp;связи с&nbsp;чем собирать её&nbsp;нужно руками самому. По&nbsp;счастью нашлись энтузиасты ( (<a target="_blank" rel="noopener" href="http://prometheus.freize.net/">http://prometheus.freize.net/</a>) ), которые автоматизировали процесс, сделав его максимально простым. По&nbsp;несчастью весь процесс работает только под Debian, в&nbsp;связи с&nbsp;чем пришлось высасывать Virtual Box образ, что я&nbsp;сильно не&nbsp;люблю. Пробовал запустить их&nbsp;скрипт у&nbsp;себя на&nbsp;ArchLinux-е, но&nbsp;не&nbsp;взлетело&nbsp;&mdash; ошибки посыпались на&nbsp;попытке установки пакетов через apt-get. В&nbsp;итоге от&nbsp;судьбы видно не&nbsp;уйти&nbsp;&mdash; ставлю образ в&nbsp;Virtual&nbsp;Box.</p>
+<p>Тут такой момент&nbsp;&mdash; для установки прошивок нужен SSH доступ, которого в&nbsp;стоковой прошивке&nbsp;нет. Его можно получить&nbsp;&mdash; для этого есть хитрая процедура с&nbsp;регистрацией на&nbsp;сайте Xiaomi, выкачиванием бинарников и&nbsp;обновлением вручную. А&nbsp;есть просто хак для которого нафиг ничего не&nbsp;нужно&nbsp;&mdash; он&nbsp;просто создаёт ssh доступ как-то&nbsp;сам. Хак этот кстати встроен в&nbsp;прометея, что несомненно удобно. Но&nbsp;в&nbsp;общем это наводит на&nbsp;определённые мысли о&nbsp;безопасности родной прошивки этого устройства и&nbsp;это ещё один довод за&nbsp;то, чтобы эту железку перепрошить (хотя в&nbsp;общем-то для использования этого хака нужен доступ к&nbsp;админке).</p>
+<p>В общем после запуска предложенного образа оно долго обновлялось с&nbsp;интернета&nbsp;&mdash; тянуло обновления, потом высасывало код и&nbsp;наконец появилась менюшка с&nbsp;цифирьками. Дальше всё делаем по&nbsp;инструкции&nbsp;&mdash; прощёлкиваем эти цифры в&nbsp;порядке возрастания. В&nbsp;сети огромное количество ресурсов с&nbsp;описанием процесса, где всё разжёвано гораздо лучше (например <a target="_blank" rel="noopener" href="http://andrew25kir.blogspot.ru/2016/08/miwifi-3-xiaomi-mi-router-3.html">тут</a>), чем это могу сделать&nbsp;я.&nbsp;Я&nbsp;лишь делюсь впечатлениями.</p>
+<p>В какой-то момент запускаем сборку прошивки и&nbsp;начинается долгий и&nbsp;нудный процесс компиляции. Я&nbsp;тут сильно пожалел, что пожалел ядер виртуальной машине&nbsp;&mdash; возможно всё пошло&nbsp;бы&nbsp;гораздо бодрее.</p>
+<p>После прошивки предлагается перезапустить маршрутизатор и&nbsp;в&nbsp;итоге по&nbsp;адресу <code>192.168.1.1</code> у&nbsp;нас становится доступна новая админка.</p>
+<p>Далее нужно обновить загрузчик и&nbsp;EEPROM (для улучшения работы Wi-Fi на&nbsp;5ГГц). Делаем&nbsp;это, нажимая циферки в&nbsp;прометее.</p>
+<p>Ну и&nbsp;собственно и&nbsp;всё&nbsp;&mdash; получаем обновлённый маршрутизатор. По&nbsp;первым впечатлениям новая админка значительно отзывчивее, полностью на&nbsp;русском и&nbsp;имеет гораздо больше возможностей, чем оригинальная.</p>
+<h1 id="Информация"><a href="#Информация" class="headerlink" title="Информация"></a>Информация</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://4pda.ru/forum/index.php?showtopic=686221&amp;st=20">https://4pda.ru/forum/index.php? showtopic=686221&amp; st=20</a></li>
+<li><a target="_blank" rel="noopener" href="http://sms.clan.su/news/firmware_padavan_for_xiaomi_mi_router/2016-01-01-1">http://sms.clan.su/news/firmware_padavan_for_xiaomi_mi_router/01.01.2016-1</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ixbt.com/comm/xiaomi-miwifimini.shtml">https://www.ixbt.com/comm/xiaomi-miwifimini.shtml</a></li>
+<li><a target="_blank" rel="noopener" href="https://mysku.ru/blog/china-stores/31418.html">https://mysku.ru/blog/china-stores/31418.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://megaobzor.com/review-Xiaomi-Mi-Wi-Fi-mini.html">https://megaobzor.com/review-Xiaomi-Mi-Wi-Fi-mini.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_62tVE4dA6c">https://www.youtube.com/watch? v=_62tVE4dA6c</a></li>
+</ul>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/xiaomi-mini/">xiaomi-mini</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/xiaomi/">xiaomi</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/router/">router</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="3" href="/tags/padavan-firmware/">padavan-firmware</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/devops/">DevOps</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description="Как перепрошить китайский маршрутизатор Xiaomi Mini прошивкой Prometheus."></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2018/01/26/xiaomi-wifi-router-setup/';
+  this.page.identifier = 'https://www.webhive.ru/2018/01/26/xiaomi-wifi-router-setup/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

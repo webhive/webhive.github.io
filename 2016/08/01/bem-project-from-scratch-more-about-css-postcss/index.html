@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Проект на БЭМ с нуля - ещё немного о CSS - PostCSS</title><meta name="description" content="После статьи про БЭМ CSS погрузился в дивный мир современных CSS технологий. В связи с тем, что сам я в основном работаю с Rails, то как оказалось я немного отстал от жизни и пропустил такую интересную штуку как PostCSS, которая потихоньку становится мэйнстримом, чему в немалой степени способствует застой в мире SASS, Compass, Stylus и иже с ними."><meta name="keywords" content="БЭМ,CSS,Stylus,post-css,sugarss"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2016/08/01/bem-project-from-scratch-more-about-css-postcss/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;БЭМ&quot;,&quot;CSS&quot;,&quot;Stylus&quot;,&quot;post-css&quot;,&quot;sugarss&quot;]"><meta property="article:section" content="[&quot;Вёрстка&quot;]"><meta property="article:published_time" content="2016-08-01T14:39:37.000Z"><meta property="article:modified_time" content="2016-08-01T14:39:37.000Z"><meta name="DC.Title" content="Проект на БЭМ с нуля - ещё немного о CSS - PostCSS"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2016-08-01T14:39:37.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2016/08/01/bem-project-from-scratch-more-about-css-postcss/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2016/08/01/bem-project-from-scratch-more-about-css-postcss/">
+        Проект на БЭМ с нуля - ещё немного о CSS - PostCSS
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2016-08-01T14:39:37.000Z" itemprop="datePublished">
+        1 августа 2016
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2016/08/01/bem-project-from-scratch-more-about-css-postcss/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>После статьи про <a href="/2016/07/27/bem-minimal-project-from-scratch-css-preprocessors-stylus-and-sass/" title="БЭМ CSS">БЭМ CSS</a> погрузился в&nbsp;дивный мир современных CSS технологий. В&nbsp;связи с&nbsp;тем, что сам я&nbsp;в&nbsp;основном работаю с&nbsp;Rails, то&nbsp;как оказалось я&nbsp;немного отстал от&nbsp;жизни и&nbsp;пропустил такую интересную штуку как <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a>, которая потихоньку становится мэйнстримом, чему в&nbsp;немалой степени способствует застой в&nbsp;мире <a target="_blank" rel="noopener" href="http://sass-lang.com/">SASS</a>, <a target="_blank" rel="noopener" href="http://compass-style.org/">Compass</a>, <a target="_blank" rel="noopener" href="http://stylus-lang.com/">Stylus</a> и&nbsp;иже с&nbsp;ними.</p>
+<a id="more"></a>
+
+<p>Ничего плохого не&nbsp;могу сказать про традиционные препроцессоры, но&nbsp;видимо их&nbsp;время уходит. Судя по&nbsp;всему они уже достигли потолка своих возможностей и&nbsp;какого-то дальнейшего развития не&nbsp;предвидится.</p>
+<h1 id="PostCSS"><a href="#PostCSS" class="headerlink" title="PostCSS"></a>PostCSS</h1><p>На этой оптимистичной ноте стоит поглубже изучить их&nbsp;потенциального преемника, а&nbsp;именно <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a>. Собственно я&nbsp;периодически слышал про этот проект, но&nbsp;никогда особого значения не&nbsp;придавал, т.&nbsp;к.&nbsp;считал его очередным &laquo;одним из&raquo; препроцессором, коих развелось в&nbsp;последнее время довольно много.</p>
+<p>Причиной&nbsp;же, по&nbsp;которой он&nbsp;удостоился моего внимания стал <a target="_blank" rel="noopener" href="https://ru.bem.info/forum/">БЭМ форум</a>, где он&nbsp;активно упоминался. Кроме того он&nbsp;используется внутри <a target="_blank" rel="noopener" href="https://github.com/enb/enb-stylus">enb-stylus</a> для итоговой обработки, что для меня выглядело довольно странно.</p>
+<p>Наиболее важным на&nbsp;мой взгляд достоинством <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a> является его модульность и&nbsp;расширяемость. Любые ваши фантазии могут быть реализованы дополнительным плагином.</p>
+<p>Кроме того есть возможность подключать синтаксические анализаторы, что фактически позволяет реализовать любой входной синтаксис., а&nbsp;так&nbsp;же&nbsp;сделать понятным для <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a> синтаксис уже существующих препроцессоров.</p>
+<p>В этом видео <a target="_blank" rel="noopener" href="http://sitnik.ru/">Андрей Ситник</a> (автор <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a>)  подробно и&nbsp;доходчиво рассказывает, что это такое и&nbsp;зачем оно нужно. Очень познавательно&nbsp;&mdash; настоятельно рекомендую к&nbsp;просмотру.</p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/qhouBGNncGQ" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+
+<p>Ну что&nbsp;&mdash; пробуем добавить эту штуку в&nbsp;наш конфиг. Для начала добавим сам <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i --save-dev enb-postcss</span><br></pre></td></tr></table></figure>
+
+<p>Так как голый <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a> сам делать ничего не&nbsp;умеет поставим ему пачку плагинов. Полный набор плагинов кстати можно посмотреть <a target="_blank" rel="noopener" href="http://postcss.parts/">тут</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i --save-dev postcss-nested postcss-mixins postcss-simple-vars autoprefixer postcss-easings postcss-cssnext postcss-autoreset postcss-initial postcss-bem postcss-import</span><br></pre></td></tr></table></figure>
+
+<p>Теперь подключаем всё это добро в&nbsp;наш конфиг <code>.bem/make.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> techs = &#123;</span><br><span class="line">  fileProvider: <span class="built_in">require</span>(<span class="string">&#x27;enb/techs/file-provider&#x27;</span>),</span><br><span class="line">  bemhtml: <span class="built_in">require</span>(<span class="string">&#x27;enb-bemxjst/techs/bemhtml&#x27;</span>),</span><br><span class="line">  bemjsonToHtml: <span class="built_in">require</span>(<span class="string">&#x27;enb-bemxjst/techs/bemjson-to-html&#x27;</span>),</span><br><span class="line">  postcss: <span class="built_in">require</span>(<span class="string">&#x27;enb-postcss/techs/enb-postcss&#x27;</span>) <span class="comment">// вот тут</span></span><br><span class="line">&#125;,</span><br><span class="line">...</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  config.nodes(<span class="string">&#x27;*.bundles/*&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">nodeConfig</span>) </span>&#123;</span><br><span class="line">    nodeConfig.addTechs([</span><br><span class="line">...</span><br><span class="line">      <span class="comment">// и тут</span></span><br><span class="line">      [techs.postcss, &#123;</span><br><span class="line">          sourceSuffixes: [<span class="string">&#x27;css&#x27;</span>], <span class="comment">// обрабатываем входные CSS файлы</span></span><br><span class="line">          comments : <span class="literal">true</span>,         <span class="comment">// добавляем комменты - какой файл подключен</span></span><br><span class="line">          sourcemap : <span class="literal">true</span>,        <span class="comment">// строим sourcemap</span></span><br><span class="line">          plugins : [              <span class="comment">// подключаем плагины</span></span><br><span class="line">              <span class="built_in">require</span>(<span class="string">&#x27;postcss-import&#x27;</span>)(), <span class="comment">// вот это обязательно</span></span><br><span class="line">              <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>)()    <span class="comment">// а то чисто для примера</span></span><br><span class="line">          ]</span><br><span class="line">      &#125;]</span><br><span class="line">    ]);</span><br><span class="line">...</span><br><span class="line">    <span class="comment">// добавляем цель сборки для стилей</span></span><br><span class="line">    nodeConfig.addTarget(<span class="string">&#x27;?.css&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Важный момент&nbsp;&mdash; <code>enb-postcss</code> по&nbsp;умолчанию добавляет файлы в&nbsp;виде импорта, полностью полагаясь на&nbsp;плагин <code>postcss-import</code>, поэтому наличие <code>postcss-import</code> <strong>обязательно</strong> иначе подключенный плагины работать не&nbsp;будут.</p>
+<p>В данном примере так&nbsp;же&nbsp;подключил <code>autoprefixer</code>. Соответственно после генерации бандла мы&nbsp;можем наблюдать в&nbsp;итоговом CSS файле кучу браузерных префиксов.</p>
+<h1 id="SugarSS"><a href="#SugarSS" class="headerlink" title="SugarSS"></a>SugarSS</h1><p>Автор <a target="_blank" rel="noopener" href="http://postcss.org/">PostCSS</a> активно продвигает в&nbsp;качестве синтаксиса для CSS новый формат, а&nbsp;именно <code>SugarSS</code>. Формат явно сделан под влиянием Stylus ибо сильно похож на&nbsp;него. Я&nbsp;полностью разделяю такой подход и&nbsp;считаю все эти скобки и&nbsp;точки с&nbsp;запятой синтаксическим шумом, не&nbsp;несущим полезной информации.</p>
+<p>Поэтому я&nbsp;предпочитаю подключить к&nbsp;проекту <code>SugarSS</code> и&nbsp;полностью выкинуть все остальные перпроцессоры. Итак снова наш <code>.bem/make.js</code></p>
+<p>Итак&nbsp;&mdash; ставим</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i --save-dev sugarss</span><br></pre></td></tr></table></figure>
+
+<p>Подключаем</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  config.nodes(<span class="string">&#x27;*.bundles/*&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">nodeConfig</span>) </span>&#123;</span><br><span class="line">    nodeConfig.addTechs([</span><br><span class="line">...</span><br><span class="line">      <span class="comment">// и тут</span></span><br><span class="line">      [techs.postcss, &#123;</span><br><span class="line">          sourceSuffixes: [<span class="string">&#x27;css&#x27;</span>, <span class="string">&#x27;sss&#x27;</span>], <span class="comment">// говорим PostCSS обрабатывать css и sss файлы</span></span><br><span class="line">          comments : <span class="literal">true</span>,</span><br><span class="line">          sourcemap : <span class="literal">true</span>,</span><br><span class="line">          parser: <span class="built_in">require</span>(<span class="string">&#x27;sugarss&#x27;</span>), <span class="comment">// вот тут подключен SugarSS</span></span><br><span class="line">          ...</span><br><span class="line">      &#125;]</span><br><span class="line">    ]);</span><br><span class="line">...</span><br><span class="line">    <span class="comment">// добавляем цель сборки для стилей</span></span><br><span class="line">    nodeConfig.addTarget(<span class="string">&#x27;?.css&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Итоги"><a href="#Итоги" class="headerlink" title="Итоги"></a>Итоги</h1><ul>
+<li>избавились от&nbsp;устаревших препроцессоров</li>
+<li>поимели PostCSS с&nbsp;возможностью неограниченного расширения с&nbsp;помощью плагинов</li>
+<li>добавили поддержку SugarSS</li>
+</ul>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/bem/">БЭМ</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/css/">CSS</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="2" href="/tags/stylus/">Stylus</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="3" href="/tags/post-css/">post-css</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="4" href="/tags/sugarss/">sugarss</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/css/">Вёрстка</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description=""></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2016/08/01/bem-project-from-scratch-more-about-css-postcss/';
+  this.page.identifier = 'https://www.webhive.ru/2016/08/01/bem-project-from-scratch-more-about-css-postcss/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>

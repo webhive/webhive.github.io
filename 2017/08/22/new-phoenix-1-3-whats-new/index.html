@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="ru" prefix="og: http://ogp.me/ns# ya: http://webmaster.yandex.ru/vocabularies/config article: http://ogp.me/ns/article#"><head><meta charset="utf-8"><meta name="author" content="Роман Татауров"><title>Новый Phoenix - опять всё переделали</title><meta name="description" content="Попытка разобраться с новыми веяниями, идеями и концепциями новой версии Phoenix."><meta name="keywords" content="phoenix,phoenix-1.3"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta property="og:title" content=""><meta property="og:site_name" content="WebHive"><meta property="og:locale" content="ru_RU"><meta property="og:url" content="https://www.webhive.ru/2017/08/22/new-phoenix-1-3-whats-new/"><meta property="og:type" content="article"><meta property="og:description"><meta property="article:tag" content="[&quot;phoenix&quot;,&quot;phoenix-1.3&quot;]"><meta property="article:section" content="[&quot;Программирование&quot;]"><meta property="article:published_time" content="2017-08-22T19:53:01.000Z"><meta property="article:modified_time" content="2017-08-22T19:53:01.000Z"><meta name="DC.Title" content="Новый Phoenix - опять всё переделали"><meta name="DC.Subject"><meta name="DC.Creator" content="Роман Татауров"><meta name="DC.Creator.Name" content="Роман Татауров"><meta name="DC.Date" scheme="WTN8601" content="2017-08-22T19:53:01.000Z"><meta name="DC.Type" content="Text"><meta name="DC.Language" content="ru-RU"><meta name="apple-mobile-web-app-title" content="WebHive"><meta name="application-name" content="WebHive"><meta name="msapplication-TileColor" content="#2b5797"><meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link type="text/css" rel="stylesheet" href="/css/app-66a13052.css"><link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml"><meta name="generator" content="Hexo 5.2.0"></head><body class="page" itemscope itemtype="http://schema.org/WebPage" itemid="https://www.webhive.ru/2017/08/22/new-phoenix-1-3-whats-new/"><section class="header"> <div class="header__content"><div class="content-wrapper content-wrapper_header"><div class="title-box"><button class="button button_header button_left js-main-nav"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M108,206h784c54.1,0,98-43.9,98-98c0-54.1-43.9-98-98-98H108c-54.1,0-98,43.9-98,98C10,162.1,53.9,206,108,206z M892,402H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,445.9,946.1,402,892,402z M892,794H108c-54.1,0-98,43.9-98,98c0,54.1,43.9,98,98,98h784c54.1,0,98-43.9,98-98C990,837.9,946.1,794,892,794z"></path></svg></span></button><a href="/"><img class="title-box__logo logo logo--main" src="/images/logo.png"/></a><h1 class="title-box__title"><a href="/">WebHive</a></h1><div class="title-box__description"><a href="/">Заметки программиста-многостаночника</a></div><button class="button button_header button_right js-search"><span class="icon"><svg width="24" height="24" viewBox="0 0 1000 1000"><path d="M688.5,424.6c0-72.6-25.8-134.8-77.4-186.4s-113.8-77.4-186.4-77.4s-134.8,25.8-186.4,77.4S160.8,352,160.8,424.6c0,72.6,25.8,134.8,77.4,186.4c51.6,51.6,113.8,77.4,186.4,77.4S559.4,662.6,611,611C662.6,559.4,688.5,497.3,688.5,424.6L688.5,424.6z M990,914.6c0,20.4-7.5,38.1-22.4,53c-14.9,14.9-32.6,22.4-53,22.4c-21.2,0-38.9-7.5-53-22.4l-202-201.4c-70.3,48.7-148.6,73-235,73c-56.1,0-109.8-10.9-161.1-32.7s-95.4-51.2-132.5-88.3c-37.1-37.1-66.5-81.3-88.3-132.5C20.9,534.5,10,480.8,10,424.6s10.9-109.8,32.7-161.1S93.9,168.1,131,131c37.1-37.1,81.3-66.6,132.5-88.3S368.5,10,424.6,10s109.8,10.9,161.1,32.7c51.2,21.8,95.4,51.2,132.5,88.3c37.1,37.1,66.6,81.3,88.3,132.5c21.8,51.2,32.7,104.9,32.7,161.1c0,86.4-24.3,164.7-73,235l202,202C982.7,876.1,990,893.8,990,914.6L990,914.6z"></path></svg></span></button></div><nav class="main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement"><ul class="main-menu-bar"><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/">Главная</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/uncategorized/">Разное</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/programming/">Программирование</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/css/">Вёрстка</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/devops/">DevOps</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/hardware/">hardware</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link" itemprop="url" href="/categories/deep-learning/">Deep Learning</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/archives">Архив</a></li><li class="main-menu-bar__item"><a class="main-menu-bar__item-link js-#{i}" itemprop="url" href="/search">Поиск</a></li></ul></nav><script>var yandexSearchOptions = {
+  action: '/search/',
+  arrow: false,
+  bg: 'transparent',
+  fontsize: 16,
+  fg: '#FFF',
+  language: 'ru',
+  logo: 'rb',
+  publicname: 'Поиск по сайту www.webhive.ru',
+  suggest: false,
+  target: '_self',
+  tld: 'ru',
+  type: 2,
+  searchid: 2110588,
+  webopt: false,
+  websearch: false,
+  input_fg: '#FFF',
+  input_bg: 'transparent',
+  input_fontStyle: 'normal',
+  input_fontWeight: 'normal',
+  input_placeholder: 'Поиск по сайту',
+  input_placeholderColor: '#FFF',
+  input_borderColor: 'transparent'
+}
+</script><div class="content-wrapper__search-box"><button class="button button_type_close button__control js-close-search"><span class="icon"><svg width="32" height="32" viewBox="0 0 348.333 348.334"><path d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"></path></svg></span></button><div class="ya-site-form ya-site-form_inited_no" onclick="return yandexSearchOptions"><form class="search" action="https://yandex.ru/sitesearch" method="get" target="_self"><input type="hidden" name="searchid" value="2110588"/><input type="hidden" name="l10n" value="ru"/><input type="hidden" name="reqenc" value=""/><span class="input input_search"><span class="input__box"><input class="input__control" placeholder="Поиск" name="text"></span></span><button class="button button_type_submit button_search button__control" type="submit"><span class="icon"><svg width="24" height="24" viewBox="0 0 512 512"><path d="M445,386.7l-84.8-85.9c13.8-24.1,21-50.9,21-77.9c0-87.6-71.2-158.9-158.6-158.9C135.2,64,64,135.3,64,222.9c0,87.6,71.2,158.9,158.6,158.9c27.9,0,55.5-7.7,80.1-22.4l84.4,85.6c1.9,1.9,4.6,3.1,7.3,3.1c2.7,0,5.4-1.1,7.3-3.1l43.3-43.8C449,397.1,449,390.7,445,386.7z M222.6,125.9c53.4,0,96.8,43.5,96.8,97c0,53.5-43.4,97-96.8,97c-53.4,0-96.8-43.5-96.8-97C125.8,169.4,169.2,125.9,222.6,125.9z"></path></svg></span></button></form></div></div><footer class="copyright copyright--sidebar">&copy; 2024 WebHive</footer></div></div><div class="header__overlay"></div></section><div class="content-wrapper content-wrapper_main"><main class="content content_main" itemprop="mainEntityOfPage"> <article class="post post--full" itemscope itemtype="http://schema.org/Article" itemprop="mainEntityOfPage">
+  <header>
+    <h2 class="post__title" itemprop="headline">
+      <a class="link link__control link_post-title" href="/2017/08/22/new-phoenix-1-3-whats-new/">
+        Новый Phoenix - опять всё переделали
+      </a>
+    </h2>
+    <div class="post__meta">
+      <time class="post__date" datetime="2017-08-22T19:53:01.000Z" itemprop="datePublished">
+        22 августа 2017
+      </time>
+      <span class="post__author" itemscope itemtype="http://schema.org/Person" itemprop="author"> Автор: <span itemprop="name">Роман Татауров</span></span>
+      <meta itemscope itescope itemType="https://schema.org/Person" itemprop="publisher" content="Роман Татауров" />
+      <a class="link link__control link_comments-count" href="https://www.webhive.ru/2017/08/22/new-phoenix-1-3-whats-new/#disqus_thread"></a>
+    </div>
+  </header>
+
+  <div class="post__entry" itemprop="articleBody">
+    
+    <p>Некоторое время назад в&nbsp;процессе расширения своих познаний в&nbsp;области веб разработки окунулся в&nbsp;прекрасный мир программирования на&nbsp;elixir и&nbsp;в&nbsp;частности использования фреймворка Phoenix. Не&nbsp;так давно он&nbsp;(Phoenix)  обновился до&nbsp;версии 1.3 и&nbsp;как я&nbsp;обнаружил все мои познания пошли прахом&nbsp;&mdash; всё перевернуто с&nbsp;ног на&nbsp;голову и&nbsp;в&nbsp;общем весь опыт в&nbsp;этой области можно смело выбросить на&nbsp;помойку. Ситуация в&nbsp;мире ИТ&nbsp;не&nbsp;нова, а&nbsp;вариант решения всего один&nbsp;&mdash; разобраться со&nbsp;всем этими нововведениями и&nbsp;начать жить заново.</p>
+<a id="more"></a>
+
+<p>Итак первое, что бросилось в&nbsp;глаза&nbsp;&mdash; <code>mix</code>-овые задачи сменили префикс с&nbsp;<code>phoenix</code> на&nbsp;<code>phx</code>. В&nbsp;общем-то неплохо и&nbsp;я&nbsp;даже этому скорее рад ибо люблю лаконизм во&nbsp;всех его проявлениях.</p>
+<p>Второй момент, который насторожил, это исчезнувшая директория <code>web</code>, но&nbsp;её&nbsp;содержимое быстро нашлось. Не&nbsp;вполне понял смысл этого действа, но&nbsp;пишут, что типа стало меньше неоднозначности куда складывать код&nbsp;&mdash; типа раньше были две папки <code>lib</code> и&nbsp;<code>web</code>, а&nbsp;сейчас осталась только <code>lib</code>. Ну&nbsp;ладно&nbsp;&mdash; проглотим. Собственно ничего деструктивного тут не&nbsp;вижу.</p>
+<p>Теперь проблемы посерьёзнее&nbsp;&mdash; как оказалось теперь <code>phoenix</code> не&nbsp;рекомендует создавать модели, а&nbsp;предлагает создать вместо модели схему. Ну&nbsp;ок&nbsp;&mdash; пробуем. Ну&nbsp;да&nbsp;теперь вместо модели, теста и&nbsp;миграции создаётся только файл схемы и&nbsp;миграция. Хммм &hellip; ну&nbsp;что&nbsp;&mdash; вполне логично. Собственно и&nbsp;раньше модели были довольно странными и&nbsp;нифига не&nbsp;были похожи на&nbsp;те&nbsp;модели к&nbsp;которым мы&nbsp;привыкли. Скорее это была концепция объектов и&nbsp;репозитариев, где данные и&nbsp;способы их&nbsp;хранения фактически были разными сущностями. Похоже решили пока не&nbsp;поздно назвать таки вещи своими именами во&nbsp;избежание путаницы. Ладно&nbsp;&mdash; годное изменение.</p>
+<p>Теперь при создании схемы обязательно указывать контекст или пространство имён (модуль)  для схемы. Соответственно все методы для работы с&nbsp;данными будут выполняться в&nbsp;этом контексте (пространстве имён или модуле). Соответствующим образом изменились генераторы обязательно указывать название контекста. Вообще в&nbsp;релиз ноте используется термин контекст, так, что буду далее называть его именно&nbsp;так, хотя по&nbsp;мне так слишком обобщённый термин и&nbsp;может привести к&nbsp;путанице.</p>
+<p>Модели похоже вообще исчезли как класс. Вся логика похоже переезжает как раз в&nbsp;эти самые контексты. Как-то придётся переосмыслить подходы к&nbsp;построению приложений. Походу один контекст сейчас может объединять несколько схем. Остаётся вопрос как быть если схема нужна сразу нескольким контекстам. Есть повод подумать и&nbsp;порыть информацию.</p>
+<p>Ха! Я&nbsp;тут порыл немного по&nbsp;теме&nbsp;&mdash; контексты это просто отличная идея. Теперь не&nbsp;нужен весь этот код в&nbsp;контроллерах для сохранения моделей&nbsp;&mdash; changeset-ы, репозитарии&nbsp;&mdash; все это уехало как раз в&nbsp;контексты. И&nbsp;если раньше код контроллеры выглядел как-то&nbsp;так:</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">create</span></span>(conn, %&#123;<span class="string">&quot;entity&quot;</span> =&gt; entity_params&#125;) <span class="keyword">do</span></span><br><span class="line">    changeset = Entity.changeset(%Entity&#123;&#125;, entity_params)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> Repo.insert(changeset) <span class="keyword">do</span></span><br><span class="line">      &#123;<span class="symbol">:ok</span>, entity&#125; -&gt;</span><br><span class="line">        conn</span><br><span class="line">        |&gt; put_status(<span class="symbol">:created</span>)</span><br><span class="line">        |&gt; put_resp_header(<span class="string">&quot;location&quot;</span>, entity_path(conn, <span class="symbol">:show</span>, entity))</span><br><span class="line">        |&gt; render(<span class="string">&quot;show.json&quot;</span>, <span class="symbol">entity:</span> entity)</span><br><span class="line">      &#123;<span class="symbol">:error</span>, changeset&#125; -&gt;</span><br><span class="line">        conn</span><br><span class="line">        |&gt; put_status(<span class="symbol">:unprocessable_entity</span>)</span><br><span class="line">        |&gt; render(MyFilamentApi.ChangesetView, <span class="string">&quot;error.json&quot;</span>, <span class="symbol">changeset:</span> changeset)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>То теперь вс&nbsp;выглядит как-то&nbsp;так:</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">create</span></span>(conn, %&#123;<span class="string">&quot;entity&quot;</span> =&gt; entity_params&#125;) <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">with</span> &#123;<span class="symbol">:ok</span>, %Entity&#123;&#125; = entity&#125; &lt;- Parts.create_entity(entity_params) <span class="keyword">do</span></span><br><span class="line">      conn</span><br><span class="line">      |&gt; put_status(<span class="symbol">:created</span>)</span><br><span class="line">      |&gt; put_resp_header(<span class="string">&quot;location&quot;</span>, entity_path(conn, <span class="symbol">:show</span>, entity))</span><br><span class="line">      |&gt; render(<span class="string">&quot;show.json&quot;</span>, <span class="symbol">entity:</span> entity)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>т.е. как ни&nbsp;парадоксально избавившись от&nbsp;моделей работа с&nbsp;данными стала больше походить на&nbsp;классическую работу с&nbsp;моделями, принятую в&nbsp;других языках.</p>
+<p>Похудели контроллеры&nbsp;&mdash; навскидку стало меньше кода. Это не&nbsp;может не&nbsp;радовать&nbsp;&mdash; в&nbsp;старом <code>phoenix</code>-е херова гора лишнего кода изрядно раздражала.</p>
+<p>Добавился fallback контроллер, теперь все ошибки можно тупо ловить и&nbsp;обрабатывать в&nbsp;нём, а&nbsp;не&nbsp;писать оромные <code>case</code>-ы в&nbsp;каждом котроллере. Ну&nbsp;да&nbsp;&mdash; они пишутся генераторами автоматически, но&nbsp;потом это гуано разгребать довольно утомительно. В&nbsp;<code>rails</code> такая тема есть уже давно и&nbsp;как-то даже странно слышать об&nbsp;этом как о&nbsp;каком-то значимом улучшении, но&nbsp;тем не&nbsp;менее появление такого функционала в&nbsp;<code>phoenix</code> определённо шаг вперёд, хотя и&nbsp;говорит о&nbsp;том, что <code>phoenix</code>-у ещё расти и&nbsp;расти.</p>
+<h1 id="Источники-вдохновения"><a href="#Источники-вдохновения" class="headerlink" title="Источники вдохновения"></a>Источники вдохновения</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://habrahabr.ru/post/332898/">https://habrahabr.ru/post/332898/</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/wemake-services/why-changes-in-phoenix-1-3-are-so-important-2d50c9bdabb9">https://medium.com/wemake-services/why-changes-in-phoenix-1-3-are-so-important-2d50c9bdabb9</a></li>
+<li><a target="_blank" rel="noopener" href="http://phoenixframework.org/blog/phoenix-1-3-0-released">http://phoenixframework.org/blog/phoenix-1-3-0-released</a></li>
+<li><a target="_blank" rel="noopener" href="https://robots.thoughtbot.com/lessons-from-using-phoenix-1-3">https://robots.thoughtbot.com/lessons-from-using-phoenix-1-3</a></li>
+<li><a target="_blank" rel="noopener" href="http://michal.muskala.eu/2017/05/16/putting-contexts-in-context.html#now-my-context-modules-are-huge">http://michal.muskala.eu/16.05.2017/putting-contexts-in-context.html#now-my-context-modules-are-huge</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=tMO28ar0lW8">https://www.youtube.com/watch? v=tMO28ar0lW8</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=hfssz8U0JD0">https://www.youtube.com/watch? v=hfssz8U0JD0</a></li>
+</ul>
+  </div>
+
+  <footer>
+      <ul class="tags tags_post">
+      <li class="tags__label"><i class="icon-tags"></i></li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="0" href="/tags/phoenix/">phoenix</a>
+          </span>
+        </li>
+            <li class="tags__tag">
+          <span class="tag" itemprop="articleSection">
+            <a class="link link__control link_tag" tabindex="1" href="/tags/phoenix-1-3/">phoenix-1.3</a>
+          </span>
+        </li>
+          </ul>
+  
+  
+    <ul class="categories categories_post">
+      <li class="categories__label"><i class="icon-folder-empty"></i></li>
+      
+        <li class="categories__category">
+          <span class="category" itemprop="articleSection">
+            <a class="link link__control link_category" tabindex="0" href="/categories/programming/">Программирование</a>
+          </span>
+        </li>
+      
+    </ul>
+  
+  <div class="share" style="margin: 1rem 0; display: flex; flex-direction: row; font-size: 90%">
+  <div class="share__label" style="margin-right: 0.5rem">Поделиться:</div>
+  <div class="share__body ya-share2" data-services="vkontakte,lj" data-size="s" data-description="Попытка разобраться с новыми веяниями, идеями и концепциями новой версии Phoenix."></div>
+</div>
+  </footer>
+</article>
+
+
+<section class="comments">
+  <h3 class="comments__title">Комментарии</h3>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+<footer class="copyright copyright--bottom">&copy; 2024 WebHive</footer>
+</main></div><script>var disqus_config = function() {
+  this.page.url = 'https://www.webhive.ru/2017/08/22/new-phoenix-1-3-whats-new/';
+  this.page.identifier = 'https://www.webhive.ru/2017/08/22/new-phoenix-1-3-whats-new/';
+};
+
+(function() {  // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://hivetech.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();</script><noscript> <p class="disqus__no-js">Please enable JavaScript to view the <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener">comments powered by Disqus.</a></p></noscript><!-- Yandex.Metrika counter--><script>(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter23574193 = new Ya.Metrika({
+            id: '23574193',
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true
+          });
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex.metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/#{config.yandex.metrika}" style="position:absolute; left:-9999px;" alt=""></div></noscript><!-- /Yandex.Metrika counter--><script src="https://yastatic.net/share2/share.js" async="async"></script><script src="/js/app-8f31f535.js"></script></body></html>
