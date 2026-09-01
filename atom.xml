@@ -235,13 +235,13 @@
     <category term="devops" scheme="https://www.webhive.ru/categories/devops/"/>
     
     
-    <category term="coreos" scheme="https://www.webhive.ru/tags/coreos/"/>
-    
     <category term="docker" scheme="https://www.webhive.ru/tags/docker/"/>
     
     <category term="kubernetes" scheme="https://www.webhive.ru/tags/kubernetes/"/>
     
     <category term="digital-ocean" scheme="https://www.webhive.ru/tags/digital-ocean/"/>
+    
+    <category term="coreos" scheme="https://www.webhive.ru/tags/coreos/"/>
     
     <category term="etcd" scheme="https://www.webhive.ru/tags/etcd/"/>
     
