@@ -198,14 +198,14 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2015/01/10/arch-linux-keys/</loc>
+    <loc>https://www.webhive.ru/2015/08/28/linux-zip-russian-charset/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2015/08/28/linux-zip-russian-charset/</loc>
+    <loc>https://www.webhive.ru/2015/01/10/arch-linux-keys/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -373,6 +373,13 @@
   </url>
   
   <url>
+    <loc>https://www.webhive.ru/2014/03/17/annoying-bundler-issue/</loc>
+    
+    <lastmod>2024-12-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.webhive.ru/2014/03/14/docker-vs-vagrant-what-does-it-mean/</loc>
     
     <lastmod>2024-12-21</lastmod>
@@ -380,7 +387,7 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/03/17/annoying-bundler-issue/</loc>
+    <loc>https://www.webhive.ru/2014/04/13/handlebars-helpers-issue/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -394,7 +401,7 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/04/13/handlebars-helpers-issue/</loc>
+    <loc>https://www.webhive.ru/2014/05/14/building-docker-elastic-container/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -415,13 +422,6 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/05/14/building-docker-elastic-container/</loc>
-    
-    <lastmod>2024-12-21</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.webhive.ru/2014/07/02/backbone-views-unbinding/</loc>
     
     <lastmod>2024-12-21</lastmod>
@@ -436,14 +436,14 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/07/22/microsoft-office-install-hell/</loc>
+    <loc>https://www.webhive.ru/2014/07/23/google-api-fuckup/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/07/23/google-api-fuckup/</loc>
+    <loc>https://www.webhive.ru/2014/07/22/microsoft-office-install-hell/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -465,6 +465,13 @@
   
   <url>
     <loc>https://www.webhive.ru/2014/02/25/ngrok-working-with-webhooks/</loc>
+    
+    <lastmod>2024-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/2014/01/29/timecop-extra-useful-gem/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -493,13 +500,6 @@
   
   <url>
     <loc>https://www.webhive.ru/2014/03/11/emberjs-and-seo/</loc>
-    
-    <lastmod>2024-12-21</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/2014/01/29/timecop-extra-useful-gem/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -548,6 +548,13 @@
   </url>
   
   <url>
+    <loc>https://www.webhive.ru/2013/12/26/ember-vs-backbone-1/</loc>
+    
+    <lastmod>2024-12-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.webhive.ru/2013/12/28/one-more-frustration-about-backbone-vs-ember-vs-angular/</loc>
     
     <lastmod>2024-12-21</lastmod>
@@ -562,13 +569,6 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2013/12/26/ember-vs-backbone-1/</loc>
-    
-    <lastmod>2024-12-21</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.webhive.ru/2013/12/29/extra-useful-php-libraries-list/</loc>
     
     <lastmod>2024-12-21</lastmod>
@@ -576,14 +576,14 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2013/12/29/trying-wintersmith-static-sites-generator/</loc>
+    <loc>https://www.webhive.ru/2013/12/29/nodejs-for-ecommerce/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2013/12/29/nodejs-for-ecommerce/</loc>
+    <loc>https://www.webhive.ru/2013/12/29/trying-wintersmith-static-sites-generator/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -625,14 +625,14 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/01/09/emberjs-whatsnew-in-2014/</loc>
+    <loc>https://www.webhive.ru/2014/01/10/rails-migrations-for-spatial-data/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/01/10/rails-migrations-for-spatial-data/</loc>
+    <loc>https://www.webhive.ru/2014/01/09/emberjs-whatsnew-in-2014/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -653,20 +653,6 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2013/12/09/ember-data-alternatives.html/</loc>
-    
-    <lastmod>2024-12-21</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/2013/12/10/why-not-emberjs/</loc>
-    
-    <lastmod>2024-12-21</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.webhive.ru/2013/12/14/docpad-dark-side/</loc>
     
     <lastmod>2024-12-21</lastmod>
@@ -681,7 +667,21 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2013/12/22/sailsjs-first-impression/</loc>
+    <loc>https://www.webhive.ru/2013/12/10/why-not-emberjs/</loc>
+    
+    <lastmod>2024-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/2014/01/10/hexo-deploy-on-heroku.html/</loc>
+    
+    <lastmod>2024-12-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/2013/12/09/ember-data-alternatives.html/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -695,7 +695,7 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/2014/01/10/hexo-deploy-on-heroku.html/</loc>
+    <loc>https://www.webhive.ru/2013/12/22/sailsjs-first-impression/</loc>
     
     <lastmod>2024-12-21</lastmod>
     
@@ -858,20 +858,6 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/ember-js/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/ember-data/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.webhive.ru/tags/docpad/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
@@ -893,14 +879,21 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/sails-js/</loc>
+    <loc>https://www.webhive.ru/tags/ember-js/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/news-from-trenches/</loc>
+    <loc>https://www.webhive.ru/tags/heroku/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/ember-data/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -914,7 +907,14 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/heroku/</loc>
+    <loc>https://www.webhive.ru/tags/news-from-trenches/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/sails-js/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -991,14 +991,42 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/sphinx/</loc>
+    <loc>https://www.webhive.ru/tags/linux/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/linux/</loc>
+    <loc>https://www.webhive.ru/tags/zip/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/charset/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/archlinux/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/gpg/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/sphinx/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1027,83 +1055,6 @@
   
   <url>
     <loc>https://www.webhive.ru/tags/tunnel/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/cancan/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/authorization/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/server-sent-events/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/websockets/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/javascript/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/seo/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/hashbang/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/docker/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/vagrant/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/virtualization/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/bundler/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1173,13 +1124,6 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/harp-js/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.webhive.ru/tags/rspec/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
@@ -1195,6 +1139,90 @@
   
   <url>
     <loc>https://www.webhive.ru/tags/timecop/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/harp-js/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/cancan/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/authorization/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/server-sent-events/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/websockets/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/javascript/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/seo/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/hashbang/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/bundler/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/docker/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/vagrant/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/virtualization/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1285,27 +1313,6 @@
   </url>
   
   <url>
-    <loc>https://www.webhive.ru/tags/windows/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/office-13/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/offtopic/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.webhive.ru/tags/google-api/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
@@ -1321,6 +1328,27 @@
   
   <url>
     <loc>https://www.webhive.ru/tags/google/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/windows/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/office-13/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.webhive.ru/tags/offtopic/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1412,34 +1440,6 @@
   
   <url>
     <loc>https://www.webhive.ru/tags/svg/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/archlinux/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/gpg/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/zip/</loc>
-    <lastmod>2026-09-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.webhive.ru/tags/charset/</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
