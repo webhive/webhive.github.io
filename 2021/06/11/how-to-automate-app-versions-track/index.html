@@ -284,7 +284,7 @@
   <div class="post__entry" itemprop="articleBody">
     
 
-    <p>Для развертывания приложений и&nbsp;рельсовых в&nbsp;частности, весьма актуально знать версию приложения. И&nbsp;не&nbsp;только знать, но&nbsp;и&nbsp;обновлять по&nbsp;необходимости. Желательно автоматически. Для этого существуют различные способы и&nbsp;методики. Ниже поделюсь способом к&nbsp;которому вынужденно пришёл&nbsp;я.&nbsp;</p>
+    <p>Для развертывания приложений и&nbsp;рельсовых в&nbsp;частности, весьма актуально знать версию приложения. И&nbsp;не&nbsp;только знать, но&nbsp;и&nbsp;обновлять по&nbsp;необходимости. Желательно автоматически. Для этого существуют различные способы и&nbsp;методики. Ниже поделюсь способом к&nbsp;которому вынужденно пришёл&nbsp;я.</p>
 <a id="more"></a>
 
 <h1 id="Традиционный-подход"><a href="#Традиционный-подход" class="headerlink" title="Традиционный подход"></a>Традиционный подход</h1><p>Которым я&nbsp;всегда пользовался, заключался в&nbsp;банальном хранении версии приложения в&nbsp;виде git-овского тэга.</p>
@@ -299,29 +299,34 @@
 <li>Можно задать префикс типа <code>v1.2.3</code></li>
 <li>Умеет само обновлять tag в&nbsp;git-е</li>
 <li>Может автоматом найти и&nbsp;заменить номер версии в&nbsp;дополнительно указанных файлах</li>
-<li>Умеет вести changelog </li>
+<li>Умеет вести changelog</li>
 <li>Интегрируется с&nbsp;rake</li>
 </ul>
 <p>В общем и&nbsp;целом&nbsp;&mdash; полный фарш.</p>
 <p>Чтобы вывести текущую версию, что актуально для сборки и&nbsp;деплоя, используется следующая команда:</p>
-<pre class="code language-bash"><code class="language-bash">$ rake bump:current</code></pre>
+<pre class="language-bash"><code class="language-bash">rake bump:current
+</code></pre>
 
 <p>Ну, а&nbsp;чтобы увеличить версию достаточно выполнить</p>
-<pre class="code language-bash"><code class="language-bash">$ rake bump:show-next <span class="token assign-left variable">INCREMENT</span><span class="token operator">=</span>patch</code></pre>
+<pre class="language-bash"><code class="language-bash">rake bump:show-next <span class="token assign-left variable">INCREMENT</span><span class="token operator">=</span>patch
+</code></pre>
 
-<p>Ну или если вам не&nbsp;по&nbsp;душе <code>rake</code>, то: </p>
-<pre class="code language-bash"><code class="language-bash">$ bump show-next patch</code></pre>
+<p>Ну или если вам не&nbsp;по&nbsp;душе <code>rake</code>, то:</p>
+<pre class="language-bash"><code class="language-bash">bump show-next patch
+</code></pre>
 
-<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>Как оказалось почти всё умеет yarn, что порадовало, но&nbsp;вот как вывести текущую версию, не&nbsp;меняя её&nbsp;я&nbsp;не&nbsp;нашёл, поэтому, имея в&nbsp;виду, что версия хранится в&nbsp;<code>package.json</code>, который суть есть не&nbsp;что иное как JSON файл тупо воспользовался старым добрым <code>jq</code> </p>
-<pre class="code language-bash"><code class="language-bash">$ jq <span class="token parameter variable">-r</span> <span class="token string">'.version'</span> <span class="token operator">&lt;</span> package.json
-<span class="token number">0.0</span>.2</code></pre>
+<h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>Как оказалось почти всё умеет yarn, что порадовало, но&nbsp;вот как вывести текущую версию, не&nbsp;меняя её&nbsp;я&nbsp;не&nbsp;нашёл, поэтому, имея в&nbsp;виду, что версия хранится в&nbsp;<code>package.json</code>, который суть есть не&nbsp;что иное как JSON файл тупо воспользовался старым добрым <code>jq</code></p>
+<pre class="language-bash"><code class="language-bash">$ jq <span class="token parameter variable">-r</span> <span class="token string">'.version'</span> <span class="token operator">&lt;</span> package.json
+<span class="token number">0.0</span>.2
+</code></pre>
 
 <p>Из плюсов отмечу возможность автоматически задавать tag в&nbsp;git-е, ну,&nbsp;а&nbsp;минус указал выше.</p>
-<p>Инкремент выполняется без извращений </p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token function">yarn</span> version <span class="token parameter variable">--patch</span>
+<p>Инкремент выполняется без извращений</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">yarn</span> version <span class="token parameter variable">--patch</span>
 <span class="token function">yarn</span> version v1.22.10
 info Current version: <span class="token number">0.0</span>.2
-info New version: <span class="token number">0.0</span>.3</code></pre>
+info New version: <span class="token number">0.0</span>.3
+</code></pre>
 
 <h1 id="Итого"><a href="#Итого" class="headerlink" title="Итого"></a>Итого</h1><p>Вот таким незатейливым способом я&nbsp;решил свои проблемы с&nbsp;версионностью приложений и&nbsp;думаю испрользовать такой подход и&nbsp;впредь в&nbsp;виду его практичности и&nbsp;независимости от&nbsp;структуры репозитаря. Кроме того ничтно не&nbsp;мешает даже в&nbsp;случае монорепозитария настроить автоматическое обновление тега.</p>
   </div>

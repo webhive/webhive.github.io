@@ -295,14 +295,15 @@
 
 <p>В slim есть возможность использовать так называемые engines&nbsp;&mdash; блоки с&nbsp;отличным от&nbsp;slim синтаксисом. Таким образом можно в&nbsp;slim шаблоне писать код используя одновременно несколько разных синтаксисов. asd</p>
 <p>Например:</p>
-<pre class="code language-ruby"><code class="language-ruby">markdown<span class="token operator">:</span>
+<pre class="language-ruby"><code class="language-ruby">markdown<span class="token operator">:</span>
   <span class="token comment">#Header</span>
     Hello from <span class="token comment">#{"Markdown!"}</span>
-    Second Line<span class="token operator">!</span></code></pre>
+    Second Line<span class="token operator">!</span>
+</code></pre>
 
-<p>И всё&nbsp;бы&nbsp;ничего, но&nbsp;в&nbsp;один прекрасный момент мне понадобилось внедрить не&nbsp;совсем стандартный синтаксис. На&nbsp;самом-то деле довольно стандартный&nbsp;&mdash; просто инлайновый&nbsp;css. Но&nbsp;встроенный в&nbsp;slim engine для css/scss/sass оборачивает написанный код в&nbsp;тэг style. А&nbsp;в&nbsp;моём случае планировалось использовать эту возможность для AMP страниц и&nbsp;там такой подход уже не&nbsp;работает. </p>
+<p>И всё&nbsp;бы&nbsp;ничего, но&nbsp;в&nbsp;один прекрасный момент мне понадобилось внедрить не&nbsp;совсем стандартный синтаксис. На&nbsp;самом-то деле довольно стандартный&nbsp;&mdash; просто инлайновый&nbsp;css. Но&nbsp;встроенный в&nbsp;slim engine для css/scss/sass оборачивает написанный код в&nbsp;тэг style. А&nbsp;в&nbsp;моём случае планировалось использовать эту возможность для AMP страниц и&nbsp;там такой подход уже не&nbsp;работает.</p>
 <p>Ну и&nbsp;собственно, чтобы добиться желаемого просто добавим в&nbsp;файл инициализации <code>config/initialize/slim.rb</code> нужный нам код</p>
-<pre class="code language-ruby"><code class="language-ruby"><span class="token comment"># создаем свой rendering engine</span>
+<pre class="language-ruby"><code class="language-ruby"><span class="token comment"># создаем свой rendering engine</span>
 <span class="token keyword">class</span> <span class="token class-name">AmpScssEngine</span> <span class="token operator">&lt;</span> Slim<span class="token double-colon punctuation">::</span>Embedded<span class="token double-colon punctuation">::</span>SassEngine
   <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">on_slim_embedded</span></span><span class="token punctuation">(</span>engine<span class="token punctuation">,</span> body<span class="token punctuation">,</span> attrs<span class="token punctuation">)</span>
     <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token symbol">:scss</span><span class="token punctuation">,</span> body<span class="token punctuation">,</span> attrs<span class="token punctuation">)</span>
@@ -310,16 +311,18 @@
 <span class="token keyword">end</span>
 
 <span class="token comment"># регистрируем его в slim </span>
-Slim<span class="token double-colon punctuation">::</span>Embedded<span class="token punctuation">.</span>register <span class="token symbol">:amp_scss</span><span class="token punctuation">,</span> AmpScssEngine</code></pre>
+Slim<span class="token double-colon punctuation">::</span>Embedded<span class="token punctuation">.</span>register <span class="token symbol">:amp_scss</span><span class="token punctuation">,</span> AmpScssEngine
+</code></pre>
 
 <p>После этого использовать в&nbsp;шаблоне этот рендерер можно следующим образом:</p>
-<pre class="code language-ruby"><code class="language-ruby">style amp<span class="token operator">-</span>custom
+<pre class="language-ruby"><code class="language-ruby">style amp<span class="token operator">-</span>custom
   <span class="token symbol">amp_scss</span><span class="token operator">:</span>
     <span class="token punctuation">.</span>amenity <span class="token punctuation">{</span>
       <span class="token operator">&amp;</span>__icon <span class="token punctuation">{</span>
         <span class="token symbol">display</span><span class="token operator">:</span> inline<span class="token operator">-</span>flex<span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span></code></pre>
+    <span class="token punctuation">}</span>
+</code></pre>
   </div>
 
   <footer>

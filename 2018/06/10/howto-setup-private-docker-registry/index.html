@@ -296,8 +296,9 @@
 <a id="more"></a>
 
 <h1 id="Что-за-странное-желание"><a href="#Что-за-странное-желание" class="headerlink" title="Что за странное желание?"></a>Что за&nbsp;странное желание?</h1><p>Позывы сделать свой registry были давно, но&nbsp;как-то всё не&nbsp;доходили руки. На&nbsp;самом деле не&nbsp;было такой острой необходимости. Как правило всё решалось простым:</p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">DOCKER_HOST</span><span class="token operator">=</span>tcp://<span class="token operator">&lt;</span>ip адрес хоста с докером<span class="token operator">></span>:2375
-$ <span class="token function">docker</span> <span class="token operator">&lt;</span>какая нибудь команда<span class="token operator">></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">DOCKER_HOST</span><span class="token operator">=</span>tcp://<span class="token operator">&lt;</span>ip адрес хоста с докером<span class="token operator">></span>:2375
+<span class="token function">docker</span> <span class="token operator">&lt;</span>какая нибудь команда<span class="token operator">></span>
+</code></pre>
 
 <p>Минусы такого подхода очевидны&nbsp;&mdash; каждый раз образ собирается прямо на&nbsp;целевом сервере и&nbsp;каждую новую установку или обновление образа нужно выполнять на&nbsp;каждом сервере отдельно. И&nbsp;это при&nbsp;том, что собранный образ у&nbsp;меня уже есть. Хотелось&nbsp;бы&nbsp;конечно собрать и&nbsp;оттестировать локально один&nbsp;раз, а&nbsp;потом просто разлить готовый образ по&nbsp;нужным хостам.</p>
 <p>Попытка использовать в&nbsp;качестве registry Docker Hub не&nbsp;увенчалась успехом&nbsp;&mdash; бесплатно там доступно не&nbsp;очень много.</p>
@@ -315,7 +316,7 @@ $ <span class="token function">docker</span> <span class="token operator">&lt;</
 <p>На самом деле у&nbsp;docker образа registry есть встроенная поддержка LetsEncrypt, но&nbsp;она у&nbsp;меня не&nbsp;заработала, впрочем не&nbsp;только у&nbsp;меня. Собственно именно поэтому и&nbsp;установку сертификата выполнил отдельно.</p>
 <p>Да&nbsp;&mdash; ещё забыл упомянуть&nbsp;&mdash; без HTTPS не&nbsp;работает авторизация и&nbsp;если хочется защитить свой registry паролем, то&nbsp;получение сертификата является обязательным шагом.</p>
 <p>Итак ближе к&nbsp;делу. Получаем сертификат. Для этого на&nbsp;сервере запускаем команду (на сервере должен быть установлен docker) </p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token parameter variable">-v</span> /etc/acme/webhive:/acme.sh <span class="token punctuation">\</span>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token parameter variable">-v</span> /etc/acme/webhive:/acme.sh <span class="token punctuation">\</span>
              <span class="token parameter variable">-e</span> <span class="token assign-left variable">PDD_Token</span><span class="token operator">=</span><span class="token operator">&lt;</span>токен API Яндэкса<span class="token operator">></span> <span class="token punctuation">\</span>
              <span class="token parameter variable">--rm</span> <span class="token punctuation">\</span>
              neilpang/acme.sh <span class="token punctuation">\</span>
@@ -323,28 +324,31 @@ $ <span class="token function">docker</span> <span class="token operator">&lt;</
              <span class="token parameter variable">-d</span> registry.webhive.ru <span class="token punctuation">\</span>
              <span class="token parameter variable">--dns</span> dns_yandex <span class="token punctuation">\</span>
              <span class="token parameter variable">--accountemail</span> <span class="token string">"&lt;email>"</span> <span class="token punctuation">\</span>
-             <span class="token parameter variable">--standalone</span></code></pre>
+             <span class="token parameter variable">--standalone</span>
+</code></pre>
 
 <p>Здесь <code>/etc/acme/webhive</code> предварительно созданная папка для сохранения данных LetsEncrypt.</p>
 <p>Далее нужно экспортировать полученный сертификат и&nbsp;ключ в&nbsp;папку, доступную для registry (в моём случае это <code>/etc/docker-registry/certs</code>). Делается это&nbsp;так:</p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token parameter variable">-v</span> /etc/acme/webhive:/acme.sh <span class="token punctuation">\</span>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token parameter variable">-v</span> /etc/acme/webhive:/acme.sh <span class="token punctuation">\</span>
              <span class="token parameter variable">-v</span> /etc/docker-registry/certs/:/etc/docker-registry/certs/ <span class="token punctuation">\</span>
              <span class="token parameter variable">--rm</span> <span class="token punctuation">\</span>
              neilpang/acme.sh <span class="token punctuation">\</span>
              --install-cert <span class="token parameter variable">-d</span> registry.webhive.ru <span class="token punctuation">\</span>
              --key-file /etc/docker-registry/certs/key.pem <span class="token punctuation">\</span>
-             --fullchain-file /etc/docker-registry/certs/cert.pem</code></pre>
+             --fullchain-file /etc/docker-registry/certs/cert.pem
+</code></pre>
 
 <p>Думаю тут всё очевидно&nbsp;&mdash; в&nbsp;результате получаем два файла&nbsp;&mdash; сертификат и&nbsp;ключ.</p>
 <h2 id="Basic-Auth"><a href="#Basic-Auth" class="headerlink" title="Basic Auth"></a>Basic Auth</h2><p>Кроме сертификата нам понадобится настроить парольную авторизацию, ибо у&nbsp;меня нет большого желания, чтоб в&nbsp;мой registry лазил кто попало. Делается это так&nbsp;&mdash; мы&nbsp;используем образ registry, но&nbsp;как команду для генерации аккаунта пользователя.</p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token punctuation">\</span>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token parameter variable">--rm</span> <span class="token punctuation">\</span>
              <span class="token parameter variable">--entrypoint</span> htpasswd <span class="token punctuation">\</span>
              registry:2 <span class="token punctuation">\</span>
              <span class="token parameter variable">-Bbn</span> <span class="token operator">&lt;</span>имя пользователя<span class="token operator">></span> <span class="token operator">&lt;</span>пароль<span class="token operator">></span> <span class="token punctuation">\</span>
-             <span class="token operator">></span> /etc/docker-registry/auth/htpasswd</code></pre>
+             <span class="token operator">></span> /etc/docker-registry/auth/htpasswd
+</code></pre>
 
 <h2 id="Собираем-всё-вместе"><a href="#Собираем-всё-вместе" class="headerlink" title="Собираем всё вместе"></a>Собираем всё вместе</h2><p>Ну и&nbsp;наконец у&nbsp;нас всё готово для финального аккорда. У&nbsp;нас есть сертификат и&nbsp;ключ для организации HTTPS, у&nbsp;нас есть файл с&nbsp;аккаунтами пользователей. Давайте-же наконец запустим registry.</p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token punctuation">\</span>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> run <span class="token punctuation">\</span>
     <span class="token parameter variable">--rm</span> <span class="token punctuation">\</span>
     <span class="token parameter variable">-p</span> <span class="token number">443</span>:5000 <span class="token punctuation">\</span>
     <span class="token parameter variable">--name</span> registry <span class="token punctuation">\</span>
@@ -357,21 +361,23 @@ $ <span class="token function">docker</span> <span class="token operator">&lt;</
     <span class="token parameter variable">-e</span> <span class="token assign-left variable">REGISTRY_HTTP_HOST</span><span class="token operator">=</span>https://registry.webhive.ru <span class="token punctuation">\</span>
     <span class="token parameter variable">-e</span> <span class="token assign-left variable">REGISTRY_HTTP_TLS_CERTIFICATE</span><span class="token operator">=</span>/certs/cert.pem <span class="token punctuation">\</span>
     <span class="token parameter variable">-e</span> <span class="token assign-left variable">REGISTRY_HTTP_TLS_KEY</span><span class="token operator">=</span>/certs/key.pem <span class="token punctuation">\</span>
-    registry:2</code></pre>
+    registry:2
+</code></pre>
 
 <p>Что тут происходит&nbsp;&mdash; мы&nbsp;подсовываем приложению наши ключи и&nbsp;дополнительные опции в&nbsp;виде переменных окружения. Собственно как и&nbsp;описано в&nbsp;документации&nbsp;&mdash; <a target="_blank" rel="noopener" href="https://docs.docker.com/registry/configuration/">https://docs.docker.com/registry/configuration/</a> (раздел Override specific configuration options).</p>
 <p>Так-же мы&nbsp;мапим некоторые папки нашего хоста в&nbsp;докерский образ. Это как раз сертификаты и&nbsp;файл с&nbsp;аккаунтами. Ну&nbsp;и&nbsp;собственно и&nbsp;всё&nbsp;&mdash; пазл сложился. Теперь мы&nbsp;можем наблюдать наш registry живой и&nbsp;рабочий в&nbsp;списке процессов докера.</p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token function">docker</span> login registry.webhive.ru
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">docker</span> login registry.webhive.ru
 Username: <span class="token function">docker</span>
 Password:
 WARNING<span class="token operator">!</span> Your password will be stored unencrypted <span class="token keyword">in</span> /home/roman/.docker/config.json.
 Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/<span class="token comment">#credentials-store</span>
 
-Login Succeeded</code></pre>
+Login Succeeded
+</code></pre>
 
 <h1 id="Автоматизируй-это"><a href="#Автоматизируй-это" class="headerlink" title="Автоматизируй это"></a>Автоматизируй это</h1><p>Для полного счастья осталось добавить registry в&nbsp;автозагрузку сервера. Используем systemd&nbsp;&mdash; ну,&nbsp;а&nbsp;какие ещё могут быть варианты в&nbsp;2018&nbsp;году?<br>Юнит-файл для этого у&nbsp;меня имеет следующий вид</p>
-<pre class="code language-bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<pre class="language-bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
 <span class="token assign-left variable">Description</span><span class="token operator">=</span>Docker Registry Container
 <span class="token assign-left variable">After</span><span class="token operator">=</span>docker.service
 <span class="token assign-left variable">Requires</span><span class="token operator">=</span>docker.service
@@ -399,7 +405,8 @@ Login Succeeded</code></pre>
 <span class="token assign-left variable">RestartSec</span><span class="token operator">=</span>10s
 
 <span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
-<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target</code></pre>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target
+</code></pre>
 
 <p>Ну и&nbsp;для полного счастья нужен ещё таймер для обновления сертификатов&nbsp;&mdash; он&nbsp;есть у&nbsp;меня, но&nbsp;в&nbsp;контексте данной статьи публиковать его не&nbsp;вижу нужды.</p>
 <h1 id="Итого"><a href="#Итого" class="headerlink" title="Итого"></a>Итого</h1><p>Получили рабочий Docker Registry, работающий на&nbsp;сервере внутри домашней сети и&nbsp;доступный снаружи по&nbsp;HTTPS и&nbsp;защищённый паролем.</p>

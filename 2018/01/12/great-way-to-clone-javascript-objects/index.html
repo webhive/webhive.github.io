@@ -310,10 +310,12 @@
 <p>Классический <code>Object.assign</code> несмотря на&nbsp;простоту таким свойством не&nbsp;обладает. В&nbsp;общем-то традиционно для этого приходилось выкручиваться или сторонними библиотеками или копипастить с&nbsp;интернета монстроидальные функции или на&nbsp;худой конец говнокодить самому.</p>
 <p>Сравнительно неплохим методом был старый добрый <code>JSON.parse(JSON.stringify(x))</code>, но&nbsp;несмотря на&nbsp;лаконичность на&nbsp;этот лютый оверхед я&nbsp;не&nbsp;могу смотреть без боли.</p>
 <p>Наконец спасибо ES6 у&nbsp;нас появился оператор <a target="_blank" rel="noopener" href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Functions/Rest_parameters">spread</a> (это то&nbsp;самое троеточие перед переменной), с&nbsp;помощью которого мы&nbsp;можем клонировать объекты малой кровью и&nbsp;предельно лаконично&nbsp;&mdash; примерно так</p>
-<pre class="code language-javascript"><code class="language-javascript"><span class="token keyword">const</span> clone <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token spread operator">...</span>original <span class="token punctuation">}</span></code></pre>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> clone <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token spread operator">...</span>original <span class="token punctuation">}</span>
+</code></pre>
 
 <p>Можно даже сразу добавить/обновить свойство</p>
-<pre class="code language-javascript"><code class="language-javascript"><span class="token keyword">const</span> clone <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token spread operator">...</span>original<span class="token punctuation">,</span> <span class="token literal-property property">prop</span><span class="token operator">:</span> newOne <span class="token punctuation">}</span></code></pre>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> clone <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token spread operator">...</span>original<span class="token punctuation">,</span> <span class="token literal-property property">prop</span><span class="token operator">:</span> newOne <span class="token punctuation">}</span>
+</code></pre>
 
 <p>И это прекрасно!</p>
 <p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/39736397/is-this-a-good-way-to-clone-an-object-in-es6#answer-46179203">Подсмотрено тут</a></p>

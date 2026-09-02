@@ -297,18 +297,20 @@
 
 <p>Ну в&nbsp;общем-то если немного подумать головным мозгом, то&nbsp;проблема вполне очевидна&nbsp;&mdash; docker это изоляция и&nbsp;работает он&nbsp;в&nbsp;совей изолированной среде, включая сеть. Взаимодействие с&nbsp;хостом у&nbsp;нас организовано через сеть и&nbsp;среда выполнения docker-а имеет свою подсеть. Доступ к&nbsp;внешнему миру (включая хост, т.&nbsp;е.&nbsp;мой ноутбук)  осуществляется через шлюз&nbsp;&mdash; специальный сетевой интерфейс доступный внутри контейнера.</p>
 <p>И всё&nbsp;бы&nbsp;ничего, но&nbsp;IP&nbsp;адрес шлюза в&nbsp;контейнере динамический и&nbsp;мы&nbsp;не&nbsp;можем ссылаться на&nbsp;него внутри контейнера. В&nbsp;моём случае nginx должен обращаться к&nbsp;приложению, но&nbsp;вот какой IP&nbsp;ему прописать непонятно.</p>
-<pre class="code language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">upstream</span> backend</span> <span class="token punctuation">{</span>
+<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">upstream</span> backend</span> <span class="token punctuation">{</span>
     <span class="token directive"><span class="token keyword">server</span> &lt;тут динамический IP приложения>:3301</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 
 <p>Самый исчерпывающий ответ по&nbsp;этой проблеме нашёл здесь <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach/24326540#24326540#answer-24326540">From inside of&nbsp;a&nbsp;Docker container, how do&nbsp;I&nbsp;connect to&nbsp;the localhost of&nbsp;the machine?</a></p>
 <p>Суть в&nbsp;том, чтобы перед запуском контейнера поместить в&nbsp;переменную окружения адрес хоста на&nbsp;котором запущен контейнер, а&nbsp;потом передать его в&nbsp;контейнер и&nbsp;использовать&nbsp;там. Делается это&nbsp;так:</p>
-<pre class="code language-bash"><code class="language-bash">$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">DOCKERHOST</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ifconfig</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-E</span> <span class="token string">"([0-9]{1,3}\.){3}[0-9]{1,3}"</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-v</span> <span class="token number">127.0</span>.0.1 <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{ print $2 }'</span> <span class="token operator">|</span> <span class="token function">cut</span> <span class="token parameter variable">-f2</span> -d: <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n1</span><span class="token variable">)</span></span></code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">DOCKERHOST</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">ifconfig</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-E</span> <span class="token string">"([0-9]{1,3}\.){3}[0-9]{1,3}"</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-v</span> <span class="token number">127.0</span>.0.1 <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{ print $2 }'</span> <span class="token operator">|</span> <span class="token function">cut</span> <span class="token parameter variable">-f2</span> -d: <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n1</span><span class="token variable">)</span></span>
+</code></pre>
 
 <p>Что тут конкретно происходит примерно понятно, но&nbsp;подробно разбирать регулярки не&nbsp;вижу смысла&nbsp;&mdash; достаточно того, что оно работает.</p>
 <p>После этого нам лишь надо добавить в&nbsp;конфигурацию контейнера запись о&nbsp;новом хосте используя директиву <code>extra_hosts</code> ну&nbsp;или если вы&nbsp;запускаете докер вручную. то&nbsp;добавив параметр <code>--add-host</code>. Это фактически запись, добавляемая в&nbsp;/etc/hosts контейнера.</p>
 <p>В моём случае конфигурация docker-compose выглядит&nbsp;так:</p>
-<pre class="code language-yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'2.1'</span>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'2.1'</span>
 
 <span class="token key atrule">services</span><span class="token punctuation">:</span>
   <span class="token key atrule">nginx</span><span class="token punctuation">:</span>
@@ -325,12 +327,14 @@
 <span class="token key atrule">networks</span><span class="token punctuation">:</span>
   <span class="token key atrule">backend</span><span class="token punctuation">:</span>
     <span class="token key atrule">enable_ipv6</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
-    <span class="token key atrule">driver</span><span class="token punctuation">:</span> bridge</code></pre>
+    <span class="token key atrule">driver</span><span class="token punctuation">:</span> bridge
+</code></pre>
 
 <p>Ну и&nbsp;после этого в&nbsp;конфигурации nginx-а внутри контейнера мы&nbsp;можем ссылаться на&nbsp;наш хост используя имя <code>dockerhost</code>. Типа вот&nbsp;так:</p>
-<pre class="code language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">upstream</span> backend</span> <span class="token punctuation">{</span>
+<pre class="language-nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">upstream</span> backend</span> <span class="token punctuation">{</span>
     <span class="token directive"><span class="token keyword">server</span> dockerhost:3301</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre>
 
 <p>В общем проверено&nbsp;&mdash; метод прекрасно работает и&nbsp;существенно расширяет возможности использования docker-а для разработки.</p>
   </div>
