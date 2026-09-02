@@ -88,7 +88,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-<link type="text/css" rel="stylesheet" href="/css/app-CDXdA3Gd.css" />
+<link type="text/css" rel="stylesheet" href="/css/app-CQc-ZgW0.css" />
 
 <link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml">
 
@@ -306,7 +306,18 @@ v7.8.0
 <h2 id="Что-с-ними-не-так"><a href="#Что-с-ними-не-так" class="headerlink" title="Что с ними не так?"></a>Что с&nbsp;ними не&nbsp;так?</h2><p>Всё, что я&nbsp;нашёл просто адово тормозит. Любой переход из&nbsp;папки в&nbsp;папку занимает пару секунд. Это очень много&nbsp;&mdash; это жутко раздражает и&nbsp;такое решения я&nbsp;считаю нерабочим. Не&nbsp;понимаю&nbsp;&mdash; неужели кто-то этим решениями действительно пользуется?</p>
 <h2 id="Почему-так-медленно"><a href="#Почему-так-медленно" class="headerlink" title="Почему так медленно"></a>Почему так медленно</h2><p>Всё дело в&nbsp;том, что анализ проводится на&nbsp;мой взгляд довольно странным способом. Средствами <code>nvm</code> запрашиваетс версия по&nbsp;умолчанию и&nbsp;версия требуемая и&nbsp;если они не&nbsp;совпадают, то&nbsp;запускается смена версии. Причём даже если нет файла <code>.nvmrc</code> всё равно&nbsp;&mdash; запускается переключение на&nbsp;версию по&nbsp;умолчанию</p>
 <h1 id="Пилю-свой-велосипед"><a href="#Пилю-свой-велосипед" class="headerlink" title="Пилю свой велосипед"></a>Пилю свой велосипед</h1><p>Блин проблема-то яйца выеденного не&nbsp;стоит. Как не&nbsp;взять руки любимый напильник? За&nbsp;дело!</p>
-<figure class="highlight zsh"><figcaption><span>.zshrc</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">load-<span class="function"><span class="title">nvmrc</span></span>() &#123;</span><br><span class="line">  <span class="keyword">if</span> [ -f <span class="string">&#x27;.nvmrc&#x27;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">local</span> required_version=`cat .nvmrc`</span><br><span class="line">    <span class="keyword">if</span> [ `nvm version` != <span class="string">&quot;<span class="variable">$required_version</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">      nvm use <span class="string">&quot;<span class="variable">$required_version</span>&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add-zsh-hook chpwd load-nvmrc</span><br><span class="line">load-nvmrc</span><br></pre></td></tr></table></figure>
+<pre><code class="language-zsh">load-nvmrc() {
+  if [ -f '.nvmrc' ]; then
+    local required_version=`cat .nvmrc`
+    if [ `nvm version` != &quot;$required_version&quot; ]; then
+      nvm use &quot;$required_version&quot;
+    fi
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+</code></pre>
 
 <p>Вот такой кусок надо добавить в&nbsp;свой файл <code>.zshrc</code>. На&nbsp;смену папки вешается хук (строка 9), который и&nbsp;выполняет анализ ситуации и&nbsp;запускает <code>nvm</code> если нужно.</p>
 <p>Чем&nbsp;же&nbsp;эта конструкция лучше? Она быстрая! Вся эта балалайка запускаетс только если есть в&nbsp;наличии файл <code>.nvmrc</code> и&nbsp;только если версия в&nbsp;нём отличается от&nbsp;текущей. Поэтому запускается редко, но&nbsp;метко.</p>
@@ -411,6 +422,6 @@ v7.8.0
 
 
 
-  <script src="/js/app-rcF1BQD3.js"></script>
+  <script src="/js/app-Cqeuifre.js"></script>
 </body>
 </html>

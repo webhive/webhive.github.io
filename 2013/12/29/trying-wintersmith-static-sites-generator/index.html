@@ -86,7 +86,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-<link type="text/css" rel="stylesheet" href="/css/app-CDXdA3Gd.css" />
+<link type="text/css" rel="stylesheet" href="/css/app-CQc-ZgW0.css" />
 
 <link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml">
 
@@ -296,23 +296,30 @@
 <h1 id="Зачем"><a href="#Зачем" class="headerlink" title="Зачем"></a>Зачем</h1><p>Текущая версия блога работает на&nbsp;движке hexo, который хотя и&nbsp;довольно неплох, но&nbsp;имеет весьма скудные возможности. Нет например описания как загружать картинки в&nbsp;статьи&nbsp;&mdash; такая казалось&nbsp;бы&nbsp;банальная вещь, а&nbsp;уже проблема.</p>
 <p>Ну в&nbsp;общем есть претензии&nbsp;&mdash; опишу подробнее в&nbsp;отдельной статье. В&nbsp;связи с&nbsp;этим начал рассматривать альтернативы. Wintersmith как раз одна из&nbsp;них.</p>
 <h1 id="Установка"><a href="#Установка" class="headerlink" title="Установка"></a>Установка</h1><p>Ничего особенного&nbsp;&mdash; довольно тривиально. Обычный модуль для node.js</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install wintersmith -g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wintersmith new &lt;path&gt;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &lt;path&gt;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> wintersmith <span class="token parameter variable">-g</span>
+wintersmith new <span class="token operator">&lt;</span>path<span class="token operator">></span>
+<span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>path<span class="token operator">></span>
+</code></pre>
 
 <h1 id="Запуск"><a href="#Запуск" class="headerlink" title="Запуск"></a>Запуск</h1><p>Как и&nbsp;принято для софта такого класса есть два варианта</p>
 <p>Запуск в&nbsp;виде сервера</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wintersmith preview</span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">wintersmith preview
+</code></pre>
 
 <p>Или генерация статичных файлов</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wintersmith build</span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">wintersmith build
+</code></pre>
 
 <h1 id="Первые-проблемы"><a href="#Первые-проблемы" class="headerlink" title="Первые проблемы"></a>Первые проблемы</h1><p>Сходу словил косяк&nbsp;&mdash; jade шаблоны ругаются на&nbsp;неправильный синтаксис</p>
 <p>Файл, строка и&nbsp;причина были указаны, поэтому исправление не&nbsp;составило большого труда. Хотя это наверно достоинство jade, а&nbsp;не&nbsp;wintersmith.</p>
 <p>Проблема была в&nbsp;устаревшем синтаксисе</p>
 <p>Вот этот кусок</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!!! 5</span><br></pre></td></tr></table></figure>
+<pre><code class="language-jade">!!! 5
+</code></pre>
 
 <p>Надо было заменить на&nbsp;этот</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctype html</span><br></pre></td></tr></table></figure>
+<pre><code class="language-jade">doctype html
+</code></pre>
 
 <p>Ладно&nbsp;&mdash; мы&nbsp;не&nbsp;гордые&nbsp;&mdash; поправим.</p>
 <p>После этого небольшого инцидента все заработало.</p>
@@ -320,7 +327,11 @@
 <p>Что-же выдал нам wintersmith?</p>
 <p>Полный провал!!!</p>
 <p>После 800&nbsp;статей он&nbsp;тупо падает с&nbsp;ошибкой.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">events.js:<span class="number">72</span></span><br><span class="line">        <span class="keyword">throw</span> er; <span class="comment">// Unhandled &#x27;error&#x27; event</span></span><br><span class="line">              ^</span><br><span class="line"><span class="built_in">Error</span>: EMFILE, open <span class="string">&#x27;&lt;путь к тестовому проекту&gt;/build/articles/test-6-97/index.html&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-javascript"><code class="language-javascript">events<span class="token punctuation">.</span><span class="token property-access">js</span><span class="token operator">:</span><span class="token number">72</span>
+        <span class="token keyword control-flow">throw</span> er<span class="token punctuation">;</span> <span class="token comment">// Unhandled 'error' event</span>
+              <span class="token operator">^</span>
+<span class="token known-class-name class-name">Error</span><span class="token operator">:</span> <span class="token constant">EMFILE</span><span class="token punctuation">,</span> open <span class="token string">'&lt;путь к тестовому проекту>/build/articles/test-6-97/index.html'</span>
+</code></pre>
 
 <h1 id="Баг-репорт"><a href="#Баг-репорт" class="headerlink" title="Баг-репорт"></a>Баг-репорт</h1><p>Отправил автору <a target="_blank" rel="noopener" href="https://github.com/jnordberg/wintersmith/issues/205">отчет об&nbsp;ошибке</a>. Ответ пока не&nbsp;радует&nbsp;&mdash; насколько я&nbsp;понял внятного объяснения у&nbsp;автора&nbsp;нет. Предложенные им&nbsp;уменьшение лимитов результата не&nbsp;дало.</p>
 <h1 id="Вывод"><a href="#Вывод" class="headerlink" title="Вывод"></a>Вывод</h1><p>Очередной провал. Очевидно, что есть какой-то лимит, после которого генерация сайта просто в&nbsp;принципе невозможна. И&nbsp;тот факт что другие движки такого лимита не&nbsp;имеют говорит о&nbsp;том, что это проблема именно кода wintersmith. Да&nbsp;&mdash; я&nbsp;нагрузил его данными&nbsp;&mdash;, но&nbsp;DocPad справился с&nbsp;куда большими объёмами (хоть и&nbsp;начал заметно тормозить), hexo вообще сожрал все и&nbsp;не&nbsp;крякнул&nbsp;&mdash; думаю он&nbsp;ьы&nbsp;отработал и&nbsp;больше, просто мне хватило и&nbsp;того что я&nbsp;увидел.</p>
@@ -414,6 +425,6 @@
 
 
 
-  <script src="/js/app-rcF1BQD3.js"></script>
+  <script src="/js/app-Cqeuifre.js"></script>
 </body>
 </html>

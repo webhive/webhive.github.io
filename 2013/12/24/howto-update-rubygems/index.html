@@ -86,7 +86,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-<link type="text/css" rel="stylesheet" href="/css/app-CDXdA3Gd.css" />
+<link type="text/css" rel="stylesheet" href="/css/app-CQc-ZgW0.css" />
 
 <link rel="alternate" href="/atom.xml" title="WebHive | Заметки программиста-многостаночника" type="application/atom+xml">
 
@@ -294,26 +294,36 @@
 <a id="more"></a>
 
 <p>Итак&nbsp;&mdash; проверяем исходную версию</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem -v</span></span><br><span class="line">2.0.4</span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">$ gem <span class="token parameter variable">-v</span>
+<span class="token number">2.0</span>.4
+</code></pre>
 
 <h1 id="Upgrade"><a href="#Upgrade" class="headerlink" title="Upgrade"></a>Upgrade</h1><p>Собственно увеличение версии делаем до&nbsp;последней текущей&nbsp;&mdash; как правило это все что нужно в&nbsp;таком случае.</p>
 <h2 id="Способ-1"><a href="#Способ-1" class="headerlink" title="Способ 1"></a>Способ 1</h2><p>Насколько помню всегда пользовался именно таким, но&nbsp;видимо начиная с&nbsp;какой-то версии процесс был существенно упрощён. Новый более лаконичный вариант описан ниже.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem install rubygems-update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> update_rubygems</span></span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">gem <span class="token function">install</span> rubygems-update
+update_rubygems
+</code></pre>
 
 <h2 id="Способ-2"><a href="#Способ-2" class="headerlink" title="Способ 2"></a>Способ 2</h2><p>До последней версии</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem update --system</span></span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">gem update <span class="token parameter variable">--system</span>
+</code></pre>
 
 <p>Или до&nbsp;заданной</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem update --system 2.1.11</span></span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">gem update <span class="token parameter variable">--system</span> <span class="token number">2.1</span>.11
+</code></pre>
 
 <h1 id="Downgrade"><a href="#Downgrade" class="headerlink" title="Downgrade"></a>Downgrade</h1><p>Это частный случай апгрейда&nbsp;&mdash; просто указываем нужный номер версии.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem update --system 2.1.10</span></span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">gem update <span class="token parameter variable">--system</span> <span class="token number">2.1</span>.10
+</code></pre>
 
 <h1 id="После-обновления"><a href="#После-обновления" class="headerlink" title="После обновления"></a>После обновления</h1><p>Вдумчиво читаем длинный список изменений на&nbsp;экране, а&nbsp;затем проверяем текущую версию, чтобы убедиться, что процесс прошел успешно.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gem -v</span></span><br><span class="line">2.1.11</span><br></pre></td></tr></table></figure>
+<pre class="language-shell"><code class="language-shell">$ gem <span class="token parameter variable">-v</span>
+<span class="token number">2.1</span>.11
+</code></pre>
 
 <p>Переинсталлируем все gem-ы.</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gem pristine --all</span><br></pre></td></tr></table></figure>
+<pre class="language-perl"><code class="language-perl">gem pristine <span class="token operator">--</span>all
+</code></pre>
   </div>
 
   <footer>
@@ -403,6 +413,6 @@
 
 
 
-  <script src="/js/app-rcF1BQD3.js"></script>
+  <script src="/js/app-Cqeuifre.js"></script>
 </body>
 </html>
