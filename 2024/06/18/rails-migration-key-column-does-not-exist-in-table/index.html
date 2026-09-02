@@ -288,15 +288,21 @@
 <a id="more"></a>
 
 <p>Итак ничего не&nbsp;предвещало и&nbsp;нужно-то было всего удалить связь между таблицами.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">remove_column <span class="symbol">:earnings</span>, <span class="symbol">:shipment_id</span></span><br></pre></td></tr></table></figure>
+<pre class="language-ruby"><code class="language-ruby">remove_column <span class="token symbol">:earnings</span><span class="token punctuation">,</span> <span class="token symbol">:shipment_id</span>
+</code></pre>
 
 <p>Любые способы удалить это поле в&nbsp;БД&nbsp;натыкались на&nbsp;сообщение, что такого поля&nbsp;нет.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rails aborted!</span><br><span class="line">StandardError: An error has occurred, all later migrations canceled:</span><br><span class="line"></span><br><span class="line">Mysql2::Error: Key column <span class="string">&#x27;shipment_id&#x27;</span> doesn<span class="string">&#x27;t exist in table</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash"><code class="language-bash">rails aborted<span class="token operator">!</span>
+StandardError: An error has occurred, all later migrations canceled:
+
+Mysql2::Error: Key <span class="token function">column</span> <span class="token string">'shipment_id'</span> doesn't exist <span class="token keyword">in</span> table
+</code></pre>
 
 <p>Но как нет если оно таки есть? Это очевидная дезинформация. При этом как я&nbsp;проверил другие поля удалялись без проблем, то&nbsp;есть это не&nbsp;какая-то случайная проблема.</p>
 <p>Естественно мысли начали двигаться в&nbsp;сторону индексов в&nbsp;БД, ибо больше зацепиться было не&nbsp;за&nbsp;что. И&nbsp;это было не&nbsp;зря.<br>После долгих мытарств и&nbsp;экспериментов я&nbsp;таки нашел виновника моих злоключений.</p>
 <p>Как оказалось виновником проблемы оказалось участие этого поля в&nbsp;составном индексе в&nbsp;одной из&nbsp;миграций ранее</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_index <span class="symbol">:earnings</span>, %i[store_id line_item_id shipment_id], <span class="symbol">unique:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<pre class="language-ruby"><code class="language-ruby">add_index <span class="token symbol">:earnings</span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">%i[store_id line_item_id shipment_id]</span></span><span class="token punctuation">,</span> <span class="token symbol">unique</span><span class="token operator">:</span> <span class="token boolean">true</span>
+</code></pre>
 
 <p>После удаления поля из&nbsp;индекса, удаление самого поля прошло без проблем.</p>
 <p>В общем конечно я&nbsp;таки виню в&nbsp;этой проблеме рельсу&nbsp;&mdash; сообщение об&nbsp;ошибке очевидно сбивало с&nbsp;толку и&nbsp;не&nbsp;соответствовало<br>реально возникшей проблеме.</p>

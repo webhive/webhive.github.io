@@ -23,10 +23,12 @@
 
 <meta charset="utf-8" />
 <meta name="author" content="Роман Татауров">
-<meta name="description" content="Как убрать файл из&nbsp;свежего коммита12git reset --soft HEAD~1git reset HEAD path&#x2F;to&#x2F;unwanted_file
+<meta name="description" content="Как убрать файл из&nbsp;свежего коммитаgit reset --soft HEAD~1
+git reset HEAD path/to/unwanted_file
+
 
 и выполнить коммит заново
-Обновить спи" />
+Обновить список бранче" />
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -42,10 +44,12 @@
 
 <meta name="DC.Title" content="Шпаргалка по git" />
 
-<meta name="DC.Subject" content="Как убрать файл из&nbsp;свежего коммита12git reset --soft HEAD~1git reset HEAD path&#x2F;to&#x2F;unwanted_file
+<meta name="DC.Subject" content="Как убрать файл из&nbsp;свежего коммитаgit reset --soft HEAD~1
+git reset HEAD path/to/unwanted_file
+
 
 и выполнить коммит заново
-Обновить спи" />
+Обновить список бранче" />
 <meta name="DC.Creator" content="Роман Татауров" />
 <meta name="DC.Creator.Name" content="Роман Татауров" />
 
@@ -268,12 +272,16 @@
   <div class="post__entry" itemprop="articleBody">
     
 
-    <h2 id="Как-убрать-файл-из-свежего-коммита"><a href="#Как-убрать-файл-из-свежего-коммита" class="headerlink" title="Как убрать файл из свежего коммита"></a>Как убрать файл из&nbsp;свежего коммита</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD~1</span><br><span class="line">git reset HEAD path&#x2F;to&#x2F;unwanted_file</span><br></pre></td></tr></table></figure>
+    <h2 id="Как-убрать-файл-из-свежего-коммита"><a href="#Как-убрать-файл-из-свежего-коммита" class="headerlink" title="Как убрать файл из свежего коммита"></a>Как убрать файл из&nbsp;свежего коммита</h2><pre class="language-plaintext"><code class="language-plaintext">git reset --soft HEAD~1
+git reset HEAD path/to/unwanted_file
+</code></pre>
 
 <p>и выполнить коммит заново</p>
-<h1 id="Обновить-список-бранчей-с-сервера"><a href="#Обновить-список-бранчей-с-сервера" class="headerlink" title="Обновить список бранчей с сервера"></a>Обновить список бранчей с&nbsp;сервера</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote update --prune</span><br></pre></td></tr></table></figure>
+<h1 id="Обновить-список-бранчей-с-сервера"><a href="#Обновить-список-бранчей-с-сервера" class="headerlink" title="Обновить список бранчей с сервера"></a>Обновить список бранчей с&nbsp;сервера</h1><pre class="language-plaintext"><code class="language-plaintext">git remote update --prune
+</code></pre>
 
-<h1 id="Удалить-последний-пуш"><a href="#Удалить-последний-пуш" class="headerlink" title="Удалить последний пуш"></a>Удалить последний пуш</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -f origin HEAD^:master</span><br></pre></td></tr></table></figure>
+<h1 id="Удалить-последний-пуш"><a href="#Удалить-последний-пуш" class="headerlink" title="Удалить последний пуш"></a>Удалить последний пуш</h1><pre class="language-plaintext"><code class="language-plaintext">git push -f origin HEAD^:master
+</code></pre>
 
 <h1 id="Удалить-удаленный-бранч"><a href="#Удалить-удаленный-бранч" class="headerlink" title="Удалить удаленный бранч"></a>Удалить удаленный бранч</h1><p>Просто указываем: перед именем бранча</p>
 <p>git push origin: webhive/2826-sharing-fixes</p>

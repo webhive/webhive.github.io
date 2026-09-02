@@ -301,22 +301,47 @@
 
 <p>В результате установил в&nbsp;virtualbox-е Debian&nbsp;&mdash; ту-же версию, что использовалась на&nbsp;сервере проекта. Сходу Debian надежд не&nbsp;оправдал&nbsp;&mdash; пакета с&nbsp;такой версией sphinx так-же не&nbsp;оказалось.</p>
 <p>Поэтому накурившись манов приступил к&nbsp;ручной установке.</p>
-<h2 id="Ставим-зависимости"><a href="#Ставим-зависимости" class="headerlink" title="Ставим зависимости"></a>Ставим зависимости</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install sudo g++ g++-4.4</span><br></pre></td></tr></table></figure>
+<h2 id="Ставим-зависимости"><a href="#Ставим-зависимости" class="headerlink" title="Ставим зависимости"></a>Ставим зависимости</h2><pre class="language-plaintext"><code class="language-plaintext">apt-get install sudo g++ g++-4.4
+</code></pre>
 
-<h2 id="Выбираем-нужную-версию-gcc"><a href="#Выбираем-нужную-версию-gcc" class="headerlink" title="Выбираем нужную версию gcc"></a>Выбираем нужную версию gcc</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;gcc gcc &#x2F;usr&#x2F;bin&#x2F;gcc-4.4 10</span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;gcc gcc &#x2F;usr&#x2F;bin&#x2F;gcc-4.7 20</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;g++ g++ &#x2F;usr&#x2F;bin&#x2F;g++-4.4 10</span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;g++ g++ &#x2F;usr&#x2F;bin&#x2F;g++-4.7 20</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;cc cc &#x2F;usr&#x2F;bin&#x2F;gcc 30</span><br><span class="line">sudo update-alternatives --set cc &#x2F;usr&#x2F;bin&#x2F;gcc</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;c++ c++ &#x2F;usr&#x2F;bin&#x2F;g++ 30</span><br><span class="line">sudo update-alternatives --set c++ &#x2F;usr&#x2F;bin&#x2F;g++</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --config gcc</span><br><span class="line">sudo update-alternatives --config g++</span><br></pre></td></tr></table></figure>
+<h2 id="Выбираем-нужную-версию-gcc"><a href="#Выбираем-нужную-версию-gcc" class="headerlink" title="Выбираем нужную версию gcc"></a>Выбираем нужную версию gcc</h2><pre class="language-plaintext"><code class="language-plaintext">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 10
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 20
+
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.4 10
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.7 20
+
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 30
+sudo update-alternatives --set cc /usr/bin/gcc
+
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 30
+sudo update-alternatives --set c++ /usr/bin/g++
+
+sudo update-alternatives --config gcc
+sudo update-alternatives --config g++
+</code></pre>
 
 <p>везде выбираем gcc 4.4</p>
 <h2 id="Ставим-с-исходников"><a href="#Ставим-с-исходников" class="headerlink" title="Ставим с исходников"></a>Ставим с&nbsp;исходников</h2><p>Распаковываем</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;sphinxsearch.com&#x2F;files&#x2F;sphinx-0.9.9.tar.gz</span><br><span class="line">rm -rf sphinx-0.9.9</span><br><span class="line">tar -xzvf sphinx-0.9.9.tar.gz</span><br><span class="line">cd sphinx-0.9.9</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">wget http://sphinxsearch.com/files/sphinx-0.9.9.tar.gz
+rm -rf sphinx-0.9.9
+tar -xzvf sphinx-0.9.9.tar.gz
+cd sphinx-0.9.9
+</code></pre>
 
 <p>Конфигурируем и&nbsp;компилируем&nbsp;&mdash; в&nbsp;моём случае <code>postgresql</code> был не&nbsp;нужен</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --with-mysql --without-pgsql --prefix&#x3D;&#x2F;usr --localstatedir&#x3D;&#x2F;var --sysconfdir&#x3D;&#x2F;etc&#x2F;sphinx</span><br><span class="line">rm -rf &#x2F;tmp&#x2F;install-sphinx-0.9.9</span><br><span class="line">mkdir &#x2F;tmp&#x2F;install-sphinx-0.9.9</span><br><span class="line">make install DESTDIR&#x3D;&#x2F;tmp&#x2F;install-sphinx-0.9.9</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">./configure --with-mysql --without-pgsql --prefix=/usr --localstatedir=/var --sysconfdir=/etc/sphinx
+rm -rf /tmp/install-sphinx-0.9.9
+mkdir /tmp/install-sphinx-0.9.9
+make install DESTDIR=/tmp/install-sphinx-0.9.9
+</code></pre>
 
 <p>Собираем пакет</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fpm -sdir -a i386 -t deb -n sphinx -v 0.9.9 -C &#x2F;tmp&#x2F;install-sphinx-0.9.9 -p sphinx-VERSION_ARCH.deb usr&#x2F;bin usr&#x2F;etc usr&#x2F;var</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">fpm -sdir -a i386 -t deb -n sphinx -v 0.9.9 -C /tmp/install-sphinx-0.9.9 -p sphinx-VERSION_ARCH.deb usr/bin usr/etc usr/var
+</code></pre>
 
 <p>Устанавливаем собранный пакет</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i .&#x2F;sphinx-0.9.9&#x2F;sphinx_0.9.9-1_i386.deb</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">sudo dpkg -i ./sphinx-0.9.9/sphinx_0.9.9-1_i386.deb
+</code></pre>
 
 <p>Вот собственно и&nbsp;все&nbsp;&mdash; ключевой момент всего квеста gcc версии не&nbsp;выше 4.4, остальное так&nbsp;&mdash; присказка.</p>
 <h2 id="Ссылки-по-теме"><a href="#Ссылки-по-теме" class="headerlink" title="Ссылки по теме"></a>Ссылки по&nbsp;теме</h2><ul>

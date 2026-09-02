@@ -292,15 +292,32 @@
 <p>Собственно всегда есть вариант запустить нужный софт в&nbsp;виртуальной машине. Но&nbsp;с&nbsp;какого-то момента понимаешь, что это всё-таки тупиковый путь. Куча виртуалок жрёт ресурсы как пылесос. Шаринг папок из&nbsp;хост системы как ни&nbsp;крути хоть и&nbsp;разрешимая, но&nbsp;проблема. По&nbsp;крайней мере я&nbsp;часто сталкивался с&nbsp;проблемами с&nbsp;правами, с&nbsp;неожиданным отмонтированием папок и&nbsp;т.&nbsp;п.</p>
 <p>Но кто ищет тот всегда найдёт и&nbsp;для меня настоящим спасением стал <a target="_blank" rel="noopener" href="https://www.docker.io/">www.docker.io</a></p>
 <p>Ниже привожу команды которыми я&nbsp;сравнительно несложно поднял экземпляр elasticsearch версии 0.9</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker build .</span><br><span class="line">$ docker images</span><br><span class="line">REPOSITORY                 TAG                 IMAGE ID            CREATED              VIRTUAL SIZE</span><br><span class="line">webhive/elasticsearch-0.9   latest              2c26db7541e7        8 minutes ago       1.048 GB</span><br><span class="line">dockerfile/java             latest              90bae6ed8c3e        About an hour ago   1.026 GB</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">docker</span> build <span class="token builtin class-name">.</span>
+$ <span class="token function">docker</span> images
+REPOSITORY                 TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
+webhive/elasticsearch-0.9   latest              2c26db7541e7        <span class="token number">8</span> minutes ago       <span class="token number">1.048</span> GB
+dockerfile/java             latest              90bae6ed8c3e        About an hour ago   <span class="token number">1.026</span> GB
+</code></pre>
 
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE                              COMMAND                CREATED              STATUS              PORTS                                            NAMES</span><br><span class="line">c4ee31e8238c        webhive/elasticsearch-0.9:latest   /opt/elasticsearch-0   About a minute ago   Up 16 seconds       0.0.0.0:9200-&gt;9200/tcp, 0.0.0.0:9300-&gt;9300/tcp   stoic_mestorf</span><br><span class="line"></span><br><span class="line">$ docker stop $(docker ps -a -q)</span><br><span class="line">$ docker rm $(docker ps -a -q)</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
+CONTAINER ID        IMAGE                              COMMAND                CREATED              STATUS              PORTS                                            NAMES
+c4ee31e8238c        webhive/elasticsearch-0.9:latest   /opt/elasticsearch-0   About a minute ago   Up <span class="token number">16</span> seconds       <span class="token number">0.0</span>.0.0:9200-<span class="token operator">></span><span class="token number">9200</span>/tcp, <span class="token number">0.0</span>.0.0:9300-<span class="token operator">></span><span class="token number">9300</span>/tcp   stoic_mestorf
+
+$ <span class="token function">docker</span> stop <span class="token variable"><span class="token variable">$(</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span> <span class="token parameter variable">-q</span><span class="token variable">)</span></span>
+$ <span class="token function">docker</span> <span class="token function">rm</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span> <span class="token parameter variable">-q</span><span class="token variable">)</span></span>
+</code></pre>
 
 <p>Поработали с&nbsp;эластиком и&nbsp;чтобы не&nbsp;загружать в&nbsp;него данные заново каждый раз</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker commit c4ee31e8238c webhive/elasticsearch-0.9:prefilled</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">docker</span> commit c4ee31e8238c webhive/elasticsearch-0.9:prefilled
+</code></pre>
 
 <p>Теперь видим ещё один образ с&nbsp;уже загруженными данными</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line">REPOSITORY                  TAG                 IMAGE ID            CREATED             VIRTUAL SIZE</span><br><span class="line">webhive/elasticsearch-0.9   prefilled           657a4b46ae88        3 minutes ago       1.064 GB</span><br><span class="line">webhive/elasticsearch-0.9   latest              2c26db7541e7        19 hours ago        1.048 GB</span><br><span class="line">dockerfile/java             latest              90bae6ed8c3e        20 hours ago        1.026 GB</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">docker</span> images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+webhive/elasticsearch-0.9   prefilled           657a4b46ae88        <span class="token number">3</span> minutes ago       <span class="token number">1.064</span> GB
+webhive/elasticsearch-0.9   latest              2c26db7541e7        <span class="token number">19</span> hours ago        <span class="token number">1.048</span> GB
+dockerfile/java             latest              90bae6ed8c3e        <span class="token number">20</span> hours ago        <span class="token number">1.026</span> GB
+</code></pre>
   </div>
 
   <footer>

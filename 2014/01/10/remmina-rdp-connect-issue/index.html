@@ -299,10 +299,13 @@
 
 <p>В ходе расследования выяснил, что истёк срок сертификата windows.</p>
 <p>Убедимся, что не&nbsp;сотрём чего-нибудь лишнего</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~&#x2F;.freerdp&#x2F;known_hosts</span><br><span class="line">192.168.1.3 09:7c:cb:ef:e8:80:bf:85:28:dc:b5:10:6b:cf:36:46:60:57:00</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">$ cat ~/.freerdp/known_hosts
+192.168.1.3 09:7c:cb:ef:e8:80:bf:85:28:dc:b5:10:6b:cf:36:46:60:57:00
+</code></pre>
 
 <p>И удаляем его нахрен</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm ~&#x2F;.freerdp&#x2F;known_hosts</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">$ rm ~/.freerdp/known_hosts
+</code></pre>
 
 <p>При последующем запуске remmina спросит насчет доверять&nbsp;ли&nbsp;сертификату и&nbsp;будет работать как раньше.</p>
   </div>

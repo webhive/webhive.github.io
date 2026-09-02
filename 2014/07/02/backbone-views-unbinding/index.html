@@ -295,7 +295,8 @@
 
 <p>Однако диалоговое окно при каждом вызове создавалось заново, а&nbsp;при каждом закрытии полностью вычищалось из&nbsp;DOM-а. С&nbsp;<a target="_blank" rel="noopener" href="http://chaplinjs.org/">chaplinjs</a> я&nbsp;знаком не&nbsp;настолько круто, чтоб сходу диагностировать проблему, но&nbsp;ситуация вполне понятная&nbsp;&mdash; события повешены не&nbsp;на&nbsp;сам элемент, а&nbsp;bubbled up&nbsp;в&nbsp;document на&nbsp;верхнем уровне.</p>
 <p>Уверен, что есть какой-то способ, чтоб событие отбиндивалось при уничтожении диалога автоматически, но&nbsp;в&nbsp;силу своего скудоумия не&nbsp;нашёл ничего лучше чем вручную отбиндивать событие при закрытии окна используя.</p>
-<figure class="highlight coffee"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@.$el.<span class="literal">off</span> <span class="string">&#x27;click&#x27;</span>, <span class="string">&#x27;&lt;selector&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-coffee"><code class="language-coffee">@<span class="token punctuation">.</span>$el<span class="token punctuation">.</span><span class="token keyword">off</span> <span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token string">'&lt;selector>'</span>
+</code></pre>
   </div>
 
   <footer>

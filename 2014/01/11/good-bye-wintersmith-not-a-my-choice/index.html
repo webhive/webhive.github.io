@@ -302,7 +302,13 @@
 <p>Рассмотрю найденные варианты&nbsp;&mdash; может кто-то еще страдает этим геморроем и&nbsp;хотя&nbsp;бы&nbsp;тут мой опыт сгодится</p>
 <h1 id="Решение-от-Roland-Bole"><a href="#Решение-от-Roland-Bole" class="headerlink" title="Решение от Roland Bole"></a>Решение от&nbsp;Roland Bole</h1><p>Сама статья находится по&nbsp;адресу <a target="_blank" rel="noopener" href="http://rolandbole.at/articles/wintersmithTagList_11092013/">http://rolandbole.at/articles/wintersmithTagList_11092013/</a></p>
 <p>Вкратце он&nbsp;предлагает массив тегов с&nbsp;метаинформацией по&nbsp;каждому хранить в&nbsp;файле настроек.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;tags&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Sports&quot;</span>,</span><br><span class="line">          <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;/tag_sports/&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+<pre class="language-json"><code class="language-json"> <span class="token property">"tags"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+       <span class="token punctuation">{</span>
+           <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Sports"</span><span class="token punctuation">,</span>
+           <span class="token property">"url"</span><span class="token operator">:</span> <span class="token string">"/tag_sports/"</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">]</span>
+</code></pre>
 
 <p>Соответственно для каждого тега создается страница. Т.е. напихав в&nbsp;статью тегов мы&nbsp;должны по&nbsp;каждому тегу еще и&nbsp;страничку создать.</p>
 <p>Не раскрыта проблема пагинации на&nbsp;странице тега&nbsp;&mdash; я&nbsp;понимаю, что блог Roland Bole он&nbsp;всего из&nbsp;нескольких страничек и&nbsp;там эта проблема неактуальна, но&nbsp;блин мы&nbsp;же&nbsp;серьёзные люди&nbsp;&mdash; давайте смотреть шире.</p>

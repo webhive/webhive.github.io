@@ -292,16 +292,20 @@
 <a id="more"></a>
 
 <h1 id="Установка"><a href="#Установка" class="headerlink" title="Установка"></a>Установка</h1><p>Ничуть не&nbsp;удивился наличию готового пакета hugo в&nbsp;репозитарии arch linux. Поэтому установка прошла довольно тривиально.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yaourt -S hugo</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ yaourt <span class="token parameter variable">-S</span> hugo
+</code></pre>
 
 <p>На сайте есть так&nbsp;же&nbsp;возможность скачать готовый пакет для windows и&nbsp;osx. Процесс установки подробно расписан <a target="_blank" rel="noopener" href="https://gohugo.io/overview/installing/">тут</a></p>
-<h1 id="Создаём-новый-сайт"><a href="#Создаём-новый-сайт" class="headerlink" title="Создаём новый сайт"></a>Создаём новый сайт</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hugo new site . -f yaml -b http://www.webhive.ru/ -D -F -t webhive</span><br></pre></td></tr></table></figure>
+<h1 id="Создаём-новый-сайт"><a href="#Создаём-новый-сайт" class="headerlink" title="Создаём новый сайт"></a>Создаём новый сайт</h1><pre class="language-sh"><code class="language-sh">$ hugo new site <span class="token builtin class-name">.</span> <span class="token parameter variable">-f</span> yaml <span class="token parameter variable">-b</span> http://www.webhive.ru/ <span class="token parameter variable">-D</span> <span class="token parameter variable">-F</span> <span class="token parameter variable">-t</span> webhive
+</code></pre>
 
 <p>Здесь мы&nbsp;указали создать новый сайт в&nbsp;текущей папке, формат конфигурационных файлов&nbsp;&mdash; yaml, поддержка черновиков и&nbsp;публикации контента в&nbsp;будущем и&nbsp;использовать тему <code>webhive</code> (которая ещё не&nbsp;создана, но&nbsp;сразу скопирую дефолтную в&nbsp;отдельную тему, чтобы было удобнее настраивать под свои нужды).</p>
 <h1 id="Загружаем-темы"><a href="#Загружаем-темы" class="headerlink" title="Загружаем темы"></a>Загружаем темы</h1><p>В стандартной комплектации hugo не&nbsp;имеет никаких&nbsp;тем, но&nbsp;есть репозитарий откуда можно слить типа стандартный набор&nbsp;тем, что мы&nbsp;и&nbsp;сделаем.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> --depth 1 --recursive https://github.com/spf13/hugoThemes.git themes</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">git</span> clone <span class="token parameter variable">--depth</span> <span class="token number">1</span> <span class="token parameter variable">--recursive</span> https://github.com/spf13/hugoThemes.git themes
+</code></pre>
 <p>Кстати темы можно посмотреть и&nbsp;скачать на&nbsp;сайте <a target="_blank" rel="noopener" href="http://themes.gohugo.io/">themes.gohugo.io</a></p>
-<h1 id="Создаём-новую-тему"><a href="#Создаём-новую-тему" class="headerlink" title="Создаём новую тему"></a>Создаём новую тему</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hugo new theme webhive</span><br></pre></td></tr></table></figure>
+<h1 id="Создаём-новую-тему"><a href="#Создаём-новую-тему" class="headerlink" title="Создаём новую тему"></a>Создаём новую тему</h1><pre class="language-sh"><code class="language-sh">hugo new theme webhive
+</code></pre>
 
 <p>Тут словил первую неприятность&nbsp;&mdash; почему-то для темы нельзя задать формат конфига и&nbsp;по&nbsp;умолчанию используется <code>toml</code>. Мелочь, но&nbsp;всё-таки как-то шершаво.</p>
 <h1 id="Достоинства"><a href="#Достоинства" class="headerlink" title="Достоинства"></a>Достоинства</h1><ul>

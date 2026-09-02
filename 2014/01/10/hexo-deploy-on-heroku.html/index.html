@@ -289,23 +289,35 @@
 
 <p>Управление хостингом реализовано через интерфейс командной строки, поэтому для начала нужно установить набор утилит для управления этим хостингом.</p>
 <p>На моей рабочей машине установлен Arch Linux поэтому команды пишу именно для него</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yaourt -S heroku-toolbelt</span><br></pre></td></tr></table></figure>
+<pre class="language-bash"><code class="language-bash">$ yaourt <span class="token parameter variable">-S</span> heroku-toolbelt
+</code></pre>
 
 <p>Ну собственно и&nbsp;всё готово. Теперь залогинимся в&nbsp;heroku.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ heroku login</span><br></pre></td></tr></table></figure>
+<pre class="language-bash"><code class="language-bash">$ heroku login
+</code></pre>
 
 <p>И создадим приложение</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ heroku apps:create web-hive</span><br><span class="line">Creating web-hive... <span class="keyword">done</span>, stack is cedar</span><br><span class="line">http://web-hive.herokuapp.com/ | git@heroku.com:web-hive.git</span><br></pre></td></tr></table></figure>
+<pre class="language-bash"><code class="language-bash">$ heroku apps:create web-hive
+Creating web-hive<span class="token punctuation">..</span>. done, stack is cedar
+http://web-hive.herokuapp.com/ <span class="token operator">|</span> git@heroku.com:web-hive.git
+</code></pre>
 
 <p>Как видим у&nbsp;нас создалось приложение, нам показали по&nbsp;какому адресу оно будет доступно, и&nbsp;дали git репозитарий для него.</p>
 <p>Если по&nbsp;указанному адресу ошибка то&nbsp;пробуем запустить приложение</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ heroku ps:scale web=1</span><br></pre></td></tr></table></figure>
+<pre class="language-bash"><code class="language-bash">$ heroku ps:scale <span class="token assign-left variable">web</span><span class="token operator">=</span><span class="token number">1</span>
+</code></pre>
 
 <p>Теперь добавим его в&nbsp;конфиг hexo&nbsp;&mdash; <code>_config.yml</code>.</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: http://zespia.tw/hexo/docs/deploy.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">heroku</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@heroku.com:web-hive.git</span></span><br></pre></td></tr></table></figure>
+<pre class="language-yaml"><code class="language-yaml"><span class="token comment"># Deployment</span>
+<span class="token comment">## Docs: http://zespia.tw/hexo/docs/deploy.html</span>
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> heroku
+  <span class="token key atrule">repository</span><span class="token punctuation">:</span> git@heroku.com<span class="token punctuation">:</span>web<span class="token punctuation">-</span>hive.git
+</code></pre>
 
 <p>Ну собственно и&nbsp;все&nbsp;&mdash; пробуем задеплоить наш hexo блог</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<pre class="language-bash"><code class="language-bash">$ hexo deploy
+</code></pre>
 
 <p>этой командой hexo зальёт все изменения в&nbsp;репозитарий и&nbsp;они станут видимы по&nbsp;выданному вам URL-у.</p>
 <p>Можно в&nbsp;общем-то и&nbsp;сгенерировать контент вручную и&nbsp;закоммитить его вручную&nbsp;&mdash; heroku как я&nbsp;понял работает на&nbsp;git хуках, поэтому изменнения так-же отразятся на&nbsp;сайте.</p>

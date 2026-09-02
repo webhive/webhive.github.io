@@ -304,21 +304,21 @@
 </ul>
 <p>В общем и&nbsp;целом&nbsp;&mdash; полный фарш.</p>
 <p>Чтобы вывести текущую версию, что актуально для сборки и&nbsp;деплоя, используется следующая команда:</p>
-<pre class="code language language-bash"><code class="language language-bash">$ rake bump:current</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ rake bump:current</code></pre>
 
 <p>Ну, а&nbsp;чтобы увеличить версию достаточно выполнить</p>
-<pre class="code language language-bash"><code class="language language-bash">$ rake bump:show-next <span class="token assign-left variable">INCREMENT</span><span class="token operator">=</span>patch</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ rake bump:show-next <span class="token assign-left variable">INCREMENT</span><span class="token operator">=</span>patch</code></pre>
 
 <p>Ну или если вам не&nbsp;по&nbsp;душе <code>rake</code>, то: </p>
-<pre class="code language language-bash"><code class="language language-bash">$ bump show-next patch</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ bump show-next patch</code></pre>
 
 <h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>Как оказалось почти всё умеет yarn, что порадовало, но&nbsp;вот как вывести текущую версию, не&nbsp;меняя её&nbsp;я&nbsp;не&nbsp;нашёл, поэтому, имея в&nbsp;виду, что версия хранится в&nbsp;<code>package.json</code>, который суть есть не&nbsp;что иное как JSON файл тупо воспользовался старым добрым <code>jq</code> </p>
-<pre class="code language language-bash"><code class="language language-bash">$ jq <span class="token parameter variable">-r</span> <span class="token string">'.version'</span> <span class="token operator">&lt;</span> package.json
+<pre class="code language-bash"><code class="language-bash">$ jq <span class="token parameter variable">-r</span> <span class="token string">'.version'</span> <span class="token operator">&lt;</span> package.json
 <span class="token number">0.0</span>.2</code></pre>
 
 <p>Из плюсов отмечу возможность автоматически задавать tag в&nbsp;git-е, ну,&nbsp;а&nbsp;минус указал выше.</p>
 <p>Инкремент выполняется без извращений </p>
-<pre class="code language language-bash"><code class="language language-bash">$ <span class="token function">yarn</span> version <span class="token parameter variable">--patch</span>
+<pre class="code language-bash"><code class="language-bash">$ <span class="token function">yarn</span> version <span class="token parameter variable">--patch</span>
 <span class="token function">yarn</span> version v1.22.10
 info Current version: <span class="token number">0.0</span>.2
 info New version: <span class="token number">0.0</span>.3</code></pre>

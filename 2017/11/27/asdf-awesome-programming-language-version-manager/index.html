@@ -298,27 +298,41 @@
 <p>Собственно не&nbsp;скажу, что я&nbsp;чем-то недоволен в&nbsp;RVM или NVM&nbsp;&mdash; оба пакета делают своё дело и&nbsp;делают его хорошо, но&nbsp;зачем использовать 2&nbsp;разные программы, которые делают практически одно и&nbsp;тоже когда можно заменить их&nbsp;одной которая делает гораздо больше? Вопрос конечно риторический.</p>
 <p>Я уже проверил работу <a target="_blank" rel="noopener" href="https://github.com/asdf-vm/asdf">ASDF</a> на&nbsp;ряде своих проектов и&nbsp;каких-то видимых проблем с&nbsp;ними не&nbsp;обнаружил.</p>
 <h1 id="Установка"><a href="#Установка" class="headerlink" title="Установка"></a>Установка</h1><p>Собственно процесс установки прекрасно описан на&nbsp;странице проекта. Просто тупо клонируем реп в&nbsp;папку <code>~/.asdf</code>&nbsp;&mdash; что может быть проще?</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.0</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">git</span> clone https://github.com/asdf-vm/asdf.git ~/.asdf <span class="token parameter variable">--branch</span> v0.4.0
+</code></pre>
 
 <p>Ну и&nbsp;добавляем нужные строчки в&nbsp;автозагрузку вашей оболочки как написано на&nbsp;странице проекта.</p>
 <p>После этого <a target="_blank" rel="noopener" href="https://github.com/asdf-vm/asdf">ASDF</a> пока бесполезен ибо ничего не&nbsp;знает ни&nbsp;о&nbsp;каких языках программирования. Поддержка каждого языка осуществляется отдельным плагином, что в&nbsp;общем-то на&nbsp;мой вкус очень даже неплохо.</p>
 <h1 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h1><p>Ставим плагин для поддержки ruby.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+</code></pre>
 
 <p>после этого мы&nbsp;можем посмотреть имеющиеся версии ruby</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ asdf list-all ruby</span><br><span class="line">jruby-1.0.0RC1</span><br><span class="line">jruby-1.0.0RC2</span><br><span class="line">jruby-1.0.0RC3</span><br><span class="line">jruby-1.0.1</span><br><span class="line">...</span><br><span class="line">2.4.1</span><br><span class="line">2.4.2</span><br><span class="line">2.5.0-preview1</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ asdf list-all ruby
+jruby-1.0.0RC1
+jruby-1.0.0RC2
+jruby-1.0.0RC3
+jruby-1.0.1
+<span class="token punctuation">..</span>.
+<span class="token number">2.4</span>.1
+<span class="token number">2.4</span>.2
+<span class="token number">2.5</span>.0-preview1
+</code></pre>
 
 <p>и установить выбранную версию</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ asdf install ruby 2.4.2</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ asdf <span class="token function">install</span> ruby <span class="token number">2.4</span>.2
+</code></pre>
 
 <p>Несомненным плюсом является поддержка конфигурационных файлов&nbsp;RVM, но&nbsp;только если версия ruby в&nbsp;них прописана только цифрами, в&nbsp;случае&nbsp;же&nbsp;полной записи с&nbsp;префиксом <code>ruby</code> ASDF нужную версию найти не&nbsp;может и&nbsp;нужно править конфиг. Так-же можно перенести уже установленные версии <code>ruby</code> из&nbsp;RVM банальным копированием &laquo;в лоб&raquo;, что несомненно очень удобно.</p>
 <p>Из минусов отмечу, что среди всего многообразия вариантов ruby машин в&nbsp;списке есть только jruby и&nbsp;MRI версии.</p>
 <p>Относительным минусом можно назвать отсутствие поддержки <code>gemset</code>-ов, но&nbsp;этот функционал успешно реализован в&nbsp;<code>bundler</code>-е и&nbsp;особой проблемы не&nbsp;вижу.</p>
 <h1 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h1><p>Плагин для nodejs</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+</code></pre>
 
 <p>После установки плагина нужно ещё импортировать ключи</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">bash</span> ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+</code></pre>
 
 <p>Ну, а&nbsp;дальше установка точно так-же как и&nbsp;для ruby. Node.js кстати тянет бинарные версии, поэтому установка проходит очень быстро. В&nbsp;отличие от&nbsp;NVM нет деления на&nbsp;текущие и&nbsp;lts версии и&nbsp;нет алиасов, поддержка которых была в&nbsp;случае NVM очень удобной.</p>
 <p>Поддерживается формат файлов&nbsp;NVM, но&nbsp;как показала практика пользы от&nbsp;этого не&nbsp;очень много, т.&nbsp;к.&nbsp;в&nbsp;моём случае версия node.js в&nbsp;каждом проекте была прописана алиасом <code>stable</code>, который не&nbsp;поддерживается. Там-же где использовался явный номер версии версия была указана с&nbsp;префиксом <code>v</code>, что правильно для NVM, но&nbsp;ASDF такой формат не&nbsp;понимает.</p>

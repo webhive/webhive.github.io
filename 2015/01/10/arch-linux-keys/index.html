@@ -297,13 +297,22 @@
 
 <p>Такая-же проблема появляется иногда при обновлении отдельных пакетов.</p>
 <p>Например:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">vdpauinfo-0.9.tar.gz ... СБОЙ (неизвестный открытый ключ 1BEF3D8401A68861)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh"><span class="token punctuation">..</span>.
+vdpauinfo-0.9.tar.gz <span class="token punctuation">..</span>. СБОЙ <span class="token punctuation">(</span>неизвестный открытый ключ 1BEF3D8401A68861<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+</code></pre>
 
 <p>Решение оказалось довольно простым, хотя и&nbsp;пришлось перепробовать несколько вариантов.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --keyserver keys.gnupg.net --recv-keys &lt;не найденный ключ&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ gpg <span class="token parameter variable">--keyserver</span> keys.gnupg.net --recv-keys <span class="token operator">&lt;</span>не найденный ключ<span class="token operator">></span>
+</code></pre>
 
 <p>Пример:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --keyserver keys.gnupg.net --recv-keys 1BEF3D8401A68861</span><br><span class="line">gpg: ключ 09BA9635: импортирован открытый ключ <span class="string">&quot;Aaron Plattner &lt;aplattner@nvidia.com&gt;&quot;</span></span><br><span class="line">gpg: абсолютно доверенных ключей не найдено</span><br><span class="line">gpg: Всего обработано: 1</span><br><span class="line">gpg:                  импортировано: 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ gpg <span class="token parameter variable">--keyserver</span> keys.gnupg.net --recv-keys 1BEF3D8401A68861
+gpg: ключ 09BA9635: импортирован открытый ключ <span class="token string">"Aaron Plattner &lt;aplattner@nvidia.com>"</span>
+gpg: абсолютно доверенных ключей не найдено
+gpg: Всего обработано: <span class="token number">1</span>
+gpg:                  импортировано: <span class="token number">1</span>
+</code></pre>
   </div>
 
   <footer>

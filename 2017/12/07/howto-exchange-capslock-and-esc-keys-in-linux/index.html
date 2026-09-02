@@ -310,23 +310,34 @@
 <p>Основная причина подобного извращения это&nbsp;то, что <code>CapsLock</code> используется сравнительно редко (ну или скажем честно&nbsp;&mdash; никогда), а&nbsp;расположен близко к&nbsp;домашней линии клавиш, что несомненно удобно с&nbsp;точки зрения перемещения пальцев при печати. В&nbsp;общем как говорится в&nbsp;старой рекламе &laquo;попробовав раз&nbsp;&mdash; ем&nbsp;и&nbsp;сейчас&raquo;&nbsp;&mdash; это оказалось действительно офигенно удобно&nbsp;&mdash; мизинец практически всегда расположен в&nbsp;районе <code>CapsLock</code>-а и&nbsp;таким образом нажатие <code>Esc</code> стало практически незаметным и&nbsp;машинальным, что для работы в&nbsp;Vim-е просто незаменимо.</p>
 <h1 id="Как-же-добиться-такого-счастья"><a href="#Как-же-добиться-такого-счастья" class="headerlink" title="Как же добиться такого счастья?"></a>Как&nbsp;же&nbsp;добиться такого счастья?</h1><p>Собственно тут возможны варианты и&nbsp;казалось&nbsp;бы&nbsp;самым логичным было&nbsp;бы&nbsp;перемапить клавиши в&nbsp;самом Vim-е. Но&nbsp;в&nbsp;силу разных причин это является проблематичным, поэтому самым оптимальным вариантом является перемапливание клавиш средствами самой операционной системы.</p>
 <p>Поэтому воспользуемся волшебной командой <code>xmodmap</code> примерно следующим образом:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ xmodmap -e <span class="string">&quot;remove Lock = Caps_Lock&quot;</span></span><br><span class="line">$ xmodmap -e <span class="string">&quot;keycode 66 = Escape NoSymbol Escape&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ xmodmap <span class="token parameter variable">-e</span> <span class="token string">"remove Lock = Caps_Lock"</span>
+$ xmodmap <span class="token parameter variable">-e</span> <span class="token string">"keycode 66 = Escape NoSymbol Escape"</span>
+</code></pre>
 
 <p>Я всё-таки решил оставить оригинальный <code>Esc</code> на&nbsp;месте, т.&nbsp;к.&nbsp;временами руки сами машинально тянутся к&nbsp;нему, а&nbsp;вместо ожидаемого результата получаю какую-то ерунду, да&nbsp;и&nbsp;настройка эта применяется ко&nbsp;всем приложениям и&nbsp;оригинальный <code>Esc</code> в&nbsp;других программах мне пригодится.</p>
 <p>Однако, чтобы эти значения не&nbsp;потерялись при перезагрузке нужно прописать их&nbsp;в&nbsp;файл <code>~/.xmodmap</code> и&nbsp;соответственно засунуть автозагрузку этого файла в&nbsp;<code>~/.xinitrc</code>.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.xmodmap</span><br><span class="line">remove Lock = Caps_Lock</span><br><span class="line">keycode 66 = Escape NoSymbol Escape</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">cat</span> ~/.xmodmap
+remove Lock <span class="token operator">=</span> Caps_Lock
+keycode <span class="token number">66</span> <span class="token operator">=</span> Escape NoSymbol Escape
+</code></pre>
 
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.xinitrc</span><br><span class="line">...</span><br><span class="line">[[ -f ~/.xmodmap ]] &amp;&amp; xmodmap ~/.xmodmap</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">cat</span> ~/.xinitrc
+<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token parameter variable">-f</span> ~/.xmodmap <span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> xmodmap ~/.xmodmap
+</code></pre>
 
 <p>Блин&nbsp;&mdash; и&nbsp;конечно-же это нихрена не&nbsp;работает в&nbsp;GNOME. Я&nbsp;не&nbsp;стал ковырять системный GDM конфиг, чтобы заставить его грузить мой xmodmap и&nbsp;вообще не&nbsp;стал ковырять системные файлы&nbsp;&mdash; вместо этого сделал всё через программу <code>gnome-tweak</code>.</p>
 <img src="/2017/12/07/howto-exchange-capslock-and-esc-keys-in-linux/gnome-tweak-screenshot.png" class="" title="Настройка смены клавиш в GNOME">
 
 <p>И только в&nbsp;таком варианте всё заработало как надо даже после перезагрузки. Ммда&nbsp;&mdash; похоже старые X-овые навыки становятся невостребованными.</p>
 <p>Чё-то не&nbsp;удержался и&nbsp;разобрался таки как это работает. Собственно как и&nbsp;ожидалось это просто запись в&nbsp;гномовский реестр.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gsettings get org.gnome.desktop.input-sources xkb-options                                                                                            2.4.2  8.1.3</span><br><span class="line">[<span class="string">&#x27;caps:escape&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ gsettings get org.gnome.desktop.input-sources xkb-options                                                                                            <span class="token number">2.4</span>.2  <span class="token number">8.1</span>.3
+<span class="token punctuation">[</span><span class="token string">'caps:escape'</span><span class="token punctuation">]</span>
+</code></pre>
 
 <p>Так что если кому лень ковыряться с&nbsp;<code>gnome-tweak</code>-ом то&nbsp;ожно запихнуть напрямую в&nbsp;реестр:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gsettings <span class="built_in">set</span> org.gnome.desktop.input-sources xkb-options <span class="string">&quot;[&#x27;caps:escape&#x27;]&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ gsettings <span class="token builtin class-name">set</span> org.gnome.desktop.input-sources xkb-options <span class="token string">"['caps:escape']"</span>
+</code></pre>
 
 <p>Итого результатом стало повышение удобства работы в&nbsp;текстовом редакторе&nbsp;Vim.</p>
 <h1 id="Источники"><a href="#Источники" class="headerlink" title="Источники"></a>Источники</h1><ul>

@@ -290,18 +290,27 @@
 <a id="more"></a>
 
 <p>В логах компиляции <code>ruby</code> обнаружил вот такое:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">readline.c:1886:26: ошибка: «Function» undeclared (first use in this function)</span><br><span class="line">     rl_pre_input_hook &#x3D; (Function *)readline_pre_input_hook;</span><br><span class="line">                          ^</span><br><span class="line">readline.c:1886:26: замечание: each undeclared identifier is reported only once for each function it appears in</span><br><span class="line">readline.c:1886:36: ошибка: expected expression before «)» token</span><br><span class="line">     rl_pre_input_hook &#x3D; (Function *)readline_pre_input_hook;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">readline.c:1886:26: ошибка: «Function» undeclared (first use in this function)
+     rl_pre_input_hook = (Function *)readline_pre_input_hook;
+                          ^
+readline.c:1886:26: замечание: each undeclared identifier is reported only once for each function it appears in
+readline.c:1886:36: ошибка: expected expression before «)» token
+     rl_pre_input_hook = (Function *)readline_pre_input_hook;
+</code></pre>
 
 <p>Очевидно, что проблема с&nbsp;библиотекой <code>readline</code>. Видимо системная версия библиотеки оказалась не&nbsp;совместимой с&nbsp;требованиями для <code>ruby</code>.</p>
 <p>На наше счастье <code>RVM</code> предоставляет возможность установить собственные версии библиотек-зависимостей. В&nbsp;частности <code>readline</code> и&nbsp;<code>openssl</code>.</p>
 <p>Ставим <code>readline</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rvm pkg install readline</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">$ rvm pkg install readline
+</code></pre>
 
 <p>После этого у&nbsp;меня получилось установить ruby 2.1.1.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rvm install 2.1.1</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">$ rvm install 2.1.1
+</code></pre>
 
 <p>Но при сборке версии 2.0.0&nbsp;по&nbsp;прежнему возникала та-же ошибка. Решение&nbsp;&mdash; явно указать где искать нужную версию <code>readline</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rvm install ruby-2.0.0-p353  -C --with-readline-dir&#x3D;$HOME&#x2F;.rvm&#x2F;usr</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">$ rvm install ruby-2.0.0-p353  -C --with-readline-dir=$HOME/.rvm/usr
+</code></pre>
   </div>
 
   <footer>

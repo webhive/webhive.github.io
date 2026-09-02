@@ -312,7 +312,10 @@
 <p>Таким образом суть проблемы это найти возможность передать этот путь серверу. Опять&nbsp;же&nbsp;рассмотрим два варианта решений этой задачи:</p>
 <h2 id="Использование-HTML5-History-API"><a href="#Использование-HTML5-History-API" class="headerlink" title="Использование HTML5 History API"></a>Использование HTML5&nbsp;History API</h2><p>HTML5&nbsp;History API позволяет перезаписывать URL без перезагрузки страницы. В&nbsp;этом случае никакого символа <code>#</code> в&nbsp;URL-е нет и&nbsp;ссылки выглядят как обычно <code>http://mydomain.com/posts/1</code>. Фреймворк манипулирует URL-ами через History&nbsp;API.</p>
 <p>Для Ember включается следующим образом:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Router.reopen(&#123;</span><br><span class="line">  location: <span class="string">&#x27;history&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre class="language-javascript"><code class="language-javascript"><span class="token maybe-class-name">App</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Router</span></span><span class="token punctuation">.</span><span class="token method function property-access">reopen</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">location</span><span class="token operator">:</span> <span class="token string">'history'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 
 <p>Теперь поисковая машина обнаружив такую ссылку не&nbsp;испытает никаких угрызений совести и&nbsp;спокойно пошлёт запрос на&nbsp;сервер. Нужно лишь, чтобы сервер вернул в&nbsp;ответ правильный HTML.</p>
 <p>Ну и&nbsp;очевидным минусом такого подхода является необходимость дублировать для каждого Ember пути соответствующий серверный эквивалент. В&nbsp;случае большого приложения это может стать проблемой.</p>

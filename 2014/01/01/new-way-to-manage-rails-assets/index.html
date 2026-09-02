@@ -287,10 +287,12 @@
 
 <p>Это новый, набирающий популярность способ управления статическими файлами. Суть способа это конвертирование пакета bower в&nbsp;rails gem и&nbsp;дальнейшее использование готового gem-а штатными средствами rails&nbsp;т.&nbsp;е.&nbsp;через bundler.</p>
 <p>Добавляем в&nbsp;<code>Gemfile</code> новый источник</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source <span class="string">&#x27;https://rails-assets.org&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-ruby"><code class="language-ruby">source <span class="token string-literal"><span class="token string">'https://rails-assets.org'</span></span>
+</code></pre>
 
 <p>Добавляем&nbsp;gem, соответствующий bower пакету:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">&#x27;rails-assets-BOWER_PACKAGE_NAME&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-ruby"><code class="language-ruby">gem <span class="token string-literal"><span class="token string">'rails-assets-BOWER_PACKAGE_NAME'</span></span>
+</code></pre>
 
 <p>Теперь выполнив <code>bundle install</code> будут выполнены следующие действия:</p>
 <ul>

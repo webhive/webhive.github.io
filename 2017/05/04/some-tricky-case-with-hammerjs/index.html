@@ -286,7 +286,10 @@
 <p>Защитить сайт от&nbsp;копипасты пытаются многие, но&nbsp;это по&nbsp;определению невозможно, а&nbsp;тут&nbsp;&mdash; нате. В&nbsp;ходе расследования наткнулся на&nbsp;наличие в&nbsp;теге <code>body</code> CSS правила <code>user-select: none</code>. Я&nbsp;такой фигни сделать не&nbsp;мог, значит это какой-то <code>js</code>&nbsp;код.</p>
 <p>Как оказалось виноват был hammer.js, который и&nbsp;добавлял эту конструкцию. Проблема оказалась описана <a target="_blank" rel="noopener" href="http://hammerjs.github.io/tips/#i-cant-select-my-text-anymore">тут</a>.</p>
 <p>Соответственно добавив вот такую конструкцию перед вызовом конструктора HammerJs-а полностью избавляемся от&nbsp;проблемы.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">delete</span> Hammer.defaults.cssProps.userSelect;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<pre class="language-js"><code class="language-js"><span class="token spread operator">...</span>
+<span class="token keyword">delete</span> <span class="token maybe-class-name">Hammer</span><span class="token punctuation">.</span><span class="token property-access">defaults</span><span class="token punctuation">.</span><span class="token property-access">cssProps</span><span class="token punctuation">.</span><span class="token property-access">userSelect</span><span class="token punctuation">;</span>
+<span class="token spread operator">...</span>
+</code></pre>
   </div>
 
   <footer>

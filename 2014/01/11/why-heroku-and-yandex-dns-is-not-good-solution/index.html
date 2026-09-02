@@ -293,7 +293,8 @@
 
 <p>Если для проекта размещённого на&nbsp;heroku хочется использовать какое-то свое доменное имя то&nbsp;очевидно, что нужно как-то настроить свои зоны и&nbsp;направить их&nbsp;на&nbsp;heroku. Но&nbsp;heroku не&nbsp;поддерживает записи A-типа (<a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/apex-domains">почему?</a>), соответственно нужно какое-то альтернативное решение.</p>
 <h1 id="Способ-первый"><a href="#Способ-первый" class="headerlink" title="Способ первый"></a>Способ первый</h1><p>Рекомендуемый способ это задать поддомен www как <code>CNAME</code> для выданного вам heroku доменного имени</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CNAME www example.herokuapp.com.</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">CNAME www example.herokuapp.com.
+</code></pre>
 
 <p>с этим проблем никаких&nbsp;&mdash; Яндекс вполне себе позволяет такие штуки. Но&nbsp;что если хочется перенаправить весь домен?</p>
 <h1 id="Хочу-без-www"><a href="#Хочу-без-www" class="headerlink" title="Хочу без www"></a>Хочу без www</h1><p>На этот случай heroku предлагает воспользоваться записями типа <code>ALIAS</code> или <code>ANAME</code>. Но&nbsp;тут поджидает засада от&nbsp;яндекса&nbsp;&mdash; он&nbsp;не&nbsp;поддерживает записи таких типов.</p>

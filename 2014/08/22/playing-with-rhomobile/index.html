@@ -290,17 +290,86 @@
 <a id="more"></a>
 
 <p>Создаём в&nbsp;RVM новый gemset</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;home&#x2F;roman&#x2F;.Projects&#x2F;Sam&#x2F;corp-house&#x2F;mobile       ruby-2.0.0-p353@evrone-resto</span><br><span class="line">ruby-2.1.1 - #gemset created &#x2F;home&#x2F;roman&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.1@citishift-rho</span><br><span class="line">ruby-2.1.1 - #generating citishift-rho wrappers - please wait</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">cd /home/roman/.Projects/Sam/corp-house/mobile       ruby-2.0.0-p353@evrone-resto
+ruby-2.1.1 - #gemset created /home/roman/.rvm/gems/ruby-2.1.1@citishift-rho
+ruby-2.1.1 - #generating citishift-rho wrappers - please wait
+</code></pre>
 
 <p>Устанавливаем rhodes</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">gem install rhodes</span><br><span class="line"></span><br><span class="line">Fetching: highline-1.6.21.gem (100%)</span><br><span class="line">Successfully installed highline-1.6.21</span><br><span class="line">Fetching: diff-lcs-1.2.5.gem (100%)</span><br><span class="line">Successfully installed diff-lcs-1.2.5</span><br><span class="line">Fetching: extlib-0.9.16.gem (100%)</span><br><span class="line">Successfully installed extlib-0.9.16</span><br><span class="line">Fetching: templater-1.0.0.gem (100%)</span><br><span class="line">Successfully installed templater-1.0.0</span><br><span class="line">Fetching: activesupport-2.3.18.gem (100%)</span><br><span class="line">Successfully installed activesupport-2.3.18</span><br><span class="line">Fetching: systemu-2.6.4.gem (100%)</span><br><span class="line">Successfully installed systemu-2.6.4</span><br><span class="line">Fetching: macaddr-1.7.1.gem (100%)</span><br><span class="line">Successfully installed macaddr-1.7.1</span><br><span class="line">Fetching: uuid-2.3.7.gem (100%)</span><br><span class="line">Successfully installed uuid-2.3.7</span><br><span class="line">Fetching: rhodes-3.5.1.12.gem (100%)</span><br><span class="line">Building native extensions.  This could take a while...</span><br><span class="line">Successfully installed rhodes-3.5.1.12</span><br><span class="line">9 gems installed</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">gem install rhodes
+
+Fetching: highline-1.6.21.gem (100%)
+Successfully installed highline-1.6.21
+Fetching: diff-lcs-1.2.5.gem (100%)
+Successfully installed diff-lcs-1.2.5
+Fetching: extlib-0.9.16.gem (100%)
+Successfully installed extlib-0.9.16
+Fetching: templater-1.0.0.gem (100%)
+Successfully installed templater-1.0.0
+Fetching: activesupport-2.3.18.gem (100%)
+Successfully installed activesupport-2.3.18
+Fetching: systemu-2.6.4.gem (100%)
+Successfully installed systemu-2.6.4
+Fetching: macaddr-1.7.1.gem (100%)
+Successfully installed macaddr-1.7.1
+Fetching: uuid-2.3.7.gem (100%)
+Successfully installed uuid-2.3.7
+Fetching: rhodes-3.5.1.12.gem (100%)
+Building native extensions.  This could take a while...
+Successfully installed rhodes-3.5.1.12
+9 gems installed
+</code></pre>
 
 <p>При попытке генерации приложения ругнулось на&nbsp;отсутсвие iconv&nbsp;&mdash; ставим</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gem install iconv</span><br><span class="line"></span><br><span class="line">Fetching: iconv-1.0.4.gem (100%)</span><br><span class="line">Building native extensions.  This could take a while...</span><br><span class="line">Successfully installed iconv-1.0.4</span><br><span class="line">1 gem installed</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rhodes-setup</span><br><span class="line"></span><br><span class="line">We will ask you a few questions below about your dev environment.</span><br><span class="line"></span><br><span class="line">JDK path (required) (&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java-default-runtime):</span><br><span class="line">Android SDK path (blank to skip) (&#x2F;opt&#x2F;android-sdk):</span><br><span class="line">Android NDK path (blank to skip) ():</span><br><span class="line">Windows Mobile 6 SDK CabWiz (blank to skip) ():</span><br><span class="line">BlackBerry JDE 4.6 (blank to skip) ():</span><br><span class="line">BlackBerry JDE 4.6 MDS (blank to skip) ():</span><br><span class="line">BlackBerry JDE 4.2 (blank to skip) ():</span><br><span class="line">BlackBerry JDE 4.2 MDS (blank to skip) ():</span><br><span class="line"></span><br><span class="line">If you want to build with other BlackBerry SDK versions edit: &#x2F;home&#x2F;roman&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.1@citishift-rho&#x2F;gems&#x2F;rhodes-3.5.1.12&#x2F;rhobuild.yml</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">gem install iconv
+
+Fetching: iconv-1.0.4.gem (100%)
+Building native extensions.  This could take a while...
+Successfully installed iconv-1.0.4
+1 gem installed
+</code></pre>
+<pre class="language-plaintext"><code class="language-plaintext">rhodes-setup
+
+We will ask you a few questions below about your dev environment.
+
+JDK path (required) (/usr/lib/jvm/java-default-runtime):
+Android SDK path (blank to skip) (/opt/android-sdk):
+Android NDK path (blank to skip) ():
+Windows Mobile 6 SDK CabWiz (blank to skip) ():
+BlackBerry JDE 4.6 (blank to skip) ():
+BlackBerry JDE 4.6 MDS (blank to skip) ():
+BlackBerry JDE 4.2 (blank to skip) ():
+BlackBerry JDE 4.2 MDS (blank to skip) ():
+
+If you want to build with other BlackBerry SDK versions edit: /home/roman/.rvm/gems/ruby-2.1.1@citishift-rho/gems/rhodes-3.5.1.12/rhobuild.yml
+</code></pre>
 
 <p>Создаём новое приложение</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">rhodes app citishift</span><br><span class="line"></span><br><span class="line">Generating with app generator:</span><br><span class="line">     [ADDED]  citishift&#x2F;rhoconfig.txt</span><br><span class="line">     [ADDED]  citishift&#x2F;build.yml</span><br><span class="line">     [ADDED]  citishift&#x2F;.gitignore</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;application.rb</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;index.erb</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;index.bb.erb</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;layout.erb</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading.html</span><br><span class="line">     [ADDED]  citishift&#x2F;Rakefile</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading-568h@2x.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading-Landscape.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading-LandscapeLeft.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading-LandscapeRight.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading-Portrait.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading-PortraitUpsideDown.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;loading@2x.png</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;helpers</span><br><span class="line">     [ADDED]  citishift&#x2F;icon</span><br><span class="line">     [ADDED]  citishift&#x2F;app&#x2F;Settings</span><br><span class="line">     [ADDED]  citishift&#x2F;public</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">rhodes app citishift
+
+Generating with app generator:
+     [ADDED]  citishift/rhoconfig.txt
+     [ADDED]  citishift/build.yml
+     [ADDED]  citishift/.gitignore
+     [ADDED]  citishift/app/application.rb
+     [ADDED]  citishift/app/index.erb
+     [ADDED]  citishift/app/index.bb.erb
+     [ADDED]  citishift/app/layout.erb
+     [ADDED]  citishift/app/loading.html
+     [ADDED]  citishift/Rakefile
+     [ADDED]  citishift/app/loading.png
+     [ADDED]  citishift/app/loading-568h@2x.png
+     [ADDED]  citishift/app/loading-Landscape.png
+     [ADDED]  citishift/app/loading-LandscapeLeft.png
+     [ADDED]  citishift/app/loading-LandscapeRight.png
+     [ADDED]  citishift/app/loading-Portrait.png
+     [ADDED]  citishift/app/loading-PortraitUpsideDown.png
+     [ADDED]  citishift/app/loading@2x.png
+     [ADDED]  citishift/app/helpers
+     [ADDED]  citishift/icon
+     [ADDED]  citishift/app/Settings
+     [ADDED]  citishift/public
+</code></pre>
 
 <p>RhoSimulator существует только под Windows&nbsp;&mdash; печаль.</p>
 <h1 id="Итого-впечатления-от-работы"><a href="#Итого-впечатления-от-работы" class="headerlink" title="Итого впечатления от работы"></a>Итого впечатления от&nbsp;работы</h1><p>Выражаясь словами известного персонажа &laquo;Какая гадость эта ваша &hellip;&raquo;. В&nbsp;общем и&nbsp;целом разочарован технологией.</p>

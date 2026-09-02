@@ -298,7 +298,9 @@
 <a id="more"></a>
 
 <p>Итак&nbsp;&mdash; вот простое решение этой задачи для MySQL. В&nbsp;файле миграции описываем поля для широты и&nbsp;долготы как <code>decimal</code> и&nbsp;явно указываем их&nbsp;размерность <code>precision</code> и&nbsp;<code>scale</code>.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t.decimal <span class="symbol">:latitude</span>,  <span class="symbol">precision:</span> <span class="number">64</span>, <span class="symbol">scale:</span> <span class="number">12</span></span><br><span class="line">t.decimal <span class="symbol">:longitude</span>, <span class="symbol">precision:</span> <span class="number">64</span>, <span class="symbol">scale:</span> <span class="number">12</span></span><br></pre></td></tr></table></figure>
+<pre class="language-ruby"><code class="language-ruby">t<span class="token punctuation">.</span>decimal <span class="token symbol">:latitude</span><span class="token punctuation">,</span>  <span class="token symbol">precision</span><span class="token operator">:</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token symbol">scale</span><span class="token operator">:</span> <span class="token number">12</span>
+t<span class="token punctuation">.</span>decimal <span class="token symbol">:longitude</span><span class="token punctuation">,</span> <span class="token symbol">precision</span><span class="token operator">:</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token symbol">scale</span><span class="token operator">:</span> <span class="token number">12</span>
+</code></pre>
   </div>
 
   <footer>

@@ -298,10 +298,15 @@
 <p>Итак изначально <code>docker</code> ставился в&nbsp;<code>CentOS 7</code> по&nbsp;умолчанию, никаких особых настроек не&nbsp;было сделано и&nbsp;всё работало. Но&nbsp;в&nbsp;связи с&nbsp;возникшей проблемой пришлось таки разбираться как&nbsp;же&nbsp;скормить ему опции для запуска.</p>
 <p>В CentOS начиная с&nbsp;версии 7&nbsp;запуск демонов производится через <code>systemd</code>. Соответственно вся настройка должна выполняться именно через unit файлы <code>systemd</code>.</p>
 <p>Итак создаём Unit файл для докера:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line">$ touch /etc/systemd/system/docker.service.d/docker.conf</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/systemd/system/docker.service.d
+$ <span class="token function">touch</span> /etc/systemd/system/docker.service.d/docker.conf
+</code></pre>
 
 <p>В созданный файл записываем следующее содержимое:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Service]</span><br><span class="line">ExecStart&#x3D;</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;dockerd -H fd:&#x2F;&#x2F; -H unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock
+</code></pre>
 
 <p>Пустой <code>ExecStart=</code> обязателен&nbsp;&mdash; он&nbsp;как&nbsp;бы&nbsp;говорит нам не&nbsp;использовать значение <code>ExecStart</code> системного unit-файла. А&nbsp;уже повторный вызов устанавливает новое значение.</p>
 <ul>

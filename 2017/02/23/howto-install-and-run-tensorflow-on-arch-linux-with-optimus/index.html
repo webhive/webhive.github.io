@@ -332,21 +332,21 @@
 <h1 id="Старый-добрый-docker"><a href="#Старый-добрый-docker" class="headerlink" title="Старый добрый docker"></a>Старый добрый docker</h1><p>Подумал, что раз такой геморрой со&nbsp;сборкой должен был найтись добрый человек, который уже прошёл через этот ад&nbsp;и&nbsp;завернул всё в&nbsp;контейнер. Ну&nbsp;и&nbsp;поиски свои я&nbsp;начал конечно&nbsp;же&nbsp;<a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/install_linux#InstallingDocker">с сайта TensorFlow</a>&nbsp;&mdash; кому как не&nbsp;им&nbsp;озаботиться такими вещами раз уж&nbsp;арчевские пакеты оказались бесполезными.</p>
 <p>Ура&nbsp;&mdash; имеем в&nbsp;наличии полный набор докерских образов на&nbsp;все случаи жизни. Но&nbsp;мне интересен был <a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/install_linux#gpu_support">вариант с&nbsp;GPU</a>, поэтому далее именно о&nbsp;нём.</p>
 <p>Оказалось, что нужен какой-то специальный <code>nvidia-docker</code>, что слегка озадачило. Arch опять сел в&nbsp;лужу&nbsp;&mdash; такой пакет&nbsp;был, но&nbsp;устаревший и&nbsp;нерабочий. Пришлось ставить вручную. Процесс достаточно подробно описан <a target="_blank" rel="noopener" href="https://github.com/NVIDIA/nvidia-docker#quick-start">на сайте nvidia-docker</a></p>
-<pre class="code language language-bash"><code class="language language-bash">$ <span class="token function">wget</span> <span class="token parameter variable">-P</span> /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.0/nvidia-docker_1.0.0_amd64.tar.xz
+<pre class="code language-bash"><code class="language-bash">$ <span class="token function">wget</span> <span class="token parameter variable">-P</span> /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.0/nvidia-docker_1.0.0_amd64.tar.xz
 $ <span class="token function">sudo</span> <span class="token function">tar</span> --strip-components<span class="token operator">=</span><span class="token number">1</span> <span class="token parameter variable">-C</span> /usr/bin <span class="token parameter variable">-xvf</span> /tmp/nvidia-docker*.tar.xz <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> /tmp/nvidia-docker*.tar.xz</code></pre>
 
 <p>Всё встало как часы&nbsp;&mdash; время запустить тест.</p>
-<pre class="code language language-bash"><code class="language language-bash">$ nvidia-docker run <span class="token parameter variable">--rm</span> nvidia/cuda nvidia-smi</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ nvidia-docker run <span class="token parameter variable">--rm</span> nvidia/cuda nvidia-smi</code></pre>
 
 <p>Тщетно&nbsp;&mdash; не&nbsp;работает&nbsp;оно. Ругается на&nbsp;невозможность запустить драйвер. Далее эксперименты с&nbsp;<code>optirun</code> и&nbsp;опять никак.</p>
 <p>Наконец сработал способ включения дискретной видеокарты вручную</p>
-<pre class="code language language-bash"><code class="language language-bash">$ <span class="token function">sudo</span> <span class="token function">tee</span> /proc/acpi/bbswitch <span class="token operator">&lt;&lt;&lt;</span> ON</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">tee</span> /proc/acpi/bbswitch <span class="token operator">&lt;&lt;&lt;</span> ON</code></pre>
 
 <p>Ну и&nbsp;не&nbsp;забыть загрузить плагины иначе тоже нихрена не&nbsp;работает.</p>
-<pre class="code language language-bash"><code class="language language-bash">$ <span class="token function">sudo</span> <span class="token parameter variable">-b</span> <span class="token function">nohup</span> nvidia-docker-plugin <span class="token operator">></span> /tmp/nvidia-docker.log</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token parameter variable">-b</span> <span class="token function">nohup</span> nvidia-docker-plugin <span class="token operator">></span> /tmp/nvidia-docker.log</code></pre>
 
 <p>Теперь тест работает</p>
-<pre class="code language language-bash"><code class="language language-bash">$ nvidia-docker run <span class="token parameter variable">--rm</span> nvidia/cuda nvidia-smi
+<pre class="code language-bash"><code class="language-bash">$ nvidia-docker run <span class="token parameter variable">--rm</span> nvidia/cuda nvidia-smi
 +-----------------------------------------------------------------------------+
 <span class="token operator">|</span> NVIDIA-SMI <span class="token number">378.13</span>                 Driver Version: <span class="token number">378.13</span>                    <span class="token operator">|</span>
 <span class="token operator">|</span>-------------------------------+----------------------+----------------------+
@@ -366,7 +366,7 @@ $ <span class="token function">sudo</span> <span class="token function">tar</spa
 </code></pre>
 
 <p>Ну и&nbsp;образ тоже запускается</p>
-<pre class="code language language-bash"><code class="language language-bash">$ nvidia-docker run <span class="token parameter variable">-it</span> <span class="token parameter variable">-p</span> <span class="token number">8888</span>:8888 gcr.io/tensorflow/tensorflow:latest-gpu
+<pre class="code language-bash"><code class="language-bash">$ nvidia-docker run <span class="token parameter variable">-it</span> <span class="token parameter variable">-p</span> <span class="token number">8888</span>:8888 gcr.io/tensorflow/tensorflow:latest-gpu
 <span class="token punctuation">[</span>I <span class="token number">13</span>:21:46.313 NotebookApp<span class="token punctuation">]</span> Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
 <span class="token punctuation">[</span>W <span class="token number">13</span>:21:46.646 NotebookApp<span class="token punctuation">]</span> WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
 <span class="token punctuation">[</span>I <span class="token number">13</span>:21:46.696 NotebookApp<span class="token punctuation">]</span> Serving notebooks from <span class="token builtin class-name">local</span> directory: /notebooks
@@ -376,17 +376,17 @@ $ <span class="token function">sudo</span> <span class="token function">tar</spa
 <p>Получили работающий на&nbsp;GPU docker контейнер. По&nbsp;адресу <a target="_blank" rel="noopener" href="http://localhot:8888/">http://localhot: 8888/</a> доступен <a target="_blank" rel="noopener" href="http://jupyter.org/">jupiter</a> с&nbsp;тестовыми примерами.</p>
 <h1 id="Итого"><a href="#Итого" class="headerlink" title="Итого"></a>Итого</h1><p>Подведу итоги. Чтобы запустить TensorFlow требуются следующие шаги:</p>
 <p>Ставим <code>nvidia-docker</code></p>
-<pre class="code language language-bash"><code class="language language-bash">$ <span class="token function">wget</span> <span class="token parameter variable">-P</span> /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.0/nvidia-docker_1.0.0_amd64.tar.xz
+<pre class="code language-bash"><code class="language-bash">$ <span class="token function">wget</span> <span class="token parameter variable">-P</span> /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.0/nvidia-docker_1.0.0_amd64.tar.xz
 $ <span class="token function">sudo</span> <span class="token function">tar</span> --strip-components<span class="token operator">=</span><span class="token number">1</span> <span class="token parameter variable">-C</span> /usr/bin <span class="token parameter variable">-xvf</span> /tmp/nvidia-docker*.tar.xz <span class="token operator">&amp;&amp;</span> <span class="token function">rm</span> /tmp/nvidia-docker*.tar.xz</code></pre>
 
 <p>Включаем дискретную видеокарту</p>
-<pre class="code language language-bash"><code class="language language-bash">$ <span class="token function">sudo</span> <span class="token function">tee</span> /proc/acpi/bbswitch <span class="token operator">&lt;&lt;&lt;</span> ON</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">tee</span> /proc/acpi/bbswitch <span class="token operator">&lt;&lt;&lt;</span> ON</code></pre>
 
 <p>Загружаем плагины</p>
-<pre class="code language language-bash"><code class="language language-bash">$ <span class="token function">sudo</span> <span class="token parameter variable">-b</span> <span class="token function">nohup</span> nvidia-docker-plugin <span class="token operator">></span> /tmp/nvidia-docker.log</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token parameter variable">-b</span> <span class="token function">nohup</span> nvidia-docker-plugin <span class="token operator">></span> /tmp/nvidia-docker.log</code></pre>
 
 <p>Запускаем контейнер</p>
-<pre class="code language language-bash"><code class="language language-bash">$ nvidia-docker run <span class="token parameter variable">-it</span> <span class="token parameter variable">-p</span> <span class="token number">8888</span>:8888 gcr.io/tensorflow/tensorflow:latest-gpu</code></pre>
+<pre class="code language-bash"><code class="language-bash">$ nvidia-docker run <span class="token parameter variable">-it</span> <span class="token parameter variable">-p</span> <span class="token number">8888</span>:8888 gcr.io/tensorflow/tensorflow:latest-gpu</code></pre>
   </div>
 
   <footer>

@@ -296,7 +296,9 @@
 <a id="more"></a>
 
 <p>По счастью можно указать <a target="_blank" rel="noopener" href="https://github.com/creationix/nvm">NVM</a> какую версию использовать в&nbsp;данном проекте создав файл <code>.nvmrc</code> в&nbsp;папке проекта. Например такой:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .nvmrc</span><br><span class="line">v7.8.0</span><br></pre></td></tr></table></figure>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">cat</span> .nvmrc
+v7.8.0
+</code></pre>
 
 <p>Но чтобы <a target="_blank" rel="noopener" href="https://github.com/creationix/nvm">NVM</a> сожрал этот файл необходимо руками вызвать команду <code>nvm use</code>, что неудобно. Особенно раздражает запустив обновление пакетов обнаружить, что они установились не&nbsp;в&nbsp;ту&nbsp;версию.</p>
 <h1 id="Что-же-я-хочу"><a href="#Что-же-я-хочу" class="headerlink" title="Что же я хочу?"></a>Что&nbsp;же&nbsp;я&nbsp;хочу?</h1><p>Хочу я&nbsp;немногого&nbsp;&mdash; при смене папки на&nbsp;папку с&nbsp;файлом <code>.nvmrc</code> автоматически переключать версию node.js на&nbsp;версию, указанную в&nbsp;этом файле и&nbsp;таким образом не&nbsp;отвлекаться на&nbsp;контроль за&nbsp;тем какая версию активна в&nbsp;данный момент.</p>

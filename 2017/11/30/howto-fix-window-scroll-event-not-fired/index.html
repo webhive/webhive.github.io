@@ -298,10 +298,16 @@
 <a id="more"></a>
 
 <p>Дебаггинг ни&nbsp;привёл ни&nbsp;к&nbsp;чему&nbsp;&mdash; событие просто не&nbsp;вызывалось, при&nbsp;том, что код то&nbsp;был довольно банальным:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;scroll&#x27;</span>, <span class="built_in">this</span>.handleScroll);</span><br></pre></td></tr></table></figure>
+<pre class="language-javascript"><code class="language-javascript"><span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">'scroll'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">handleScroll</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 
 <p>Причина вызвавшая такую проблему оказалась довольно неожиданной&nbsp;&mdash; проблема крылась в&nbsp;CSS, а&nbsp;именно:</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-scss"><code class="language-scss"><span class="token selector">html, body </span><span class="token punctuation">{</span>
+  ...
+  <span class="token property">overflow-x</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+  ...
+<span class="token punctuation">}</span>
+</code></pre>
 
 <p>Видимо в&nbsp;процессе очередных дизайнерских наворотов добавили вот этот самый <code>overflow-x</code> который и&nbsp;отключает вертикальный скролл.</p>
 <p>Кому как, а&nbsp;по&nbsp;мне так довольно замороченная ситуация. Я&nbsp;бы&nbsp;как-то понял если&nbsp;бы&nbsp;вертикальный скролл отрубался на&nbsp;<code>overflow-y</code>, но&nbsp;в&nbsp;данном случае поведение выглядит несколько нелогичным.</p>

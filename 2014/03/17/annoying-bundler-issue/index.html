@@ -24,7 +24,7 @@
 <meta charset="utf-8" />
 <meta name="author" content="Роман Татауров">
 <meta name="description" content="Не первый раз уже ловлю такую ошибку при установке приложения на новый хост с помощью RVM
-1GemNotFound: Could not find minitest-4.7.5.gem for installation" />
+GemNotFound: Could not find minitest-4.7.5.gem for installation" />
 
 
   
@@ -43,7 +43,7 @@
 <meta property="og:url" content="https://www.webhive.ru/2014/03/17/annoying-bundler-issue/" />
 <meta property="og:type" content="article" />
 <meta property="og:description" content="Не первый раз уже ловлю такую ошибку при установке приложения на новый хост с помощью RVM
-1GemNotFound: Could not find minitest-4.7.5.gem for installation" />
+GemNotFound: Could not find minitest-4.7.5.gem for installation" />
 
   
   
@@ -66,7 +66,7 @@
 <meta name="DC.Title" content="Об одной раздражающей ошибке bundler" />
 
 <meta name="DC.Subject" content="Не первый раз уже ловлю такую ошибку при установке приложения на новый хост с помощью RVM
-1GemNotFound: Could not find minitest-4.7.5.gem for installation" />
+GemNotFound: Could not find minitest-4.7.5.gem for installation" />
 <meta name="DC.Creator" content="Роман Татауров" />
 <meta name="DC.Creator.Name" content="Роман Татауров" />
 <meta name="DC.Date" scheme="WTN8601" content="2014-03-17T06:55:32.000Z" />
@@ -290,18 +290,23 @@
     
 
     <p>Не первый раз уже ловлю такую ошибку при установке приложения на&nbsp;новый хост с&nbsp;помощью <code>RVM</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GemNotFound: Could not find minitest-4.7.5.gem for installation</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">GemNotFound: Could not find minitest-4.7.5.gem for installation
+</code></pre>
 
 <a id="more"></a>
 
 <p>Полный текст ошибки выглядит примерно&nbsp;так.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DEBUG [f2e1c052]  Bundler::GemNotFound: Could not find minitest-4.7.5.gem for installation</span><br><span class="line">DEBUG [f2e1c052]  An error occurred while installing minitest (4.7.5), and Bundler cannot continue.</span><br><span class="line">DEBUG [f2e1c052]  Make sure that &#96;gem install minitest -v &#39;4.7.5&#39;&#96; succeeds before bundling.</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">DEBUG [f2e1c052]  Bundler::GemNotFound: Could not find minitest-4.7.5.gem for installation
+DEBUG [f2e1c052]  An error occurred while installing minitest (4.7.5), and Bundler cannot continue.
+DEBUG [f2e1c052]  Make sure that `gem install minitest -v '4.7.5'` succeeds before bundling.
+</code></pre>
 
 <p>Проблема собственно в&nbsp;том, что RVM ставит по&nbsp;умолчанию довольно старую версию <code>bundler</code>-а</p>
 <p>Вот тут разбор полётов</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/bundler/bundler/issues/2780">https://github.com/bundler/bundler/issues/2780</a></p>
 <p>Ну и&nbsp;лечится это обновлением <code>bundler</code>-а до&nbsp;последней версии.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install bundler</span><br></pre></td></tr></table></figure>
+<pre class="language-plaintext"><code class="language-plaintext">gem install bundler
+</code></pre>
   </div>
 
   <footer>
